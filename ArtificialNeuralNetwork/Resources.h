@@ -1,4 +1,4 @@
-#define CLASS1 0
+#define CLASS1 -1
 #define CLASS2 1
 
 struct Samples

@@ -1,8 +1,7 @@
 #include <Windows.h>
 #include <time.h>
 #include "Process.h"
-#include "ArtificialNeuralNetwork.h"
-//#include "Resources.h"
+#include "SingleLayerNetwork.h"
 
 namespace ArtificialNeuralNetwork {
 
@@ -111,9 +110,7 @@ namespace ArtificialNeuralNetwork {
 			   this->tableLayoutPanel2 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			   this->radioButton2 = (gcnew System::Windows::Forms::RadioButton());
 			   this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
-			   this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			   this->textBox5 = (gcnew System::Windows::Forms::TextBox());
-			   this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			   this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			   this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			   this->textBox7 = (gcnew System::Windows::Forms::TextBox());
@@ -121,6 +118,8 @@ namespace ArtificialNeuralNetwork {
 			   this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			   this->textBox9 = (gcnew System::Windows::Forms::TextBox());
 			   this->textBox10 = (gcnew System::Windows::Forms::TextBox());
+			   this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			   this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			   this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			   this->menuStrip1->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -281,19 +280,6 @@ namespace ArtificialNeuralNetwork {
 			   this->radioButton1->Text = L"Class1";
 			   this->radioButton1->UseVisualStyleBackColor = true;
 			   // 
-			   // textBox1
-			   // 
-			   this->textBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(220)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			   this->textBox1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(162)));
-			   this->textBox1->ForeColor = System::Drawing::Color::White;
-			   this->textBox1->Location = System::Drawing::Point(3, 39);
-			   this->textBox1->Name = L"textBox1";
-			   this->textBox1->Size = System::Drawing::Size(144, 25);
-			   this->textBox1->TabIndex = 2;
-			   this->textBox1->Text = L"X1: ";
-			   // 
 			   // textBox5
 			   // 
 			   this->textBox5->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(58)), static_cast<System::Int32>(static_cast<System::Byte>(227)),
@@ -306,19 +292,6 @@ namespace ArtificialNeuralNetwork {
 			   this->textBox5->Size = System::Drawing::Size(144, 25);
 			   this->textBox5->TabIndex = 6;
 			   this->textBox5->Text = L"X1: ";
-			   // 
-			   // textBox2
-			   // 
-			   this->textBox2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(220)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			   this->textBox2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(162)));
-			   this->textBox2->ForeColor = System::Drawing::Color::White;
-			   this->textBox2->Location = System::Drawing::Point(3, 69);
-			   this->textBox2->Name = L"textBox2";
-			   this->textBox2->Size = System::Drawing::Size(144, 25);
-			   this->textBox2->TabIndex = 3;
-			   this->textBox2->Text = L"X2: ";
 			   // 
 			   // textBox6
 			   // 
@@ -406,6 +379,32 @@ namespace ArtificialNeuralNetwork {
 			   this->textBox10->Size = System::Drawing::Size(144, 25);
 			   this->textBox10->TabIndex = 11;
 			   this->textBox10->Text = L"NaN";
+			   // 
+			   // textBox1
+			   // 
+			   this->textBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(220)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			   this->textBox1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(162)));
+			   this->textBox1->ForeColor = System::Drawing::Color::White;
+			   this->textBox1->Location = System::Drawing::Point(3, 39);
+			   this->textBox1->Name = L"textBox1";
+			   this->textBox1->Size = System::Drawing::Size(144, 25);
+			   this->textBox1->TabIndex = 2;
+			   this->textBox1->Text = L"X1: ";
+			   // 
+			   // textBox2
+			   // 
+			   this->textBox2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(220)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			   this->textBox2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(162)));
+			   this->textBox2->ForeColor = System::Drawing::Color::White;
+			   this->textBox2->Location = System::Drawing::Point(3, 69);
+			   this->textBox2->Name = L"textBox2";
+			   this->textBox2->Size = System::Drawing::Size(144, 25);
+			   this->textBox2->TabIndex = 3;
+			   this->textBox2->Text = L"X2: ";
 			   // 
 			   // pictureBox2
 			   // 
