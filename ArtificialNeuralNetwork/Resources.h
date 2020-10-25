@@ -5,5 +5,5 @@ struct Samples
 {
 	double x1;
 	double x2;
-	int id;
+	int classId;
 };
