@@ -1,5 +1,8 @@
 #include "Resources.h"
 
+#define DIMENSION 2
+#define BIAS -1
+
 class SingleLayerNetwork
 {
 private:
@@ -28,7 +31,5 @@ public:
 
 	double* Train(Samples* input, double* output, int inputCount, int &jeneration);
 	int sgn(int number);
-	double calculateNet(double* w, Samples x);
-	double* calculateNewWeight(double* w, double c, int d, int net, Samples x);
 };
 
