@@ -1,2 +1,2 @@
 
-int YPoint(int x, double* w, int factor = 1);
+int YPoint(int x, double* w, int = 1);
