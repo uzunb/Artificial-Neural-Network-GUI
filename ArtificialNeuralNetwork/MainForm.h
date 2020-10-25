@@ -85,6 +85,7 @@ namespace ArtificialNeuralNetwork {
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	private: System::Windows::Forms::TextBox^ textBox9;
 	private: System::Windows::Forms::TextBox^ textBox10;
+	private: System::Windows::Forms::ToolStripMenuItem^ clearToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ trainToolStripMenuItem;
 
 
@@ -104,6 +105,7 @@ namespace ArtificialNeuralNetwork {
 			   this->initialToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->randomlyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->trainToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->clearToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			   this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			   this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
@@ -131,7 +133,10 @@ namespace ArtificialNeuralNetwork {
 			   // menuStrip1
 			   // 
 			   this->menuStrip1->BackColor = System::Drawing::Color::Turquoise;
-			   this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->processToolStripMenuItem });
+			   this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				   this->processToolStripMenuItem,
+					   this->clearToolStripMenuItem
+			   });
 			   this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			   this->menuStrip1->Name = L"menuStrip1";
 			   this->menuStrip1->Size = System::Drawing::Size(1350, 24);
@@ -168,6 +173,13 @@ namespace ArtificialNeuralNetwork {
 			   this->trainToolStripMenuItem->Size = System::Drawing::Size(103, 22);
 			   this->trainToolStripMenuItem->Text = L"Train";
 			   this->trainToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::trainToolStripMenuItem_Click);
+			   // 
+			   // clearToolStripMenuItem
+			   // 
+			   this->clearToolStripMenuItem->Name = L"clearToolStripMenuItem";
+			   this->clearToolStripMenuItem->Size = System::Drawing::Size(46, 20);
+			   this->clearToolStripMenuItem->Text = L"Clear";
+			   this->clearToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::clearToolStripMenuItem_Click);
 			   // 
 			   // richTextBox1
 			   // 
@@ -475,7 +487,7 @@ namespace ArtificialNeuralNetwork {
 			double x2 = (double)((pictureBox1->Height >> 1) - temp_y);
 
 			
-			if (sizeOfSamples == 0) { sizeOfSamples = sizeOfClass1 = 1; p = new Samples[1]; p[0].x1 = x1;	p[0].x2 = x2; p[0].id = CLASS1; }
+			if (sizeOfSamples == 0) { sizeOfSamples = sizeOfClass1 = 1; p = new Samples[1]; p[0].x1 = x1;	p[0].x2 = x2; p[0].classId = CLASS1; }
 			else {
 				Samples* temp;
 				temp = p;
@@ -486,11 +498,11 @@ namespace ArtificialNeuralNetwork {
 				{
 					p[i].x1 = temp[i].x1;
 					p[i].x2 = temp[i].x2;
-					p[i].id = temp[i].id;
+					p[i].classId = temp[i].classId;
 				}
 				p[sizeOfSamples - 1].x1 = x1;
 				p[sizeOfSamples - 1].x2 = x2;
-				p[sizeOfSamples - 1].id = CLASS1;
+				p[sizeOfSamples - 1].classId = CLASS1;
 				delete temp;
 			}
 
@@ -511,10 +523,10 @@ namespace ArtificialNeuralNetwork {
 			int temp_x = System::Convert::ToInt32(e->X);
 			int temp_y = System::Convert::ToInt32(e->Y);
 
-			double x1 = (double)(temp_x - (pictureBox1->Width >> 1));
-			double x2 = (double)((pictureBox1->Height >> 1) - temp_y);
+			double x1 = (double)((temp_x - (pictureBox1->Width >> 1)));
+			double x2 = (double)(((pictureBox1->Height >> 1) - temp_y));
 
-			if (sizeOfSamples == 0) { sizeOfSamples = sizeOfClass2 = 1; p = new Samples[1]; p[0].x1 = x1;	p[0].x2 = x2; p[0].id = CLASS2; }
+			if (sizeOfSamples == 0) { sizeOfSamples = sizeOfClass2 = 1; p = new Samples[1]; p[0].x1 = x1;	p[0].x2 = x2; p[0].classId = CLASS2; }
 			else {
 				Samples* temp;
 				temp = p;
@@ -525,12 +537,12 @@ namespace ArtificialNeuralNetwork {
 				{
 					p[i].x1 = temp[i].x1;
 					p[i].x2 = temp[i].x2;
-					p[i].id = temp[i].id;
+					p[i].classId = temp[i].classId;
 				}
 
 				p[sizeOfSamples - 1].x1 = x1;
 				p[sizeOfSamples - 1].x2 = x2;
-				p[sizeOfSamples - 1].id = CLASS2;
+				p[sizeOfSamples - 1].classId = CLASS2;
 				delete temp;
 			}
 
@@ -572,17 +584,17 @@ namespace ArtificialNeuralNetwork {
 		this->richTextBox1->BackColor = Color::Red;
 
 		SingleLayerNetwork network;
-		int jeneration = 0;
+		int cycleCount = 0;
 
 		if (sizeOfSamples != 0) {
-			w = network.Train(p, w, sizeOfSamples, jeneration);
+			w = network.Train(p, w, sizeOfSamples, cycleCount);
 			drawTrainLine();
-			this->textBox10->Text = Convert::ToString(jeneration);
+			this->textBox10->Text = Convert::ToString(cycleCount);
 		}
 		else
 			MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-		
-		
+
+		w[0] = w[1] = w[2] = 0;
 
 		this->richTextBox1->BackColor = Color::Turquoise;
 
@@ -593,16 +605,33 @@ namespace ArtificialNeuralNetwork {
 	//DrawTrainLine
 	void drawTrainLine()
 	{
-		int minX = pictureBox1->Width / -2;
+		/*int minX = pictureBox1->Width / -2;
 		int minY = YPoint(minX, w);
 		int maxX = pictureBox1->Width / 2;
-		int maxY = YPoint(maxX, w);
+		int maxY = YPoint(maxX, w);*/
+
+
+		//x2 = (+c -ax1) / b
+		int minX = pictureBox1->Width / -2;
+		int minY = (w[2] - minX * w[0]) / w[1];
+		int maxX = pictureBox1->Width / 2;
+		int maxY = (w[2] - maxX * w[0]) / w[1];
 
 		Pen^ pen = gcnew Pen(Color::MidnightBlue, 3.0f);
-		pictureBox1->CreateGraphics()->DrawLine(pen, pictureBox1->Width / 2 + minX, minY, pictureBox1->Width / 2 + maxX, maxY);
+		pictureBox1->CreateGraphics()->DrawLine(pen, 0, pictureBox1->Height / 2 - minY, pictureBox1->Width, pictureBox1->Height / 2 - maxY);
 
 		richTextBox1->AppendText("w1: " + Convert::ToString(w[0]) + "\tw2: " + Convert::ToString(w[1]) + "\tw3: " + Convert::ToString(w[2]) + "\n");
 	}//DrawTrainLine
 
+	private: System::Void clearToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
+		System::Drawing::Rectangle r;
+		PaintEventArgs^ f = gcnew PaintEventArgs(pictureBox1->CreateGraphics(), r);
+		this->pictureBox1_Paint(this , f);
+		delete w;
+		delete p;
+
+		sizeOfSamples = sizeOfClass1 = sizeOfClass2 = 0;
+	}
 };
 }
