@@ -21,7 +21,13 @@
     <ClCompile Include="Process.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SingleLayerNetwork.cpp">
+    <ClCompile Include="NeuralNetwork.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DeltaLearning.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PerceptronLearning.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +41,13 @@
     <ClInclude Include="Process.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SingleLayerNetwork.h">
+    <ClInclude Include="NeuralNetwork.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeltaLearning.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PerceptronLearning.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
