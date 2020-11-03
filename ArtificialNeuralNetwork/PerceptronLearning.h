@@ -1,3 +1,4 @@
+#pragma once
 #include "NeuralNetwork.h"
 
 #define DIMENSION 2

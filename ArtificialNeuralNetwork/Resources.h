@@ -1,3 +1,4 @@
+#pragma once
 #define CLASS1 -1
 #define CLASS2 1
 
