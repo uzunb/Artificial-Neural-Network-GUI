@@ -1,5 +1,7 @@
+#pragma once
 #include "NeuralNetwork.h"
 #include <math.h>
+#include <iostream>
 
 void NeuralNetwork::setLayerCount(int count)
 {
@@ -91,19 +93,21 @@ int NeuralNetwork::sgn(int number)
 	return number >= 0 ? 1 : -1;
 }
 
-double NeuralNetwork::sigmoid(double net, double delta)
+double NeuralNetwork::sigmoid(double net, double delta) 
 {
-	try {
-		return 2 / (1 + exp(-delta * net) - 1);
-	}
-	catch (...) {
-		return this->sgn(2 / (1 + exp(-delta * net) - 1));
-	}
+	double temp1 = exp(-delta * net);
+
+	double returnValue = (2 / (1 + temp1)) - 1;
+	//return std::isfinite(returnValue) ? returnValue : this->sgn(returnValue);
+	if (isfinite(returnValue))
+		return returnValue;
+	else
+		return returnValue >= 0 ? 1 : -1;
 }
 
-double NeuralNetwork::derivatedSigmoid(double net, double output)
+double NeuralNetwork::derivatedSigmoid(double output)
 {
-	return (1 - pow(output, 2)) / 2;
+	return 0.5 * (1 - pow(output, 2));
 }
 
 double NeuralNetwork::logistic(double net)
