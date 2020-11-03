@@ -1,3 +1,4 @@
+#pragma once
 #include <math.h> 
 #include "NeuralNetwork.h"
 
@@ -7,7 +8,7 @@ class DeltaLearning : public NeuralNetwork
 {
 private:
 	double eta;
-	double delta = 1;
+	double delta = 2;
 
 public:
 	DeltaLearning();

@@ -1,4 +1,6 @@
+#pragma once
 #include "DeltaLearning.h"
+
 
 DeltaLearning::DeltaLearning()
 {
@@ -50,13 +52,14 @@ void DeltaLearning::Train(Samples* input, double* w, int inputCount, int& jenera
 
             //w^t * x   
             net = w[0] * input[i].x1 + w[1] * input[i].x2 + w[2] * BIAS;
-
-            output = this->sigmoid(net, this->getDelta());   //activation function
-            derivatedOutput = this->derivatedSigmoid(net, output);
+     
+            //activation functions
+            output = this->sigmoid(net, this->getDelta());   
+            derivatedOutput = this->derivatedSigmoid(output);
 
             error = d - output;
             epoch += error;
-            if (error > 0.7) {
+            if (epoch > 0.7 || epoch < -0.7) {
 
                 //w^n+1 = w^n + c * ( d - sgn(net) ) * x
                 temp = this->getC() * error * derivatedOutput;
