@@ -1,7 +1,8 @@
+#pragma once
 #include <Windows.h>
 #include <time.h>
 #include "Process.h"
-//#include "PerceptronLearning.h"
+#include "PerceptronLearning.h"
 #include "DeltaLearning.h"
 
 
@@ -632,7 +633,7 @@ namespace ArtificialNeuralNetwork {
 	//Perceptron Train
 	private: System::Void trainToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		/*this->richTextBox1->BackColor = Color::Red;
+		this->richTextBox1->BackColor = Color::Red;
 
 			PerceptronLearning *learningNetwork = new PerceptronLearning();
 		int cycleCount = 0;
@@ -647,7 +648,7 @@ namespace ArtificialNeuralNetwork {
 
 		w[0] = w[1] = w[2] = 0;
 
-		this->richTextBox1->BackColor = Color::Turquoise;*/
+		this->richTextBox1->BackColor = Color::Turquoise;
 
 	}//Perceptron Train
 
@@ -656,6 +657,7 @@ namespace ArtificialNeuralNetwork {
 	//DrawTrainLine
 	void drawTrainLine()
 	{
+
 		/*int minX = pictureBox1->Width / -2;
 		int minY = YPoint(minX, w);
 		int maxX = pictureBox1->Width / 2;
@@ -730,10 +732,12 @@ namespace ArtificialNeuralNetwork {
 		//draw new points.
 		for (int i = 0; i < pointCount; i++)
 		{
+			int tempX = point[i].x1*50 + this->pictureBox1->Width / 2;
+			int tempY = this->pictureBox1->Height / 2 - point[i].x2*50;
 			if (point[i].classId < 0)
-				this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, point[i].x1, point[i].x2, 5, 5);
+				this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 5, 5);
 			else
-				this->pictureBox1->CreateGraphics()->DrawEllipse(pen2, point[i].x1, point[i].x2, 5, 5);
+				this->pictureBox1->CreateGraphics()->DrawEllipse(pen2, tempX, tempY, 5, 5);
 		}
 	}//Draw Normalized points
 };
