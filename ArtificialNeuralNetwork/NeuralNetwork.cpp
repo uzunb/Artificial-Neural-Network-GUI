@@ -105,9 +105,9 @@ double NeuralNetwork::sigmoid(double net, double delta)
 		return returnValue >= 0 ? 1 : -1;
 }
 
-double NeuralNetwork::derivatedSigmoid(double output)
+double NeuralNetwork::derivatedSigmoid(double output, int desiredValue)
 {
-	return 0.5 * (1 - pow(output, 2));
+	return 0.5 * (desiredValue - pow(output, 2));
 }
 
 double NeuralNetwork::logistic(double net)

@@ -29,7 +29,7 @@ public:
 	//Activation functions
 	int sgn(int number);
 	double sigmoid(double net, double delta);
-	double derivatedSigmoid(double output);
+	double derivatedSigmoid(double output, int desiredValue);
 	double logistic(double net);
 	double tanH(double net);		// Hyperbolic Tangent
 	double reLU(double net);		// Rectified Linear Unit
