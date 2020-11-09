@@ -55,11 +55,11 @@ void DeltaLearning::Train(Samples* input, double* w, int inputCount, int& jenera
      
             //activation functions
             output = this->sigmoid(net, this->getDelta());   
-            derivatedOutput = this->derivatedSigmoid(output);
+            derivatedOutput = this->derivatedSigmoid(output, d);
 
-            error = d - output;
+            error = 0.5* pow(d - output, 2);
             epoch += error;
-            if (epoch > 0.7 || epoch < -0.7) {
+            if (epoch > 0.2) {
 
                 //w^n+1 = w^n + c * ( d - sgn(net) ) * x
                 temp = this->getC() * error * derivatedOutput;
