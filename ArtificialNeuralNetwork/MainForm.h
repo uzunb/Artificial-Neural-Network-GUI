@@ -564,7 +564,7 @@ namespace ArtificialNeuralNetwork {
 			textBox8->Text = Convert::ToString(sizeOfSamples);
 
 			//Adding point to table.
-			Pen^ pen = gcnew Pen(Color::Aqua, 5.0f);
+			Pen^ pen = gcnew Pen(Color::Aqua, 3.0f);
 			pictureBox1->CreateGraphics()->DrawEllipse(pen, temp_x, temp_y, 5, 5);
 
 		}
@@ -605,7 +605,7 @@ namespace ArtificialNeuralNetwork {
 
 
 			//Adding point to table.
-			Pen^ pen = gcnew Pen(Color::LimeGreen, 5.0f);
+			Pen^ pen = gcnew Pen(Color::LimeGreen, 3.0f);
 			pictureBox1->CreateGraphics()->DrawEllipse(pen, temp_x, temp_y, 5, 5);
 		}
 
@@ -720,8 +720,8 @@ namespace ArtificialNeuralNetwork {
 
 	//Draw Normalized points
 	void drawNormalizedPoints(Samples* point, int pointCount) {
-		Pen^ pen1 = gcnew Pen(Color::Aqua, 5.0f);
-		Pen^ pen2 = gcnew Pen(Color::LimeGreen, 5.0f);
+		Pen^ pen1 = gcnew Pen(Color::Aqua, 3.0f);
+		Pen^ pen2 = gcnew Pen(Color::LimeGreen, 3.0f);
 
 		//picturebox clean
 		this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
