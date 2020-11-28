@@ -475,6 +475,7 @@ private: System::Windows::Forms::Label^ label6;
 			   this->button2->Text = L"Batch Normalized";
 			   this->button2->UseVisualStyleBackColor = false;
 			   this->button2->Visible = false;
+			   this->button2->Click += gcnew System::EventHandler(this, &MainForm::button2_Click);
 			   // 
 			   // panel5
 			   // 
@@ -730,7 +731,8 @@ private: System::Windows::Forms::Label^ label6;
 			sizeOfSamples = sizeOfClass[selectedClass] = 1; 
 			p = new Samples[1]; 
 			p[0].x1 = x1;	p[0].x2 = x2; 
-			p[0].classId = pClass[selectedClass].classId; 
+			//p[0].classId = selectedClass; 
+			p[0].classId = selectedClass;
 		}
 		else {
 			Samples* temp;
@@ -738,15 +740,16 @@ private: System::Windows::Forms::Label^ label6;
 			sizeOfClass[selectedClass]++;
 			sizeOfSamples++;
 			p = new Samples[sizeOfSamples];
-			for (int i = 0; i < sizeOfSamples; i++)
+			for (int i = 0; i < sizeOfSamples - 1; i++)
 			{
 				p[i].x1 = temp[i].x1;
 				p[i].x2 = temp[i].x2;
+				//p[i].classId = temp[i].classId;
 				p[i].classId = temp[i].classId;
 			}
 			p[sizeOfSamples - 1].x1 = x1;
 			p[sizeOfSamples - 1].x2 = x2;
-			p[sizeOfSamples - 1].classId = pClass[selectedClass].classId;
+			p[sizeOfSamples - 1].classId = selectedClass;
 			delete temp;
 		}
 
@@ -834,7 +837,6 @@ private: System::Windows::Forms::Label^ label6;
 			sizeOfClass[classNumber] = 0;
 		this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
 
-
 		System::Drawing::Rectangle r;
 		PaintEventArgs^ f = gcnew PaintEventArgs(pictureBox1->CreateGraphics(), r);
 		this->pictureBox1_Paint(this, f);
@@ -867,15 +869,14 @@ private: System::Windows::Forms::Label^ label6;
 	}//Delta Train
 
 	//Batch Normalizing
-	private: System::Void checkBox1_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		learningNetwork->batchNormalizing(p, sizeOfSamples);
-		this->drawNormalizedPoints(p, sizeOfSamples);
+		this->drawNormalizedPoints(p, sizeOfSamples, pClass, classNumber);
 	}//Batch Normalizing
 
 	//Draw Normalized points
-	void drawNormalizedPoints(Samples* point, int pointCount) {
+	void drawNormalizedPoints(Samples* point, int pointCount, SampleClass* sc, int classNumber) {
 		Pen^ pen1 = gcnew Pen(Color::Aqua, 3.0f);
-		Pen^ pen2 = gcnew Pen(Color::LimeGreen, 3.0f);
 
 		//picturebox clean
 		this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
@@ -888,19 +889,19 @@ private: System::Windows::Forms::Label^ label6;
 		{
 			int tempX = point[i].x1*50 + this->pictureBox1->Width / 2;
 			int tempY = this->pictureBox1->Height / 2 - point[i].x2*50;
-			if (point[i].classId < 0)
-				this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 5, 5);
-			else
-				this->pictureBox1->CreateGraphics()->DrawEllipse(pen2, tempX, tempY, 5, 5);
+
+			//noktanýn idsi ile sc idsi eþit ise onun coloru al.
+			for (int j = 0; j < classNumber; j++)
+				if (point[i].classId == sc[j].classId)
+					pen1->Color = Color::FromArgb(sc[j].color.r, sc[j].color.g, sc[j].color.b);
+			this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 5, 5);
 		}
 	}//Draw Normalized points
 
 
-	private: System::Void numericUpDown1_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
-		
+	private: System::Void numericUpDown1_ValueChanged(System::Object^ sender, System::EventArgs^ e) {}
 
 
-	}
 	//OK BUTTON
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 		int dimension = 2;
@@ -923,7 +924,7 @@ private: System::Windows::Forms::Label^ label6;
 		this->panel6->Visible = TRUE;
 		this->panel7->Visible = TRUE;
 		this->button2->Visible = TRUE;
-		this->numericUpDown5->Maximum = classNumber-1;
+		this->numericUpDown5->Maximum = classNumber - 1;
 	}//OK BUTTON
 
 	//EXIT
@@ -939,5 +940,7 @@ private: System::Windows::Forms::Label^ label6;
 	}	
 		private: System::Void textBox6_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 		}
+	
+	
 };
 }
