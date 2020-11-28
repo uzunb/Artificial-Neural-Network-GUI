@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtificialNeuralNetwork", "ArtificialNeuralNetwork\ArtificialNeuralNetwork.vcxproj", "{C0D00639-0F12-4136-BA05-A8C366F42774}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SinglecategorySinglelayerNetwork", "SinglecategorySinglelayerNetwork\SinglecategorySinglelayerNetwork.vcxproj", "{F92A0FB0-0320-489D-AC7F-0E01D32F5A77}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MulticategorySinglelayerNetwork", "MulticategorySinglelayerNetwork\MulticategorySinglelayerNetwork.vcxproj", "{1DB39ED2-74D1-4568-A376-7A49BD6EA03C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +15,22 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C0D00639-0F12-4136-BA05-A8C366F42774}.Debug|x64.ActiveCfg = Debug|x64
-		{C0D00639-0F12-4136-BA05-A8C366F42774}.Debug|x64.Build.0 = Debug|x64
-		{C0D00639-0F12-4136-BA05-A8C366F42774}.Debug|x86.ActiveCfg = Debug|Win32
-		{C0D00639-0F12-4136-BA05-A8C366F42774}.Debug|x86.Build.0 = Debug|Win32
-		{C0D00639-0F12-4136-BA05-A8C366F42774}.Release|x64.ActiveCfg = Release|x64
-		{C0D00639-0F12-4136-BA05-A8C366F42774}.Release|x64.Build.0 = Release|x64
-		{C0D00639-0F12-4136-BA05-A8C366F42774}.Release|x86.ActiveCfg = Release|Win32
-		{C0D00639-0F12-4136-BA05-A8C366F42774}.Release|x86.Build.0 = Release|Win32
+		{F92A0FB0-0320-489D-AC7F-0E01D32F5A77}.Debug|x64.ActiveCfg = Debug|x64
+		{F92A0FB0-0320-489D-AC7F-0E01D32F5A77}.Debug|x64.Build.0 = Debug|x64
+		{F92A0FB0-0320-489D-AC7F-0E01D32F5A77}.Debug|x86.ActiveCfg = Debug|Win32
+		{F92A0FB0-0320-489D-AC7F-0E01D32F5A77}.Debug|x86.Build.0 = Debug|Win32
+		{F92A0FB0-0320-489D-AC7F-0E01D32F5A77}.Release|x64.ActiveCfg = Release|x64
+		{F92A0FB0-0320-489D-AC7F-0E01D32F5A77}.Release|x64.Build.0 = Release|x64
+		{F92A0FB0-0320-489D-AC7F-0E01D32F5A77}.Release|x86.ActiveCfg = Release|Win32
+		{F92A0FB0-0320-489D-AC7F-0E01D32F5A77}.Release|x86.Build.0 = Release|Win32
+		{1DB39ED2-74D1-4568-A376-7A49BD6EA03C}.Debug|x64.ActiveCfg = Debug|x64
+		{1DB39ED2-74D1-4568-A376-7A49BD6EA03C}.Debug|x64.Build.0 = Debug|x64
+		{1DB39ED2-74D1-4568-A376-7A49BD6EA03C}.Debug|x86.ActiveCfg = Debug|Win32
+		{1DB39ED2-74D1-4568-A376-7A49BD6EA03C}.Debug|x86.Build.0 = Debug|Win32
+		{1DB39ED2-74D1-4568-A376-7A49BD6EA03C}.Release|x64.ActiveCfg = Release|x64
+		{1DB39ED2-74D1-4568-A376-7A49BD6EA03C}.Release|x64.Build.0 = Release|x64
+		{1DB39ED2-74D1-4568-A376-7A49BD6EA03C}.Release|x86.ActiveCfg = Release|Win32
+		{1DB39ED2-74D1-4568-A376-7A49BD6EA03C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
