@@ -83,8 +83,9 @@ void NeuralNetwork::batchNormalizing(Samples* input, int inputCount)
 	//Assign new normalized locations.
 	for (int i = 0; i < inputCount; i++)
 	{
-		input[i].x1 = (input[i].x1 - meanX) / sqrt(varianceX);
-		input[i].x2 = (input[i].x2 - meanY) / sqrt(varianceY);
+		//scale * x + shift
+		input[i].x1 = 50 * (input[i].x1 - meanX) / sqrt(varianceX) + 10;
+		input[i].x2 = 50 * (input[i].x2 - meanY) / sqrt(varianceY) + 10;
 	}
 }
 
