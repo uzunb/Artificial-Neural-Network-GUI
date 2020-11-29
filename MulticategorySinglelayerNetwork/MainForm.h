@@ -744,7 +744,6 @@ private: System::Windows::Forms::Label^ label6;
 			{
 				p[i].x1 = temp[i].x1;
 				p[i].x2 = temp[i].x2;
-				//p[i].classId = temp[i].classId;
 				p[i].classId = temp[i].classId;
 			}
 			p[sizeOfSamples - 1].x1 = x1;
@@ -862,7 +861,7 @@ private: System::Windows::Forms::Label^ label6;
 		else
 			MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 
-		w[0] = w[1] = w[2] = 0;
+		//w[0] = w[1] = w[2] = 0;
 
 		this->richTextBox1->BackColor = Color::Turquoise;
 
@@ -887,10 +886,9 @@ private: System::Windows::Forms::Label^ label6;
 		//draw new points.
 		for (int i = 0; i < pointCount; i++)
 		{
-			int tempX = point[i].x1*50 + this->pictureBox1->Width / 2;
-			int tempY = this->pictureBox1->Height / 2 - point[i].x2*50;
+			int tempX = point[i].x1 + this->pictureBox1->Width / 2;
+			int tempY = this->pictureBox1->Height / 2 - point[i].x2;
 
-			//noktanýn idsi ile sc idsi eþit ise onun coloru al.
 			for (int j = 0; j < classNumber; j++)
 				if (point[i].classId == sc[j].classId)
 					pen1->Color = Color::FromArgb(sc[j].color.r, sc[j].color.g, sc[j].color.b);
