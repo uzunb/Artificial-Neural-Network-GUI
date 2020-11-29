@@ -719,8 +719,8 @@ namespace ArtificialNeuralNetwork {
 		//draw new points.
 		for (int i = 0; i < pointCount; i++)
 		{
-			int tempX = point[i].x1*50 + this->pictureBox1->Width / 2;
-			int tempY = this->pictureBox1->Height / 2 - point[i].x2*50;
+			int tempX = point[i].x1 + this->pictureBox1->Width / 2;
+			int tempY = this->pictureBox1->Height / 2 - point[i].x2;
 			if (point[i].classId < 0)
 				this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 5, 5);
 			else
