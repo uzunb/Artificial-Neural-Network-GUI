@@ -104,6 +104,9 @@ private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::TextBox^ textBox8;
 	private: System::Windows::Forms::TextBox^ textBox7;
 	private: System::Windows::Forms::TextBox^ textBox6;
+	private: System::Windows::Forms::Panel^ panel9;
+	private: System::Windows::Forms::TextBox^ textBox9;
+	private: System::Windows::Forms::Label^ label9;
 
 
 
@@ -143,6 +146,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->deltaTrainToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
 			   this->panel1 = (gcnew System::Windows::Forms::Panel());
+			   this->panel9 = (gcnew System::Windows::Forms::Panel());
+			   this->textBox9 = (gcnew System::Windows::Forms::TextBox());
+			   this->label9 = (gcnew System::Windows::Forms::Label());
 			   this->panel7 = (gcnew System::Windows::Forms::Panel());
 			   this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			   this->label8 = (gcnew System::Windows::Forms::Label());
@@ -180,6 +186,7 @@ private: System::Windows::Forms::Label^ label6;
 			   this->menuStrip1->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			   this->panel1->SuspendLayout();
+			   this->panel9->SuspendLayout();
 			   this->panel7->SuspendLayout();
 			   this->panel6->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown5))->BeginInit();
@@ -249,6 +256,7 @@ private: System::Windows::Forms::Label^ label6;
 			   // 
 			   this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(35)), static_cast<System::Int32>(static_cast<System::Byte>(35)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(50)));
+			   this->panel1->Controls->Add(this->panel9);
 			   this->panel1->Controls->Add(this->panel7);
 			   this->panel1->Controls->Add(this->panel6);
 			   this->panel1->Controls->Add(this->button2);
@@ -259,6 +267,38 @@ private: System::Windows::Forms::Label^ label6;
 			   this->panel1->Name = L"panel1";
 			   this->panel1->Size = System::Drawing::Size(203, 711);
 			   this->panel1->TabIndex = 2;
+			   // 
+			   // panel9
+			   // 
+			   this->panel9->Controls->Add(this->textBox9);
+			   this->panel9->Controls->Add(this->label9);
+			   this->panel9->Location = System::Drawing::Point(0, 523);
+			   this->panel9->Name = L"panel9";
+			   this->panel9->Size = System::Drawing::Size(203, 65);
+			   this->panel9->TabIndex = 1;
+			   // 
+			   // textBox9
+			   // 
+			   this->textBox9->BackColor = System::Drawing::Color::Silver;
+			   this->textBox9->Dock = System::Windows::Forms::DockStyle::Fill;
+			   this->textBox9->Location = System::Drawing::Point(0, 33);
+			   this->textBox9->Name = L"textBox9";
+			   this->textBox9->Size = System::Drawing::Size(203, 22);
+			   this->textBox9->TabIndex = 10;
+			   // 
+			   // label9
+			   // 
+			   this->label9->BackColor = System::Drawing::Color::DarkGreen;
+			   this->label9->Dock = System::Windows::Forms::DockStyle::Top;
+			   this->label9->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->label9->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
+			   this->label9->ForeColor = System::Drawing::Color::White;
+			   this->label9->Location = System::Drawing::Point(0, 0);
+			   this->label9->Name = L"label9";
+			   this->label9->Size = System::Drawing::Size(203, 33);
+			   this->label9->TabIndex = 9;
+			   this->label9->Text = L"Error";
+			   this->label9->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			   // 
 			   // panel7
 			   // 
@@ -316,7 +356,6 @@ private: System::Windows::Forms::Label^ label6;
 			   this->numericUpDown5->Name = L"numericUpDown5";
 			   this->numericUpDown5->Size = System::Drawing::Size(43, 22);
 			   this->numericUpDown5->TabIndex = 11;
-			   this->numericUpDown5->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			   this->numericUpDown5->ValueChanged += gcnew System::EventHandler(this, &MainForm::numericUpDown5_ValueChanged);
 			   // 
 			   // groupBox1
@@ -675,6 +714,8 @@ private: System::Windows::Forms::Label^ label6;
 			   this->menuStrip1->PerformLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->EndInit();
 			   this->panel1->ResumeLayout(false);
+			   this->panel9->ResumeLayout(false);
+			   this->panel9->PerformLayout();
 			   this->panel7->ResumeLayout(false);
 			   this->panel7->PerformLayout();
 			   this->panel6->ResumeLayout(false);
@@ -707,7 +748,7 @@ private: System::Windows::Forms::Label^ label6;
 	//DrawCenterLine
 	private: System::Void pictureBox1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 
-		Pen^ pen = gcnew Pen(Color::DarkKhaki, 1.0f);
+		Pen^ pen = gcnew Pen(Color::DarkKhaki, 3.0f);
 		int center_width, center_height;
 		center_height = (int)(pictureBox1->Height / 2);
 		center_width = (int)(pictureBox1->Width / 2);
@@ -731,13 +772,12 @@ private: System::Windows::Forms::Label^ label6;
 			sizeOfSamples = sizeOfClass[selectedClass] = 1; 
 			p = new Samples[1]; 
 			p[0].x1 = x1;	p[0].x2 = x2; 
-			//p[0].classId = selectedClass; 
 			p[0].classId = selectedClass;
 		}
 		else {
 			Samples* temp;
 			temp = p;
-			sizeOfClass[selectedClass]++;
+			textBox1->Text = Convert::ToString(++sizeOfClass[selectedClass]);
 			sizeOfSamples++;
 			p = new Samples[sizeOfSamples];
 			for (int i = 0; i < sizeOfSamples - 1; i++)
@@ -754,33 +794,14 @@ private: System::Windows::Forms::Label^ label6;
 
 		textBox3->Text = Convert::ToString(p[sizeOfSamples - 1].x1) + "," + Convert::ToString(p[sizeOfSamples - 1].x2);
 		textBox4->Text = Convert::ToString(temp_x) + "," + Convert::ToString(temp_y);
-		//numericUpDown2->Value = Convert::ToDecimal(pClass[selectedClass].color.r);
-		//numericUpDown3->Value = Convert::ToDecimal(pClass[selectedClass].color.g);
-		//numericUpDown4->Value = Convert::ToDecimal(pClass[selectedClass].color.b);
 
 		//Adding point to table.
 		Pen^ pen = gcnew Pen(Color::FromArgb(pClass[selectedClass].color.r, pClass[selectedClass].color.g, pClass[selectedClass].color.b), 3.0f);
-		pictureBox1->CreateGraphics()->DrawEllipse(pen, temp_x, temp_y, 5, 5);
+		pictureBox1->CreateGraphics()->DrawEllipse(pen, temp_x, temp_y, 2, 2);
 
 
 	}//DrawPoint
 
-	////Initialize randomly
-	//private: System::Void randomlyToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-
-	//	//w1*x1 + w2*x2 + w3 = 0
-
-	//	int dimension = 2;
-	//	w = new double[dimension + 1];
-
-	//	srand(time(0));
-	//	for (int i = 0; i < dimension + 1; i++)
-	//		w[i] = ((double)rand() / RAND_MAX);
-
-	//	drawTrainLine();
-	//	
-	//
-	//}//Initialize randomly
 
 	//Perceptron Train
 	private: System::Void trainToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -809,25 +830,23 @@ private: System::Windows::Forms::Label^ label6;
 	//DrawTrainLine
 	void drawTrainLine(SampleClass *cls, int classNumber)
 	{
-
-		/*int minX = pictureBox1->Width / -2;
-		int minY = YPoint(minX, w);
-		int maxX = pictureBox1->Width / 2;
-		int maxY = YPoint(maxX, w);*/
+		int scale = 20;
 		for (int i = 0; i < classNumber; i++)
 		{
 			//x2 = (+c -ax1) / b
 			int minX = pictureBox1->Width / -2;
-			int minY = (cls[i].w[2] - minX * cls[i].w[0]) / cls[i].w[1];
+			int minY = YPoint(minX, cls[i].w, scale);
 			int maxX = pictureBox1->Width / 2;
-			int maxY = (cls[i].w[2] - maxX * cls[i].w[0]) / cls[i].w[1];
+			int maxY = YPoint(maxX, cls[i].w, scale);
 
-			Pen^ pen = gcnew Pen(Color::FromArgb(cls[i].color.r, cls[i].color.g, cls[i].color.b), 3.0f);
+			Pen^ pen = gcnew Pen(Color::FromArgb(cls[i].color.r, cls[i].color.g, cls[i].color.b), 2.0f);
 			pictureBox1->CreateGraphics()->DrawLine(pen, 0, pictureBox1->Height / 2 - minY, pictureBox1->Width, pictureBox1->Height / 2 - maxY);
-
-			richTextBox1->AppendText("w1: " + Convert::ToString(cls[i].w[0]) + "\tw2: " + Convert::ToString(cls[i].w[1]) + "\tw3: " + Convert::ToString(cls[i].w[2]) + "\n");
+			richTextBox1->AppendText("w1: " + Convert::ToString(cls[i].w[0]) + "\tw2: " + Convert::ToString(cls[i].w[1]) + "\tw3: " + "RGB:" + Convert::ToString(cls[i].w[2]) + "\tRGB:" + Convert::ToString(pClass[i].color.r) + ", " + Convert::ToString(pClass[i].color.g) + ", " + Convert::ToString(pClass[i].color.b) + "\n");
 		}
 	}//DrawTrainLine
+
+
+
 
 	//CLEAN
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -842,6 +861,11 @@ private: System::Windows::Forms::Label^ label6;
 
 		delete w;
 		delete p;
+		delete pClass;
+		delete learningNetwork;
+		delete sizeOfClass;
+		classNumber = 0;
+		selectedClass = 0;
 	}//CLEAN
 
 
@@ -867,6 +891,8 @@ private: System::Windows::Forms::Label^ label6;
 
 	}//Delta Train
 
+
+
 	//Batch Normalizing
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		learningNetwork->batchNormalizing(p, sizeOfSamples);
@@ -876,7 +902,7 @@ private: System::Windows::Forms::Label^ label6;
 	//Draw Normalized points
 	void drawNormalizedPoints(Samples* point, int pointCount, SampleClass* sc, int classNumber) {
 		Pen^ pen1 = gcnew Pen(Color::Aqua, 3.0f);
-
+		int scale = 20;
 		//picturebox clean
 		this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
 		System::Drawing::Rectangle r;
@@ -886,13 +912,13 @@ private: System::Windows::Forms::Label^ label6;
 		//draw new points.
 		for (int i = 0; i < pointCount; i++)
 		{
-			int tempX = point[i].x1 + this->pictureBox1->Width / 2;
-			int tempY = this->pictureBox1->Height / 2 - point[i].x2;
+			int tempX = scale * point[i].x1 + this->pictureBox1->Width / 2;
+			int tempY = this->pictureBox1->Height / 2 - point[i].x2* scale;
 
 			for (int j = 0; j < classNumber; j++)
 				if (point[i].classId == sc[j].classId)
 					pen1->Color = Color::FromArgb(sc[j].color.r, sc[j].color.g, sc[j].color.b);
-			this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 5, 5);
+			this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 2, 2);
 		}
 	}//Draw Normalized points
 
@@ -907,6 +933,7 @@ private: System::Windows::Forms::Label^ label6;
 		pClass = new SampleClass[classNumber];
 		sizeOfClass = new int[classNumber];
 
+		richTextBox1->AppendText("<----------------------Assigned random values.---------------------->\n");
 		for (int i = 0; i < classNumber; i++)
 		{
 			pClass[i].classId = i;
@@ -916,6 +943,8 @@ private: System::Windows::Forms::Label^ label6;
 			pClass[i].w = new double[dimension + 1];
 			for (int j = 0; j < dimension + 1; j++)
 				pClass[i].w[j] = ((double)rand() / RAND_MAX);
+			richTextBox1->AppendText("w1: " + Convert::ToString(pClass[i].w[0]) + "\tw2: " + Convert::ToString(pClass[i].w[1]) + "\tw3: " + Convert::ToString(pClass[i].w[2]) + "\tRGB:" + Convert::ToString(pClass[i].color.r) + ", " + Convert::ToString(pClass[i].color.g) + ", " + Convert::ToString(pClass[i].color.b) + "\n");
+
 		}
 		//drawTrainLine(pClass, classNumber);
 		this->panel5->Visible = TRUE;
@@ -923,6 +952,10 @@ private: System::Windows::Forms::Label^ label6;
 		this->panel7->Visible = TRUE;
 		this->button2->Visible = TRUE;
 		this->numericUpDown5->Maximum = classNumber - 1;
+
+		
+		richTextBox1->AppendText("<------------------------------------------------------------------->\n");
+
 	}//OK BUTTON
 
 	//EXIT

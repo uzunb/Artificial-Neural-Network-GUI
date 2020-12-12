@@ -8,7 +8,7 @@ class DeltaLearning : public NeuralNetwork
 {
 private:
 	double eta;
-	double delta = 2;
+	double delta;
 
 public:
 	DeltaLearning();
