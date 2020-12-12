@@ -84,8 +84,8 @@ void NeuralNetwork::batchNormalizing(Samples* input, int inputCount)
 	for (int i = 0; i < inputCount; i++)
 	{
 		//scale * x + shift
-		input[i].x1 = 50 * (input[i].x1 - meanX) / sqrt(varianceX) + 10;
-		input[i].x2 = 50 * (input[i].x2 - meanY) / sqrt(varianceY) + 10;
+		input[i].x1 = (input[i].x1 - meanX) / sqrt(varianceX);
+		input[i].x2 = (input[i].x2 - meanY) / sqrt(varianceY);
 	}
 }
 
@@ -108,7 +108,7 @@ double NeuralNetwork::sigmoid(double net, double delta)
 
 double NeuralNetwork::derivatedSigmoid(double output, int desiredValue)
 {
-	return 0.5 * (desiredValue - pow(output, 2));
+	return 0.5 * (1 - output*output);
 }
 
 double NeuralNetwork::logistic(double net)
