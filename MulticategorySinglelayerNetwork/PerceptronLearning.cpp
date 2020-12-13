@@ -16,16 +16,16 @@ PerceptronLearning::~PerceptronLearning()
 void PerceptronLearning::Train(Samples* input, double* w, int numberOfInputs, SampleClass* cls, int numberOfClasses, int &cycleCount)
 {
     bool isUpdated;
-    int d, signedNet;
-    double net, temp;
+    int d, output;
+    double net, temp, error;
 
     //For each class weights
     for (int clsNumber = 0; clsNumber < numberOfClasses; clsNumber++)
     {
-        // until network give not error for all samples
         do
         {
-            isUpdated = false;
+            error = 0;
+            // until network give not error for all samples
             for (int i = 0; i < numberOfInputs; i++)
             {
                 //expected value
@@ -34,20 +34,20 @@ void PerceptronLearning::Train(Samples* input, double* w, int numberOfInputs, Sa
                 //w^t * x   
                 net = cls[clsNumber].w[0] * input[i].x1 + cls[clsNumber].w[1] * input[i].x2 + cls[clsNumber].w[2] * BIAS;
 
-                signedNet = sgn(net);   //activation function
-                if (d != signedNet) {
+                output = sgn(net);   //activation function
+                if (d != output) {
 
                     //w^n+1 = w^n + c * ( d - sgn(net) ) * x
-                    temp = this->getC() * (d - signedNet);
-                    cls[clsNumber].w[0] += temp * input[i].x1;
-                    cls[clsNumber].w[1] += temp * input[i].x2;
-                    cls[clsNumber].w[2] += temp * BIAS;
+                    temp = 0.5*this->getC() * (d - output);
+                    cls[clsNumber].w[0] = cls[clsNumber].w[0] + temp * input[i].x1;
+                    cls[clsNumber].w[1] = cls[clsNumber].w[1] + temp * input[i].x2;
+                    cls[clsNumber].w[2] = cls[clsNumber].w[2] + temp * BIAS;
 
-                    isUpdated = true;
+                    error += 0.5 * (d - output) * (d - output);
                 }
             }
-                ++cycleCount;
-        } while (isUpdated);
+            ++cycleCount;
+        } while (error > 0.05);
     }
 }
 
