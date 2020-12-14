@@ -201,6 +201,9 @@ private: System::Windows::Forms::Label^ label6;
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource2))->BeginInit();
 			   this->panel8->SuspendLayout();
 			   this->SuspendLayout();
+			   // 
+			   // menuStrip1
+			   // 
 			   this->menuStrip1->AutoSize = false;
 			   this->menuStrip1->BackColor = System::Drawing::Color::Turquoise;
 			   this->menuStrip1->GripStyle = System::Windows::Forms::ToolStripGripStyle::Visible;
@@ -211,6 +214,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->menuStrip1->Size = System::Drawing::Size(1346, 30);
 			   this->menuStrip1->TabIndex = 1;
 			   this->menuStrip1->Text = L"menuStrip1";
+			   // 
+			   // processToolStripMenuItem
+			   // 
 			   this->processToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				   this->initialToolStripMenuItem,
 					   this->trainToolStripMenuItem, this->deltaTrainToolStripMenuItem
@@ -218,21 +224,36 @@ private: System::Windows::Forms::Label^ label6;
 			   this->processToolStripMenuItem->Name = L"processToolStripMenuItem";
 			   this->processToolStripMenuItem->Size = System::Drawing::Size(59, 26);
 			   this->processToolStripMenuItem->Text = L"Process";
+			   // 
+			   // initialToolStripMenuItem
+			   // 
 			   this->initialToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->randomlyToolStripMenuItem });
 			   this->initialToolStripMenuItem->Name = L"initialToolStripMenuItem";
 			   this->initialToolStripMenuItem->Size = System::Drawing::Size(160, 22);
 			   this->initialToolStripMenuItem->Text = L"Initial";
+			   // 
+			   // randomlyToolStripMenuItem
+			   // 
 			   this->randomlyToolStripMenuItem->Name = L"randomlyToolStripMenuItem";
 			   this->randomlyToolStripMenuItem->Size = System::Drawing::Size(128, 22);
 			   this->randomlyToolStripMenuItem->Text = L"Randomly";
+			   // 
+			   // trainToolStripMenuItem
+			   // 
 			   this->trainToolStripMenuItem->Name = L"trainToolStripMenuItem";
 			   this->trainToolStripMenuItem->Size = System::Drawing::Size(160, 22);
 			   this->trainToolStripMenuItem->Text = L"Perceptron Train";
 			   this->trainToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::trainToolStripMenuItem_Click);
+			   // 
+			   // deltaTrainToolStripMenuItem
+			   // 
 			   this->deltaTrainToolStripMenuItem->Name = L"deltaTrainToolStripMenuItem";
 			   this->deltaTrainToolStripMenuItem->Size = System::Drawing::Size(160, 22);
 			   this->deltaTrainToolStripMenuItem->Text = L"Delta Train";
 			   this->deltaTrainToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::deltaTrainToolStripMenuItem_Click);
+			   // 
+			   // panel1
+			   // 
 			   this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(35)), static_cast<System::Int32>(static_cast<System::Byte>(35)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(50)));
 			   this->panel1->Controls->Add(this->panel9);
@@ -246,18 +267,27 @@ private: System::Windows::Forms::Label^ label6;
 			   this->panel1->Name = L"panel1";
 			   this->panel1->Size = System::Drawing::Size(203, 711);
 			   this->panel1->TabIndex = 2;
+			   // 
+			   // panel9
+			   // 
 			   this->panel9->Controls->Add(this->textBox9);
 			   this->panel9->Controls->Add(this->label9);
 			   this->panel9->Location = System::Drawing::Point(0, 523);
 			   this->panel9->Name = L"panel9";
 			   this->panel9->Size = System::Drawing::Size(203, 65);
 			   this->panel9->TabIndex = 1;
+			   // 
+			   // textBox9
+			   // 
 			   this->textBox9->BackColor = System::Drawing::Color::Silver;
 			   this->textBox9->Dock = System::Windows::Forms::DockStyle::Fill;
 			   this->textBox9->Location = System::Drawing::Point(0, 33);
 			   this->textBox9->Name = L"textBox9";
 			   this->textBox9->Size = System::Drawing::Size(203, 22);
 			   this->textBox9->TabIndex = 10;
+			   // 
+			   // label9
+			   // 
 			   this->label9->BackColor = System::Drawing::Color::DarkGreen;
 			   this->label9->Dock = System::Windows::Forms::DockStyle::Top;
 			   this->label9->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
@@ -269,6 +299,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->label9->TabIndex = 9;
 			   this->label9->Text = L"Error";
 			   this->label9->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			   // 
+			   // panel7
+			   // 
 			   this->panel7->Controls->Add(this->textBox5);
 			   this->panel7->Controls->Add(this->label8);
 			   this->panel7->Dock = System::Windows::Forms::DockStyle::Bottom;
@@ -277,12 +310,18 @@ private: System::Windows::Forms::Label^ label6;
 			   this->panel7->Size = System::Drawing::Size(203, 63);
 			   this->panel7->TabIndex = 5;
 			   this->panel7->Visible = false;
+			   // 
+			   // textBox5
+			   // 
 			   this->textBox5->BackColor = System::Drawing::Color::Silver;
 			   this->textBox5->Dock = System::Windows::Forms::DockStyle::Fill;
 			   this->textBox5->Location = System::Drawing::Point(0, 33);
 			   this->textBox5->Name = L"textBox5";
 			   this->textBox5->Size = System::Drawing::Size(203, 22);
 			   this->textBox5->TabIndex = 8;
+			   // 
+			   // label8
+			   // 
 			   this->label8->BackColor = System::Drawing::Color::DarkGreen;
 			   this->label8->Dock = System::Windows::Forms::DockStyle::Top;
 			   this->label8->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
@@ -294,6 +333,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->label8->TabIndex = 7;
 			   this->label8->Text = L"Total Cycle";
 			   this->label8->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			   // 
+			   // panel6
+			   // 
 			   this->panel6->BackColor = System::Drawing::Color::DarkGreen;
 			   this->panel6->Controls->Add(this->numericUpDown5);
 			   this->panel6->Controls->Add(this->groupBox1);
@@ -306,12 +348,18 @@ private: System::Windows::Forms::Label^ label6;
 			   this->panel6->Size = System::Drawing::Size(200, 208);
 			   this->panel6->TabIndex = 4;
 			   this->panel6->Visible = false;
+			   // 
+			   // numericUpDown5
+			   // 
 			   this->numericUpDown5->BackColor = System::Drawing::Color::Silver;
 			   this->numericUpDown5->Location = System::Drawing::Point(154, 5);
 			   this->numericUpDown5->Name = L"numericUpDown5";
 			   this->numericUpDown5->Size = System::Drawing::Size(43, 22);
 			   this->numericUpDown5->TabIndex = 11;
 			   this->numericUpDown5->ValueChanged += gcnew System::EventHandler(this, &MainForm::numericUpDown5_ValueChanged);
+			   // 
+			   // groupBox1
+			   // 
 			   this->groupBox1->Controls->Add(this->textBox4);
 			   this->groupBox1->Controls->Add(this->textBox3);
 			   this->groupBox1->Controls->Add(this->label7);
@@ -323,16 +371,25 @@ private: System::Windows::Forms::Label^ label6;
 			   this->groupBox1->TabIndex = 1;
 			   this->groupBox1->TabStop = false;
 			   this->groupBox1->Text = L"Coordinates";
+			   // 
+			   // textBox4
+			   // 
 			   this->textBox4->BackColor = System::Drawing::Color::Silver;
 			   this->textBox4->Location = System::Drawing::Point(84, 46);
 			   this->textBox4->Name = L"textBox4";
 			   this->textBox4->Size = System::Drawing::Size(116, 22);
 			   this->textBox4->TabIndex = 10;
+			   // 
+			   // textBox3
+			   // 
 			   this->textBox3->BackColor = System::Drawing::Color::Silver;
 			   this->textBox3->Location = System::Drawing::Point(84, 18);
 			   this->textBox3->Name = L"textBox3";
 			   this->textBox3->Size = System::Drawing::Size(116, 22);
 			   this->textBox3->TabIndex = 7;
+			   // 
+			   // label7
+			   // 
 			   this->label7->BackColor = System::Drawing::Color::DarkGreen;
 			   this->label7->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->label7->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
@@ -343,6 +400,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->label7->TabIndex = 9;
 			   this->label7->Text = L"WH";
 			   this->label7->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			   // 
+			   // label6
+			   // 
 			   this->label6->BackColor = System::Drawing::Color::DarkGreen;
 			   this->label6->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->label6->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
@@ -353,11 +413,17 @@ private: System::Windows::Forms::Label^ label6;
 			   this->label6->TabIndex = 8;
 			   this->label6->Text = L"XY";
 			   this->label6->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			   // 
+			   // textBox1
+			   // 
 			   this->textBox1->BackColor = System::Drawing::Color::Silver;
 			   this->textBox1->Location = System::Drawing::Point(154, 34);
 			   this->textBox1->Name = L"textBox1";
 			   this->textBox1->Size = System::Drawing::Size(43, 22);
 			   this->textBox1->TabIndex = 6;
+			   // 
+			   // label3
+			   // 
 			   this->label3->BackColor = System::Drawing::Color::DarkGreen;
 			   this->label3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
@@ -368,6 +434,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->label3->TabIndex = 5;
 			   this->label3->Text = L"Sample Count";
 			   this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			   // 
+			   // groupBox2
+			   // 
 			   this->groupBox2->Controls->Add(this->textBox8);
 			   this->groupBox2->Controls->Add(this->textBox7);
 			   this->groupBox2->Controls->Add(this->textBox6);
@@ -379,22 +448,34 @@ private: System::Windows::Forms::Label^ label6;
 			   this->groupBox2->TabIndex = 4;
 			   this->groupBox2->TabStop = false;
 			   this->groupBox2->Text = L"Color";
+			   // 
+			   // textBox8
+			   // 
 			   this->textBox8->BackColor = System::Drawing::Color::Silver;
 			   this->textBox8->Location = System::Drawing::Point(124, 45);
 			   this->textBox8->Name = L"textBox8";
 			   this->textBox8->Size = System::Drawing::Size(34, 22);
 			   this->textBox8->TabIndex = 14;
+			   // 
+			   // textBox7
+			   // 
 			   this->textBox7->BackColor = System::Drawing::Color::Silver;
 			   this->textBox7->Location = System::Drawing::Point(84, 45);
 			   this->textBox7->Name = L"textBox7";
 			   this->textBox7->Size = System::Drawing::Size(34, 22);
 			   this->textBox7->TabIndex = 13;
+			   // 
+			   // textBox6
+			   // 
 			   this->textBox6->BackColor = System::Drawing::Color::Silver;
 			   this->textBox6->Location = System::Drawing::Point(44, 45);
 			   this->textBox6->Name = L"textBox6";
 			   this->textBox6->Size = System::Drawing::Size(34, 22);
 			   this->textBox6->TabIndex = 12;
 			   this->textBox6->TextChanged += gcnew System::EventHandler(this, &MainForm::textBox6_TextChanged);
+			   // 
+			   // label4
+			   // 
 			   this->label4->BackColor = System::Drawing::Color::DarkGreen;
 			   this->label4->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->label4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
@@ -405,6 +486,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->label4->TabIndex = 7;
 			   this->label4->Text = L"   R       G       B";
 			   this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			   // 
+			   // label2
+			   // 
 			   this->label2->BackColor = System::Drawing::Color::DarkGreen;
 			   this->label2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
@@ -415,6 +499,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->label2->TabIndex = 3;
 			   this->label2->Text = L"Selected Class";
 			   this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			   // 
+			   // button2
+			   // 
 			   this->button2->BackColor = System::Drawing::Color::DarkGreen;
 			   this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->button2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
@@ -428,6 +515,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->button2->UseVisualStyleBackColor = false;
 			   this->button2->Visible = false;
 			   this->button2->Click += gcnew System::EventHandler(this, &MainForm::button2_Click);
+			   // 
+			   // panel5
+			   // 
 			   this->panel5->BackColor = System::Drawing::Color::DarkGreen;
 			   this->panel5->Controls->Add(this->textBox2);
 			   this->panel5->Controls->Add(this->label5);
@@ -437,6 +527,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->panel5->Size = System::Drawing::Size(203, 57);
 			   this->panel5->TabIndex = 1;
 			   this->panel5->Visible = false;
+			   // 
+			   // textBox2
+			   // 
 			   this->textBox2->BackColor = System::Drawing::Color::Silver;
 			   this->textBox2->Dock = System::Windows::Forms::DockStyle::Top;
 			   this->textBox2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
@@ -445,6 +538,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->textBox2->Name = L"textBox2";
 			   this->textBox2->Size = System::Drawing::Size(203, 25);
 			   this->textBox2->TabIndex = 8;
+			   // 
+			   // label5
+			   // 
 			   this->label5->BackColor = System::Drawing::Color::DarkGreen;
 			   this->label5->Dock = System::Windows::Forms::DockStyle::Top;
 			   this->label5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
@@ -456,6 +552,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->label5->TabIndex = 7;
 			   this->label5->Text = L"Total Samples";
 			   this->label5->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			   // 
+			   // panel4
+			   // 
 			   this->panel4->BackColor = System::Drawing::Color::DarkGreen;
 			   this->panel4->Controls->Add(this->button3);
 			   this->panel4->Controls->Add(this->numericUpDown1);
@@ -465,6 +564,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->panel4->Name = L"panel4";
 			   this->panel4->Size = System::Drawing::Size(203, 29);
 			   this->panel4->TabIndex = 0;
+			   // 
+			   // button3
+			   // 
 			   this->button3->BackColor = System::Drawing::Color::LightGray;
 			   this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->button3->Location = System::Drawing::Point(151, 4);
@@ -474,12 +576,18 @@ private: System::Windows::Forms::Label^ label6;
 			   this->button3->Text = L"OK";
 			   this->button3->UseVisualStyleBackColor = false;
 			   this->button3->Click += gcnew System::EventHandler(this, &MainForm::button3_Click);
+			   // 
+			   // numericUpDown1
+			   // 
 			   this->numericUpDown1->BackColor = System::Drawing::Color::Silver;
 			   this->numericUpDown1->Location = System::Drawing::Point(101, 3);
 			   this->numericUpDown1->Name = L"numericUpDown1";
 			   this->numericUpDown1->Size = System::Drawing::Size(43, 22);
 			   this->numericUpDown1->TabIndex = 0;
 			   this->numericUpDown1->ValueChanged += gcnew System::EventHandler(this, &MainForm::numericUpDown1_ValueChanged);
+			   // 
+			   // label1
+			   // 
 			   this->label1->BackColor = System::Drawing::Color::DarkGreen;
 			   this->label1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->label1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
@@ -490,6 +598,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->label1->TabIndex = 2;
 			   this->label1->Text = L"Class Count";
 			   this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			   // 
+			   // panel2
+			   // 
 			   this->panel2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(51)));
 			   this->panel2->Controls->Add(this->pictureBox1);
@@ -498,6 +609,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->panel2->Name = L"panel2";
 			   this->panel2->Size = System::Drawing::Size(1143, 561);
 			   this->panel2->TabIndex = 3;
+			   // 
+			   // pictureBox1
+			   // 
 			   this->pictureBox1->Dock = System::Windows::Forms::DockStyle::Fill;
 			   this->pictureBox1->Location = System::Drawing::Point(0, 0);
 			   this->pictureBox1->Name = L"pictureBox1";
@@ -506,6 +620,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->pictureBox1->TabStop = false;
 			   this->pictureBox1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::pictureBox1_Paint);
 			   this->pictureBox1->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::pictureBox1_MouseClick);
+			   // 
+			   // panel3
+			   // 
 			   this->panel3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)), static_cast<System::Int32>(static_cast<System::Byte>(40)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(50)));
 			   this->panel3->Controls->Add(this->richTextBox1);
@@ -514,10 +631,13 @@ private: System::Windows::Forms::Label^ label6;
 			   this->panel3->Name = L"panel3";
 			   this->panel3->Size = System::Drawing::Size(1143, 150);
 			   this->panel3->TabIndex = 4;
+			   // 
+			   // richTextBox1
+			   // 
 			   this->richTextBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(35)), static_cast<System::Int32>(static_cast<System::Byte>(35)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(50)));
 			   this->richTextBox1->Dock = System::Windows::Forms::DockStyle::Fill;
-			   this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Mongolian Baiti", 11.25, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			   this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Mongolian Baiti", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
 			   this->richTextBox1->ForeColor = System::Drawing::Color::White;
 			   this->richTextBox1->Location = System::Drawing::Point(0, 0);
@@ -525,6 +645,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->richTextBox1->Size = System::Drawing::Size(1143, 150);
 			   this->richTextBox1->TabIndex = 0;
 			   this->richTextBox1->Text = L"";
+			   // 
+			   // button1
+			   // 
 			   this->button1->BackColor = System::Drawing::Color::Turquoise;
 			   this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			   this->button1->Dock = System::Windows::Forms::DockStyle::Right;
@@ -540,6 +663,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->button1->TextImageRelation = System::Windows::Forms::TextImageRelation::ImageAboveText;
 			   this->button1->UseVisualStyleBackColor = false;
 			   this->button1->Click += gcnew System::EventHandler(this, &MainForm::button1_Click);
+			   // 
+			   // panel8
+			   // 
 			   this->panel8->BackColor = System::Drawing::Color::Turquoise;
 			   this->panel8->Controls->Add(this->button4);
 			   this->panel8->Controls->Add(this->button1);
@@ -547,6 +673,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->panel8->Name = L"panel8";
 			   this->panel8->Size = System::Drawing::Size(92, 30);
 			   this->panel8->TabIndex = 1;
+			   // 
+			   // button4
+			   // 
 			   this->button4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(224)));
 			   this->button4->Dock = System::Windows::Forms::DockStyle::Right;
@@ -560,6 +689,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->button4->Text = L"Clean";
 			   this->button4->UseVisualStyleBackColor = false;
 			   this->button4->Click += gcnew System::EventHandler(this, &MainForm::button4_Click);
+			   // 
+			   // MainForm
+			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
@@ -570,7 +702,7 @@ private: System::Windows::Forms::Label^ label6;
 			   this->Controls->Add(this->panel2);
 			   this->Controls->Add(this->panel1);
 			   this->Controls->Add(this->menuStrip1);
-			   this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			   this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(162)));
 			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			   this->MaximumSize = System::Drawing::Size(1366, 800);
