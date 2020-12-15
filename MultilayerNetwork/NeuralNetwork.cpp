@@ -94,7 +94,7 @@ int NeuralNetwork::sgn(int number)
 	return number >= 0 ? 1 : -1;
 }
 
-double NeuralNetwork::sigmoid(double net, double delta) 
+double NeuralNetwork::sigmoid(double net, double delta = 1) 
 {
 	double temp1 = exp(-delta * net);
 
@@ -153,6 +153,31 @@ void NeuralNetwork::MatrixMultiplication(double* m1, int col1, int row1, double*
 				sum += m1[i * col1 + k] * m2[k * col2 + j];
 			}
 			m3[i * col2 + j] = sum;
+		}
+	}
+
+}
+
+
+void NeuralNetwork::MatrixMultiplication(double* m1, int col1, int row1, double* m2, int col2, int row2, double* m3, char* activationFunc)
+{
+	if (col1 != row2)
+		return;
+
+	double sum = 0;
+	for (int i = 0; i < row1; i++) {
+		for (int j = 0; j < col2; j++) {
+			sum = 0;
+			for (int k = 0; k < col1; k++) {
+				sum += m1[i * col1 + k] * m2[k * col2 + j];
+			}
+			if (strcmp(activationFunc, "sigmoid"))
+				m3[i * col2 + j] = sigmoid(sum);
+			else if (strcmp(activationFunc, "sign"))
+				m3[i * col2 + j] = sgn(sum);
+			else
+				return;
+
 		}
 	}
 

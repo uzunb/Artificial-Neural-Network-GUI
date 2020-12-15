@@ -37,10 +37,10 @@ double DeltaLearning::getDelta()
 
 double DeltaLearning::FeedForward(Samples* input, int inputCount, int hiddenNeuronNumber, SampleClass* cls, int classCount, int numberOfClass, int d)
 {
-    MatrixMultiplication(input[inputCount].x, 3, 1, this->v, hiddenNeuronNumber, 3, this->y);
+    MatrixMultiplication(input[inputCount].x, 3, 1, this->v, hiddenNeuronNumber, 3, this->y, "sigmoid");
     this->y[hiddenNeuronNumber + 1] = BIAS;
     
-    MatrixMultiplication(this->y, (hiddenNeuronNumber + 1), 1, cls[classCount].w, numberOfClass, (hiddenNeuronNumber + 1), this->o);
+    MatrixMultiplication(this->y, (hiddenNeuronNumber + 1), 1, cls[classCount].w, numberOfClass, (hiddenNeuronNumber + 1), this->o, "sigmoid");
 
     double error = 0.5 * (d - this->o[classCount]) * (d - o[classCount]);
     return error;
