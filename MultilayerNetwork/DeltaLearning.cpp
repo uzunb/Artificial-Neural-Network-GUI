@@ -46,31 +46,32 @@ double DeltaLearning::FeedForward(Samples* input, int inputCount, int hiddenNeur
     return error;
 }
 
-void DeltaLearning::BackPropagation(SampleClass* cls, int classCount, int numberOfClass, int d, int neuronCount)
+void DeltaLearning::BackPropagation(Samples* input, int inputCount, SampleClass* cls, int classCount, int numberOfClass, int d, int hiddenNeuronNumber)
 {
-    double D_ok = 0.5 * (1 - (o[classCount] * o[classCount]) * (d - o[classCount]);
-    double D_yj = 0.5 * (1 - y[neuronCount] * y[neuronCount]);//????
-}
-
-
-
-void MatrixMultiplication(double* m1, int col1, int row1, double* m2, int col2, int row2, double* m3)
-{
-    if (col1 != row2)
-        return;
-
-    double sum = 0;
-    for (int i = 0; i < row1; i++){
-        for (int j = 0; j < col2; j++){
-            sum = 0;
-            for (int k = 0; k < col1; k++){
-                sum += m1[i * col1 + k] * m2[k * col2 + j];
-            }
-            m3[i * col2 + j] = sum;
+    double sum = 0.0, D_yj;
+    double D_ok = 0.5 * (1 - (o[classCount] * o[classCount])) * (d - o[classCount]);
+    for (int j = 0; j < hiddenNeuronNumber; j++) {
+        D_yj = 0.5 * (1 - y[j] * y[j]) * sum;
+        sum = 0.0;
+        for (int k = 0; k < numberOfClass; k++) {
+            sum += D_ok * cls[classCount].w[j * numberOfClass + k];//w : hidden x class ?? will check
         }
     }
 
+    for (int j = 0; j < hiddenNeuronNumber; j++) {
+        for (int k = 0; k < numberOfClass; k++) {
+            cls[classCount].w[j * numberOfClass + k] += getC() * D_ok * y[j];
+        }
+    }
+
+    for (int j = 0; j < hiddenNeuronNumber; j++)
+        for (int i = 0; i < 3; i++)
+            v[j * 3 + i] += getC() * D_yj * input[inputCount].x[i];
+
+
 }
+
+
 
 void DeltaLearning::Train(Samples* input, double* w, int inputCount, SampleClass* cls, int numberOfClass, int& jeneration)
 {
