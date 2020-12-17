@@ -16,7 +16,5 @@ struct SampleColor
 struct SampleClass
 {
 	int classId;
-	double* w;
-	double o;
 	SampleColor color;
 };
