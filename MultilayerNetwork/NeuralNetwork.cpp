@@ -171,9 +171,9 @@ void NeuralNetwork::MatrixMultiplication(double* m1, int col1, int row1, double*
 			for (int k = 0; k < col1; k++) {
 				sum += m1[i * col1 + k] * m2[k * col2 + j];
 			}
-			if (strcmp(activationFunc, "sigmoid"))
+			if (!strcmp(activationFunc, "sigmoid"))
 				m3[i * col2 + j] = sigmoid(sum);
-			else if (strcmp(activationFunc, "sign"))
+			else if (!strcmp(activationFunc, "sign"))
 				m3[i * col2 + j] = sgn(sum);
 			else
 				return;
