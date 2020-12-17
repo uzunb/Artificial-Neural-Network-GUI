@@ -178,6 +178,7 @@ namespace MultilayerNetwork {
 			   this->numericUpDown1 = (gcnew System::Windows::Forms::NumericUpDown());
 			   this->label1 = (gcnew System::Windows::Forms::Label());
 			   this->panel2 = (gcnew System::Windows::Forms::Panel());
+			   this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			   this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			   this->panel3 = (gcnew System::Windows::Forms::Panel());
 			   this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
@@ -185,7 +186,6 @@ namespace MultilayerNetwork {
 			   this->button1 = (gcnew System::Windows::Forms::Button());
 			   this->panel8 = (gcnew System::Windows::Forms::Panel());
 			   this->button4 = (gcnew System::Windows::Forms::Button());
-			   this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			   this->menuStrip1->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			   this->panel1->SuspendLayout();
@@ -204,11 +204,11 @@ namespace MultilayerNetwork {
 			   this->panel4->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
 			   this->panel2->SuspendLayout();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			   this->panel3->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource2))->BeginInit();
 			   this->panel8->SuspendLayout();
-			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			   this->SuspendLayout();
 			   // 
 			   // menuStrip1
@@ -308,6 +308,7 @@ namespace MultilayerNetwork {
 			   this->numericUpDown3->Name = L"numericUpDown3";
 			   this->numericUpDown3->Size = System::Drawing::Size(40, 22);
 			   this->numericUpDown3->TabIndex = 0;
+			   this->numericUpDown3->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 8, 0, 0, 0 });
 			   // 
 			   // label11
 			   // 
@@ -672,6 +673,7 @@ namespace MultilayerNetwork {
 			   this->numericUpDown1->Name = L"numericUpDown1";
 			   this->numericUpDown1->Size = System::Drawing::Size(43, 22);
 			   this->numericUpDown1->TabIndex = 0;
+			   this->numericUpDown1->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 4, 0, 0, 0 });
 			   this->numericUpDown1->ValueChanged += gcnew System::EventHandler(this, &MainForm::numericUpDown1_ValueChanged);
 			   // 
 			   // label1
@@ -699,12 +701,44 @@ namespace MultilayerNetwork {
 			   this->panel2->Size = System::Drawing::Size(1590, 561);
 			   this->panel2->TabIndex = 3;
 			   // 
+			   // chart1
+			   // 
+			   this->chart1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(35)), static_cast<System::Int32>(static_cast<System::Byte>(35)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(50)));
+			   this->chart1->BackImageTransparentColor = System::Drawing::Color::Gray;
+			   this->chart1->BackSecondaryColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			   this->chart1->BorderlineColor = System::Drawing::Color::Maroon;
+			   chartArea1->Name = L"ChartArea1";
+			   this->chart1->ChartAreas->Add(chartArea1);
+			   this->chart1->Dock = System::Windows::Forms::DockStyle::Fill;
+			   legend1->Name = L"Legend1";
+			   this->chart1->Legends->Add(legend1);
+			   this->chart1->Location = System::Drawing::Point(1000, 0);
+			   this->chart1->Name = L"chart1";
+			   series1->BackImageTransparentColor = System::Drawing::Color::WhiteSmoke;
+			   series1->BorderColor = System::Drawing::Color::White;
+			   series1->BorderWidth = 3;
+			   series1->ChartArea = L"ChartArea1";
+			   series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
+			   series1->Color = System::Drawing::Color::Red;
+			   series1->Legend = L"Legend1";
+			   series1->MarkerBorderColor = System::Drawing::Color::White;
+			   series1->MarkerColor = System::Drawing::Color::White;
+			   series1->Name = L"Error";
+			   series1->ShadowColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(120)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			   this->chart1->Series->Add(series1);
+			   this->chart1->Size = System::Drawing::Size(590, 561);
+			   this->chart1->TabIndex = 1;
+			   this->chart1->Text = L"chart1";
+			   // 
 			   // pictureBox1
 			   // 
 			   this->pictureBox1->Dock = System::Windows::Forms::DockStyle::Left;
 			   this->pictureBox1->Location = System::Drawing::Point(0, 0);
 			   this->pictureBox1->Name = L"pictureBox1";
-			   this->pictureBox1->Size = System::Drawing::Size(1143, 561);
+			   this->pictureBox1->Size = System::Drawing::Size(1000, 561);
 			   this->pictureBox1->TabIndex = 0;
 			   this->pictureBox1->TabStop = false;
 			   this->pictureBox1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainForm::pictureBox1_Paint);
@@ -779,29 +813,6 @@ namespace MultilayerNetwork {
 			   this->button4->UseVisualStyleBackColor = false;
 			   this->button4->Click += gcnew System::EventHandler(this, &MainForm::button4_Click);
 			   // 
-			   // chart1
-			   // 
-			   this->chart1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(51)));
-			   this->chart1->BackImageTransparentColor = System::Drawing::Color::Gray;
-			   this->chart1->BackSecondaryColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(0)));
-			   this->chart1->BorderlineColor = System::Drawing::Color::Maroon;
-			   chartArea1->Name = L"ChartArea1";
-			   this->chart1->ChartAreas->Add(chartArea1);
-			   this->chart1->Dock = System::Windows::Forms::DockStyle::Fill;
-			   legend1->Name = L"Legend1";
-			   this->chart1->Legends->Add(legend1);
-			   this->chart1->Location = System::Drawing::Point(1143, 0);
-			   this->chart1->Name = L"chart1";
-			   series1->ChartArea = L"ChartArea1";
-			   series1->Legend = L"Legend1";
-			   series1->Name = L"Series1";
-			   this->chart1->Series->Add(series1);
-			   this->chart1->Size = System::Drawing::Size(447, 561);
-			   this->chart1->TabIndex = 1;
-			   this->chart1->Text = L"chart1";
-			   // 
 			   // MainForm
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -847,11 +858,11 @@ namespace MultilayerNetwork {
 			   this->panel4->ResumeLayout(false);
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
 			   this->panel2->ResumeLayout(false);
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			   this->panel3->ResumeLayout(false);
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource2))->EndInit();
 			   this->panel8->ResumeLayout(false);
-			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			   this->ResumeLayout(false);
 
 		   }
@@ -994,25 +1005,31 @@ namespace MultilayerNetwork {
 	private: System::Void deltaTrainToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->richTextBox1->BackColor = Color::Red;
 
-		learningNetwork = new DeltaLearning();
+		//learningNetwork = new DeltaLearning();
 		DeltaLearning* DeltaL = new DeltaLearning();
-		learningNetwork->setLayerCount(Convert::ToInt32(numericUpDown2->Value));
+		DeltaL->setLayerCount(Convert::ToInt32(numericUpDown2->Value));
 		hiddenNeuronNumber = Convert::ToInt32(numericUpDown3->Value);
-		learningNetwork->v = (double*)malloc(hiddenNeuronNumber * (2 + 1) * sizeof(double));
-		learningNetwork->v_color = (int*)malloc(hiddenNeuronNumber * (2 + 1) * sizeof(int));
-		learningNetwork->y = (double*)malloc((hiddenNeuronNumber + 1) * sizeof(double)); //+1 : BIAS
-		learningNetwork->w = (double*)malloc((hiddenNeuronNumber + 1) * classNumber * sizeof(double)); //+1 : BIAS
+		DeltaL->v = (double*)malloc(hiddenNeuronNumber * (2 + 1) * sizeof(double));
+		DeltaL->v_color = (int*)malloc(hiddenNeuronNumber * (2 + 1) * sizeof(int));
+		DeltaL->y = (double*)malloc((hiddenNeuronNumber + 1) * sizeof(double)); //+1 : BIAS
+		DeltaL->w = (double*)malloc((hiddenNeuronNumber + 1) * classNumber * sizeof(double)); //+1 : BIAS
+		DeltaL->o = (double*)malloc(classNumber * sizeof(double));
+		chart1->Series["Error"]->Points->Clear();
 
 
-		richTextBox1->AppendText("<----------------------Hidden Layers initializing---------------------->\n");
+		richTextBox1->AppendText("<----------------------W weights initializing---------------------->\n");
 		for (int i = 0; i < hiddenNeuronNumber; i++)
-			for (int j = 0; j < (2 + 1); j++) {
-				learningNetwork->v[i * hiddenNeuronNumber + j] = ((double)rand() / RAND_MAX);
-				learningNetwork->v_color[i * hiddenNeuronNumber + j] = ((int)rand() % 255);
-			}
-		richTextBox1->AppendText("Assigned random values of V\n");
+			for (int j = 0; j < classNumber; j++)
+				DeltaL->w[i * classNumber + j] = ((double)rand() / RAND_MAX);
 
 		richTextBox1->AppendText("<------------------------------------------------------------------->\n");
+
+		richTextBox1->AppendText("<----------------------V weights initializing---------------------->\n");
+		for (int i = 0; i < hiddenNeuronNumber; i++)
+			for (int j = 0; j < (2 + 1); j++) {
+				DeltaL->v[i * hiddenNeuronNumber + j] = ((double)rand() / RAND_MAX);
+				DeltaL->v_color[i * hiddenNeuronNumber + j] = ((int)rand() % 255);
+			}
 
 		int cycleCount = 0;
 
@@ -1028,6 +1045,7 @@ namespace MultilayerNetwork {
 
 		while (error > 0.01)
 		{
+			cycleCount++;
 			error = 0.0;
 			for (int i = 0; i < sizeOfSamples; i++)
 			{
@@ -1037,6 +1055,8 @@ namespace MultilayerNetwork {
 					error += DeltaL->FeedForward(p[i].x,hiddenNeuronNumber, k, classNumber, d);
 
 					//drawing error 
+					chart1->Series["Error"]->Points->AddXY(cycleCount, error);
+
 
 					DeltaL->BackPropagation(p[i].x, hiddenNeuronNumber, k, classNumber, d);
 
