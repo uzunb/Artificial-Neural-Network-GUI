@@ -114,25 +114,7 @@ namespace MultilayerNetwork {
 	private: System::Windows::Forms::Panel^ panel10;
 	private: System::Windows::Forms::NumericUpDown^ numericUpDown2;
 	private: System::Windows::Forms::Label^ label10;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
 
 	private: System::Windows::Forms::ToolStripMenuItem^ trainToolStripMenuItem;
 
@@ -148,6 +130,9 @@ namespace MultilayerNetwork {
 		   void InitializeComponent(void)
 		   {
 			   this->components = (gcnew System::ComponentModel::Container());
+			   System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			   System::Windows::Forms::DataVisualization::Charting::Legend^ legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			   System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			   this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			   this->processToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->initialToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -200,6 +185,7 @@ namespace MultilayerNetwork {
 			   this->button1 = (gcnew System::Windows::Forms::Button());
 			   this->panel8 = (gcnew System::Windows::Forms::Panel());
 			   this->button4 = (gcnew System::Windows::Forms::Button());
+			   this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			   this->menuStrip1->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			   this->panel1->SuspendLayout();
@@ -222,6 +208,7 @@ namespace MultilayerNetwork {
 			   this->panel3->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource2))->BeginInit();
 			   this->panel8->SuspendLayout();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			   this->SuspendLayout();
 			   // 
 			   // menuStrip1
@@ -233,7 +220,7 @@ namespace MultilayerNetwork {
 			   this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			   this->menuStrip1->Name = L"menuStrip1";
 			   this->menuStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
-			   this->menuStrip1->Size = System::Drawing::Size(1346, 30);
+			   this->menuStrip1->Size = System::Drawing::Size(1793, 30);
 			   this->menuStrip1->TabIndex = 1;
 			   this->menuStrip1->Text = L"menuStrip1";
 			   // 
@@ -704,16 +691,17 @@ namespace MultilayerNetwork {
 			   // 
 			   this->panel2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			   this->panel2->Controls->Add(this->chart1);
 			   this->panel2->Controls->Add(this->pictureBox1);
 			   this->panel2->Dock = System::Windows::Forms::DockStyle::Top;
 			   this->panel2->Location = System::Drawing::Point(203, 30);
 			   this->panel2->Name = L"panel2";
-			   this->panel2->Size = System::Drawing::Size(1143, 561);
+			   this->panel2->Size = System::Drawing::Size(1590, 561);
 			   this->panel2->TabIndex = 3;
 			   // 
 			   // pictureBox1
 			   // 
-			   this->pictureBox1->Dock = System::Windows::Forms::DockStyle::Fill;
+			   this->pictureBox1->Dock = System::Windows::Forms::DockStyle::Left;
 			   this->pictureBox1->Location = System::Drawing::Point(0, 0);
 			   this->pictureBox1->Name = L"pictureBox1";
 			   this->pictureBox1->Size = System::Drawing::Size(1143, 561);
@@ -730,7 +718,7 @@ namespace MultilayerNetwork {
 			   this->panel3->Dock = System::Windows::Forms::DockStyle::Bottom;
 			   this->panel3->Location = System::Drawing::Point(203, 591);
 			   this->panel3->Name = L"panel3";
-			   this->panel3->Size = System::Drawing::Size(1143, 150);
+			   this->panel3->Size = System::Drawing::Size(1590, 150);
 			   this->panel3->TabIndex = 4;
 			   // 
 			   // richTextBox1
@@ -743,7 +731,7 @@ namespace MultilayerNetwork {
 			   this->richTextBox1->ForeColor = System::Drawing::Color::White;
 			   this->richTextBox1->Location = System::Drawing::Point(0, 0);
 			   this->richTextBox1->Name = L"richTextBox1";
-			   this->richTextBox1->Size = System::Drawing::Size(1143, 150);
+			   this->richTextBox1->Size = System::Drawing::Size(1590, 150);
 			   this->richTextBox1->TabIndex = 0;
 			   this->richTextBox1->Text = L"";
 			   // 
@@ -791,13 +779,36 @@ namespace MultilayerNetwork {
 			   this->button4->UseVisualStyleBackColor = false;
 			   this->button4->Click += gcnew System::EventHandler(this, &MainForm::button4_Click);
 			   // 
+			   // chart1
+			   // 
+			   this->chart1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(51)));
+			   this->chart1->BackImageTransparentColor = System::Drawing::Color::Gray;
+			   this->chart1->BackSecondaryColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			   this->chart1->BorderlineColor = System::Drawing::Color::Maroon;
+			   chartArea1->Name = L"ChartArea1";
+			   this->chart1->ChartAreas->Add(chartArea1);
+			   this->chart1->Dock = System::Windows::Forms::DockStyle::Fill;
+			   legend1->Name = L"Legend1";
+			   this->chart1->Legends->Add(legend1);
+			   this->chart1->Location = System::Drawing::Point(1143, 0);
+			   this->chart1->Name = L"chart1";
+			   series1->ChartArea = L"ChartArea1";
+			   series1->Legend = L"Legend1";
+			   series1->Name = L"Series1";
+			   this->chart1->Series->Add(series1);
+			   this->chart1->Size = System::Drawing::Size(447, 561);
+			   this->chart1->TabIndex = 1;
+			   this->chart1->Text = L"chart1";
+			   // 
 			   // MainForm
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			   this->ClientSize = System::Drawing::Size(1346, 741);
+			   this->ClientSize = System::Drawing::Size(1793, 741);
 			   this->Controls->Add(this->panel8);
 			   this->Controls->Add(this->panel3);
 			   this->Controls->Add(this->panel2);
@@ -806,7 +817,7 @@ namespace MultilayerNetwork {
 			   this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(162)));
 			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			   this->MaximumSize = System::Drawing::Size(1366, 800);
+			   this->MaximumSize = System::Drawing::Size(1800, 800);
 			   this->MinimumSize = System::Drawing::Size(800, 600);
 			   this->Name = L"MainForm";
 			   this->Text = L"Artificial Neural Network Workspace";
@@ -840,6 +851,7 @@ namespace MultilayerNetwork {
 			   this->panel3->ResumeLayout(false);
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource2))->EndInit();
 			   this->panel8->ResumeLayout(false);
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			   this->ResumeLayout(false);
 
 		   }
@@ -916,42 +928,42 @@ namespace MultilayerNetwork {
 
 		this->richTextBox1->BackColor = Color::Red;
 
-		PerceptronLearning* learningNetwork = new PerceptronLearning();
-		int cycleCount = 0;
+		//PerceptronLearning* learningNetwork = new PerceptronLearning();
+		//int cycleCount = 0;
 
-		if (sizeOfSamples != 0) {
-			learningNetwork->Train(p, w, sizeOfSamples, pClass, classNumber, cycleCount);
-			drawTrainLine(pClass, classNumber, 1);
-			this->textBox5->Text = Convert::ToString(cycleCount);
-		}
-		else
-			MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+		//if (sizeOfSamples != 0) {
+		//	learningNetwork->Train(p, w, sizeOfSamples, pClass, classNumber, cycleCount);
+		//	drawTrainLine(pClass, classNumber, 1);
+		//	this->textBox5->Text = Convert::ToString(cycleCount);
+		//}
+		//else
+		//	MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 
-		//w[0] = w[1] = w[2] = 0;
+		////w[0] = w[1] = w[2] = 0;
 
-		this->richTextBox1->BackColor = Color::Turquoise;
+		//this->richTextBox1->BackColor = Color::Turquoise;
 
 	}//Perceptron Train
 
 
 
 	//DrawTrainLine
-		   void drawTrainLine(SampleClass* cls, int classNumber, int scale)
-		   {
-			   for (int i = 0; i < classNumber; i++)
-			   {
-				   //x2 = (+c -ax1) / b
-				   //(cls[i].w[2] - minX * cls[i].w[0]) / cls[i].w[1];
-				   int minX = pictureBox1->Width / -2;
-				   int minY = YPoint(minX, cls[i].w, scale);
-				   int maxX = pictureBox1->Width / 2;
-				   int maxY = YPoint(maxX, cls[i].w, scale);
+		void drawTrainLine(int hiddenNeuronNumber, int scale)
+		{
+			for (int i = 0; i < hiddenNeuronNumber; i++)
+			{
+				//x2 = (+c -ax1) / b
+				int offset = i * 3;
+				int minX = pictureBox1->Width / -2;
+				int minY = YPoint(minX, learningNetwork->v, offset, scale);
+				int maxX = pictureBox1->Width / 2;
+				int maxY = YPoint(maxX, learningNetwork->v, offset, scale);
 
-				   Pen^ pen = gcnew Pen(Color::FromArgb(cls[i].color.r, cls[i].color.g, cls[i].color.b), 2.0f);
-				   pictureBox1->CreateGraphics()->DrawLine(pen, 0, pictureBox1->Height / 2 - minY, pictureBox1->Width, pictureBox1->Height / 2 - maxY);
-				   richTextBox1->AppendText("w1: " + Convert::ToString(cls[i].w[0]) + "\tw2: " + Convert::ToString(cls[i].w[1]) + "\tw3: " + Convert::ToString(cls[i].w[2]) + "\tRGB:" + Convert::ToString(pClass[i].color.r) + ", " + Convert::ToString(pClass[i].color.g) + ", " + Convert::ToString(pClass[i].color.b) + "\n");
-			   }
-		   }//DrawTrainLine
+				Pen^ pen = gcnew Pen(Color::FromArgb(learningNetwork->v_color[offset], learningNetwork->v_color[offset+1], learningNetwork->v_color[offset+2]), 2.0f);
+				pictureBox1->CreateGraphics()->DrawLine(pen, 0, pictureBox1->Height / 2 - minY, pictureBox1->Width, pictureBox1->Height / 2 - maxY);
+				richTextBox1->AppendText("w1: " + Convert::ToString(learningNetwork->v[offset]) + "\tw2: " + Convert::ToString(learningNetwork->v[offset+1]) + "\tw3: " + Convert::ToString(learningNetwork->v[offset+2]) + "\tRGB:" + Convert::ToString(pClass[i].color.r) + ", " + Convert::ToString(pClass[i].color.g) + ", " + Convert::ToString(pClass[i].color.b) + "\n");
+			}
+		}//DrawTrainLine
 
 
 
@@ -983,30 +995,60 @@ namespace MultilayerNetwork {
 		this->richTextBox1->BackColor = Color::Red;
 
 		learningNetwork = new DeltaLearning();
-
+		DeltaLearning* DeltaL = new DeltaLearning();
 		learningNetwork->setLayerCount(Convert::ToInt32(numericUpDown2->Value));
 		hiddenNeuronNumber = Convert::ToInt32(numericUpDown3->Value);
 		learningNetwork->v = (double*)malloc(hiddenNeuronNumber * (2 + 1) * sizeof(double));
+		learningNetwork->v_color = (int*)malloc(hiddenNeuronNumber * (2 + 1) * sizeof(int));
 		learningNetwork->y = (double*)malloc((hiddenNeuronNumber + 1) * sizeof(double)); //+1 : BIAS
+		learningNetwork->w = (double*)malloc((hiddenNeuronNumber + 1) * classNumber * sizeof(double)); //+1 : BIAS
 
 
 		richTextBox1->AppendText("<----------------------Hidden Layers initializing---------------------->\n");
 		for (int i = 0; i < hiddenNeuronNumber; i++)
-			for (int j = 0; j < (2 + 1); j++)
+			for (int j = 0; j < (2 + 1); j++) {
 				learningNetwork->v[i * hiddenNeuronNumber + j] = ((double)rand() / RAND_MAX);
+				learningNetwork->v_color[i * hiddenNeuronNumber + j] = ((int)rand() % 255);
+			}
 		richTextBox1->AppendText("Assigned random values of V\n");
 
 		richTextBox1->AppendText("<------------------------------------------------------------------->\n");
 
 		int cycleCount = 0;
 
-		if (sizeOfSamples != 0) {
-			learningNetwork->Train(p, w, sizeOfSamples, pClass, classNumber, cycleCount);
-			drawTrainLine(pClass, classNumber, 20);
-			this->textBox5->Text = Convert::ToString(cycleCount);
-		}
-		else
+		if (sizeOfSamples == 0) {
 			MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			return;
+		}
+
+		//TRAIN
+		//learningNetwork->Train(p, w, sizeOfSamples, pClass, classNumber, cycleCount);
+		double error = 1.0;
+		int d;
+
+		while (error > 0.01)
+		{
+			error = 0.0;
+			for (int i = 0; i < sizeOfSamples; i++)
+			{
+				for (int k = 0; k < classNumber; k++)
+				{
+					p[i].classId == pClass[k].classId ? d = 1 : d = -1;
+					error += DeltaL->FeedForward(p[i].x,hiddenNeuronNumber, k, classNumber, d);
+
+					//drawing error 
+
+					DeltaL->BackPropagation(p[i].x, hiddenNeuronNumber, k, classNumber, d);
+
+					//draw new V values
+
+				}
+			}
+		}
+
+		drawTrainLine(hiddenNeuronNumber, 20);
+		this->textBox5->Text = Convert::ToString(cycleCount);
+			
 
 		//w[0] = w[1] = w[2] = 0;
 
@@ -1055,7 +1097,6 @@ namespace MultilayerNetwork {
 		classNumber = Convert::ToInt32(numericUpDown1->Value);
 		pClass = new SampleClass[classNumber];
 		sizeOfClass = new int[classNumber];
-		
 
 		richTextBox1->AppendText("<----------------------Assigned random values.---------------------->\n");
 		for (int i = 0; i < classNumber; i++)
@@ -1064,11 +1105,8 @@ namespace MultilayerNetwork {
 			pClass[i].color.r = rand() % 255;
 			pClass[i].color.g = rand() % 255;
 			pClass[i].color.b = rand() % 255;
-			pClass[i].w = new double[dimension + 1];
-			for (int j = 0; j < dimension + 1; j++)
-				pClass[i].w[j] = ((double)rand() / RAND_MAX);
-			richTextBox1->AppendText("w1: " + Convert::ToString(pClass[i].w[0]) + "\tw2: " + Convert::ToString(pClass[i].w[1]) + "\tw3: " + Convert::ToString(pClass[i].w[2]) + "\tRGB:" + Convert::ToString(pClass[i].color.r) + ", " + Convert::ToString(pClass[i].color.g) + ", " + Convert::ToString(pClass[i].color.b) + "\n");
-
+			for (int j = 0; j < hiddenNeuronNumber; j++)
+				learningNetwork->w[i * hiddenNeuronNumber + j] = ((double)rand() / RAND_MAX);
 		}
 		this->panel5->Visible = TRUE;
 		this->panel6->Visible = TRUE;
