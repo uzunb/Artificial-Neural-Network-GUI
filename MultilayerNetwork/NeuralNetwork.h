@@ -12,7 +12,9 @@ protected:
 
 public:
 	double* v;
+	int* v_color;
 	double* y;
+	double* w;
 	double* o;
 
 	void setLayerCount(int count);
