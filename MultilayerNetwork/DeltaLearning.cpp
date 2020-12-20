@@ -42,33 +42,40 @@ double DeltaLearning::FeedForward(double* x, int hiddenNeuronNumber, int classCo
     
     MatrixMultiplication(this->y, (hiddenNeuronNumber + 1), 1, this->w, numberOfClass, (hiddenNeuronNumber + 1), this->o, "sigmoid");
 
-    double error = 0.5 * (d - this->o[classCount]) * (d - o[classCount]);
+    double error = 0.0;
+    for (int k = 0; k < numberOfClass; k++)
+       error += 0.5 * (d - this->o[k]) * (d - o[k]);
     return error;
 }
 
-void DeltaLearning::BackPropagation(double* x, int hiddenNeuronNumber, int classCount, int numberOfClass, int d)
+void DeltaLearning::BackPropagation(double* x, int hiddenNeuronNumber, int numberOfClass, int d, double* Do, double* Dy)
 {
-    double sum = 0.0, D_yj;
-    double D_ok = 0.5 * (1 - (o[classCount] * o[classCount])) * (d - o[classCount]);
+    double sum = 0.0;
+
+    //error signals of the output layer 
+    for (int k = 0; k < numberOfClass; k++)
+        Do[k] = 0.5 * (d - o[k]) * (1 - (o[k] * o[k]));
+
+    //error signals of the hidden layer 
     for (int j = 0; j < hiddenNeuronNumber; j++) {
-        D_yj = 0.5 * (1 - y[j] * y[j]) * sum;
+        for (int k = 0; k < numberOfClass; k++) {
+            sum += Do[k] * w[j * numberOfClass + k];//w : hidden x class ?? will check
+        }
+        Dy[j] = 0.5 * (1 - y[j] * y[j]) * sum;
         sum = 0.0;
-        for (int k = 0; k < numberOfClass; k++) {
-            sum += D_ok * w[j * numberOfClass + k];//w : hidden x class ?? will check
-        }
     }
 
+    //Output layer weights are adjusted
     for (int j = 0; j < hiddenNeuronNumber; j++) {
         for (int k = 0; k < numberOfClass; k++) {
-            w[j * numberOfClass + k] += getC() * D_ok * y[j];
+            w[j * numberOfClass + k] += getC() * Do[k] * y[j];
         }
     }
 
+    //Hidden layer weights are adjusted
     for (int j = 0; j < hiddenNeuronNumber; j++)
         for (int i = 0; i < 3; i++)//dimension + 1
-            v[j * 3 + i] += getC() * D_yj * x[i];
-
-
+            v[j * 3 + i] += getC() * Dy[j] * x[i];
 }
 
 
