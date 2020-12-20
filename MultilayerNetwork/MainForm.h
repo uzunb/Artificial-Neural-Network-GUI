@@ -1,6 +1,10 @@
 #pragma once
 #include <Windows.h>
 #include <time.h>
+#include <iostream>
+#include <fstream>
+#include <string> 
+#include <cstdlib> 
 #include "Process.h"
 #include "PerceptronLearning.h"
 #include "DeltaLearning.h"
@@ -59,6 +63,7 @@ namespace MultilayerNetwork {
 		int sizeOfSamples, * sizeOfClass, classNumber, selectedClass, hiddenNeuronNumber;
 		double* w;
 		NeuralNetwork* learningNetwork;
+		DeltaLearning* DeltaL;
 
 
 	private: System::Windows::Forms::ToolStripMenuItem^ initialToolStripMenuItem;
@@ -115,6 +120,11 @@ namespace MultilayerNetwork {
 	private: System::Windows::Forms::NumericUpDown^ numericUpDown2;
 	private: System::Windows::Forms::Label^ label10;
 	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
+	private: System::Windows::Forms::ToolStripMenuItem^ fileToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ saveSamplesToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ loadSamplesToolStripMenuItem;
+	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
+private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 
 	private: System::Windows::Forms::ToolStripMenuItem^ trainToolStripMenuItem;
 
@@ -134,6 +144,9 @@ namespace MultilayerNetwork {
 			   System::Windows::Forms::DataVisualization::Charting::Legend^ legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
 			   System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			   this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			   this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->saveSamplesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->loadSamplesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->processToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->initialToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->randomlyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -186,6 +199,8 @@ namespace MultilayerNetwork {
 			   this->button1 = (gcnew System::Windows::Forms::Button());
 			   this->panel8 = (gcnew System::Windows::Forms::Panel());
 			   this->button4 = (gcnew System::Windows::Forms::Button());
+			   this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			   this->openFileDialog2 = (gcnew System::Windows::Forms::OpenFileDialog());
 			   this->menuStrip1->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			   this->panel1->SuspendLayout();
@@ -216,13 +231,41 @@ namespace MultilayerNetwork {
 			   this->menuStrip1->AutoSize = false;
 			   this->menuStrip1->BackColor = System::Drawing::Color::Turquoise;
 			   this->menuStrip1->GripStyle = System::Windows::Forms::ToolStripGripStyle::Visible;
-			   this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->processToolStripMenuItem });
+			   this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				   this->fileToolStripMenuItem,
+					   this->processToolStripMenuItem
+			   });
 			   this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			   this->menuStrip1->Name = L"menuStrip1";
 			   this->menuStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
 			   this->menuStrip1->Size = System::Drawing::Size(1793, 30);
 			   this->menuStrip1->TabIndex = 1;
 			   this->menuStrip1->Text = L"menuStrip1";
+			   // 
+			   // fileToolStripMenuItem
+			   // 
+			   this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				   this->saveSamplesToolStripMenuItem,
+					   this->loadSamplesToolStripMenuItem
+			   });
+			   this->fileToolStripMenuItem->Enabled = false;
+			   this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
+			   this->fileToolStripMenuItem->Size = System::Drawing::Size(37, 26);
+			   this->fileToolStripMenuItem->Text = L"File";
+			   // 
+			   // saveSamplesToolStripMenuItem
+			   // 
+			   this->saveSamplesToolStripMenuItem->Name = L"saveSamplesToolStripMenuItem";
+			   this->saveSamplesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->saveSamplesToolStripMenuItem->Text = L"Save Samples";
+			   this->saveSamplesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::saveSamplesToolStripMenuItem_Click);
+			   // 
+			   // loadSamplesToolStripMenuItem
+			   // 
+			   this->loadSamplesToolStripMenuItem->Name = L"loadSamplesToolStripMenuItem";
+			   this->loadSamplesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->loadSamplesToolStripMenuItem->Text = L"Load Samples";
+			   this->loadSamplesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::loadSamplesToolStripMenuItem_Click);
 			   // 
 			   // processToolStripMenuItem
 			   // 
@@ -365,6 +408,7 @@ namespace MultilayerNetwork {
 			   this->panel9->Name = L"panel9";
 			   this->panel9->Size = System::Drawing::Size(203, 65);
 			   this->panel9->TabIndex = 1;
+			   this->panel9->Visible = false;
 			   // 
 			   // textBox9
 			   // 
@@ -813,6 +857,14 @@ namespace MultilayerNetwork {
 			   this->button4->UseVisualStyleBackColor = false;
 			   this->button4->Click += gcnew System::EventHandler(this, &MainForm::button4_Click);
 			   // 
+			   // openFileDialog1
+			   // 
+			   this->openFileDialog1->FileName = L"openFileDialog1";
+			   // 
+			   // openFileDialog2
+			   // 
+			   this->openFileDialog2->FileName = L"openFileDialog2";
+			   // 
 			   // MainForm
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -966,13 +1018,13 @@ namespace MultilayerNetwork {
 				//x2 = (+c -ax1) / b
 				int offset = i * 3;
 				int minX = pictureBox1->Width / -2;
-				int minY = YPoint(minX, learningNetwork->v, offset, scale);
+				int minY = YPoint(minX, DeltaL->v, offset, scale);
 				int maxX = pictureBox1->Width / 2;
-				int maxY = YPoint(maxX, learningNetwork->v, offset, scale);
+				int maxY = YPoint(maxX, DeltaL->v, offset, scale);
 
-				Pen^ pen = gcnew Pen(Color::FromArgb(learningNetwork->v_color[offset], learningNetwork->v_color[offset+1], learningNetwork->v_color[offset+2]), 2.0f);
+				Pen^ pen = gcnew Pen(Color::FromArgb(DeltaL->v_color[offset], DeltaL->v_color[offset+1], DeltaL->v_color[offset+2]), 2.0f);
 				pictureBox1->CreateGraphics()->DrawLine(pen, 0, pictureBox1->Height / 2 - minY, pictureBox1->Width, pictureBox1->Height / 2 - maxY);
-				richTextBox1->AppendText("w1: " + Convert::ToString(learningNetwork->v[offset]) + "\tw2: " + Convert::ToString(learningNetwork->v[offset+1]) + "\tw3: " + Convert::ToString(learningNetwork->v[offset+2]) + "\tRGB:" + Convert::ToString(pClass[i].color.r) + ", " + Convert::ToString(pClass[i].color.g) + ", " + Convert::ToString(pClass[i].color.b) + "\n");
+				richTextBox1->AppendText("w1: " + Convert::ToString(DeltaL->v[offset]) + "\tw2: " + Convert::ToString(DeltaL->v[offset+1]) + "\tw3: " + Convert::ToString(DeltaL->v[offset+2]) + "\tRGB:" + Convert::ToString(pClass[i].color.r) + ", " + Convert::ToString(pClass[i].color.g) + ", " + Convert::ToString(pClass[i].color.b) + "\n");
 			}
 		}//DrawTrainLine
 
@@ -1006,7 +1058,7 @@ namespace MultilayerNetwork {
 		this->richTextBox1->BackColor = Color::Red;
 
 		//learningNetwork = new DeltaLearning();
-		DeltaLearning* DeltaL = new DeltaLearning();
+		DeltaL = new DeltaLearning();
 		DeltaL->setLayerCount(Convert::ToInt32(numericUpDown2->Value));
 		hiddenNeuronNumber = Convert::ToInt32(numericUpDown3->Value);
 		DeltaL->v = (double*)malloc(hiddenNeuronNumber * (2 + 1) * sizeof(double));
@@ -1014,6 +1066,9 @@ namespace MultilayerNetwork {
 		DeltaL->y = (double*)malloc((hiddenNeuronNumber + 1) * sizeof(double)); //+1 : BIAS
 		DeltaL->w = (double*)malloc((hiddenNeuronNumber + 1) * classNumber * sizeof(double)); //+1 : BIAS
 		DeltaL->o = (double*)malloc(classNumber * sizeof(double));
+		double* Do = (double*)malloc(classNumber * sizeof(double));
+		double* Dy = (double*)malloc(hiddenNeuronNumber * sizeof(double));
+
 		chart1->Series["Error"]->Points->Clear();
 
 
@@ -1028,7 +1083,7 @@ namespace MultilayerNetwork {
 		for (int i = 0; i < hiddenNeuronNumber; i++)
 			for (int j = 0; j < (2 + 1); j++) {
 				DeltaL->v[i * hiddenNeuronNumber + j] = ((double)rand() / RAND_MAX);
-				DeltaL->v_color[i * hiddenNeuronNumber + j] = ((int)rand() % 255);
+				DeltaL->v_color[i * hiddenNeuronNumber + j] = (int)rand() % 255;
 			}
 
 		int cycleCount = 0;
@@ -1042,6 +1097,8 @@ namespace MultilayerNetwork {
 		//learningNetwork->Train(p, w, sizeOfSamples, pClass, classNumber, cycleCount);
 		double error = 1.0;
 		int d;
+		System::Drawing::Rectangle r;
+		PaintEventArgs^ f = gcnew PaintEventArgs(pictureBox1->CreateGraphics(), r);
 
 		while (error > 0.01)
 		{
@@ -1058,20 +1115,22 @@ namespace MultilayerNetwork {
 					chart1->Series["Error"]->Points->AddXY(cycleCount, error);
 
 
-					DeltaL->BackPropagation(p[i].x, hiddenNeuronNumber, k, classNumber, d);
+					DeltaL->BackPropagation(p[i].x, hiddenNeuronNumber, classNumber, d, Do, Dy);
 
 					//draw new V values
+					drawTrainLine(hiddenNeuronNumber, 20);
+					this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
+					this->pictureBox1_Paint(this, f);
 
 				}
 			}
 		}
 
 		drawTrainLine(hiddenNeuronNumber, 20);
-		this->textBox5->Text = Convert::ToString(cycleCount);
+		this->textBox5->Text = Convert::ToString(cycleCount);	
 			
 
 		//w[0] = w[1] = w[2] = 0;
-
 		this->richTextBox1->BackColor = Color::Turquoise;
 
 	}//Delta Train
@@ -1081,31 +1140,31 @@ namespace MultilayerNetwork {
 	//Batch Normalizing
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		learningNetwork->batchNormalizing(p, sizeOfSamples);
-		this->drawNormalizedPoints(p, sizeOfSamples, pClass, classNumber);
+		this->drawNormalizedPoints(p, sizeOfSamples, pClass, classNumber, 20);
 	}//Batch Normalizing
 
 	//Draw Normalized points
-		   void drawNormalizedPoints(Samples* point, int pointCount, SampleClass* sc, int classNumber) {
-			   Pen^ pen1 = gcnew Pen(Color::Aqua, 3.0f);
-			   int scale = 20;
-			   //picturebox clean
-			   this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
-			   System::Drawing::Rectangle r;
-			   PaintEventArgs^ f = gcnew PaintEventArgs(pictureBox1->CreateGraphics(), r);
-			   this->pictureBox1_Paint(this, f);
+	void drawNormalizedPoints(Samples* point, int pointCount, SampleClass* sc, int classNumber, int scale) {
+		Pen^ pen1 = gcnew Pen(Color::Aqua, 3.0f);
 
-			   //draw new points.
-			   for (int i = 0; i < pointCount; i++)
-			   {
-				   int tempX = scale * point[i].x[0] + this->pictureBox1->Width / 2;
-				   int tempY = this->pictureBox1->Height / 2 - point[i].x[1] * scale;
+		//picturebox clean
+		this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
+		System::Drawing::Rectangle r;
+		PaintEventArgs^ f = gcnew PaintEventArgs(pictureBox1->CreateGraphics(), r);
+		this->pictureBox1_Paint(this, f);
 
-				   for (int j = 0; j < classNumber; j++)
-					   if (point[i].classId == sc[j].classId)
-						   pen1->Color = Color::FromArgb(sc[j].color.r, sc[j].color.g, sc[j].color.b);
-				   this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 2, 2);
-			   }
-		   }//Draw Normalized points
+		//draw new points.
+		for (int i = 0; i < pointCount; i++)
+		{
+			int tempX = scale * point[i].x[0] + this->pictureBox1->Width / 2;
+			int tempY = this->pictureBox1->Height / 2 - point[i].x[1] * scale;
+
+			for (int j = 0; j < classNumber; j++)
+				if (point[i].classId == sc[j].classId)
+					pen1->Color = Color::FromArgb(sc[j].color.r, sc[j].color.g, sc[j].color.b);
+			this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 2, 2);
+		}
+	}//Draw Normalized points
 
 
 	private: System::Void numericUpDown1_ValueChanged(System::Object^ sender, System::EventArgs^ e) {}
@@ -1131,7 +1190,9 @@ namespace MultilayerNetwork {
 		this->panel5->Visible = TRUE;
 		this->panel6->Visible = TRUE;
 		this->panel7->Visible = TRUE;
+		this->panel9->Visible = TRUE;
 		this->button2->Visible = TRUE;
+		this->fileToolStripMenuItem->Enabled = TRUE;
 		this->numericUpDown5->Maximum = classNumber - 1;
 
 
@@ -1153,6 +1214,62 @@ namespace MultilayerNetwork {
 	private: System::Void textBox6_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 
+	//Save Samples
+	private: System::Void saveSamplesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 
-	};
+		std::ofstream samplesFile("samples.txt");
+		if (!samplesFile.is_open())
+			richTextBox1->AppendText("Error! \n File could not open.");
+
+		for (int i = 0; i < sizeOfSamples; i++)
+			samplesFile << p[i].x[0] << ',' << p[i].x[1] << ',' << p[i].x[2] << ',' << p[i].classId << "\n";
+
+		richTextBox1->AppendText("Samples Saved.\n");
+		samplesFile.close();
+
+	}//Save Samples
+
+	//Load Samples
+	private: System::Void loadSamplesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+			String^ Spath = openFileDialog1->FileName;
+			std::string path;
+			MarshalString(Spath, path);
+			std::ifstream samplesFile(path);
+			if (!samplesFile.is_open())
+				richTextBox1->AppendText("Error! \n File could not open.");
+
+			std::string myText;
+			char* token;
+			sizeOfSamples = 0;
+			while (getline(samplesFile, myText, '\n'))
+				sizeOfSamples++;
+			p = new Samples[sizeOfSamples];
+
+			samplesFile.clear();
+			samplesFile.seekg(0, std::ios::beg);
+			// Use a while loop together with the getline() function to read the file line by line
+			for (int i = 0; getline(samplesFile, myText, '\n'); i++) {
+				token = strtok((char*)myText.c_str(), ",");
+				for (int j = 0; token; j++)
+				{
+					j != 3 ? p[i].x[j] = atoi(token) : p[i].classId = atoi(token);
+					token = strtok(NULL, ",");
+				}
+			}
+
+			samplesFile.close();
+			this->drawNormalizedPoints(p, sizeOfSamples, pClass, classNumber, 1);
+		}
+
+	}//Load Samples
+
+	void MarshalString(String^ s, std::string& os) {
+		using namespace Runtime::InteropServices;
+		const char* chars =
+			(const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+		os = chars;
+		Marshal::FreeHGlobal(IntPtr((void*)chars));
+	}
+};
 }
