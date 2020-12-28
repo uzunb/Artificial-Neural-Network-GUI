@@ -256,14 +256,14 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 			   // saveSamplesToolStripMenuItem
 			   // 
 			   this->saveSamplesToolStripMenuItem->Name = L"saveSamplesToolStripMenuItem";
-			   this->saveSamplesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->saveSamplesToolStripMenuItem->Size = System::Drawing::Size(147, 22);
 			   this->saveSamplesToolStripMenuItem->Text = L"Save Samples";
 			   this->saveSamplesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::saveSamplesToolStripMenuItem_Click);
 			   // 
 			   // loadSamplesToolStripMenuItem
 			   // 
 			   this->loadSamplesToolStripMenuItem->Name = L"loadSamplesToolStripMenuItem";
-			   this->loadSamplesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->loadSamplesToolStripMenuItem->Size = System::Drawing::Size(147, 22);
 			   this->loadSamplesToolStripMenuItem->Text = L"Load Samples";
 			   this->loadSamplesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::loadSamplesToolStripMenuItem_Click);
 			   // 
@@ -747,8 +747,7 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 			   // 
 			   // chart1
 			   // 
-			   this->chart1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(35)), static_cast<System::Int32>(static_cast<System::Byte>(35)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(50)));
+			   this->chart1->BackColor = System::Drawing::Color::DarkGreen;
 			   this->chart1->BackImageTransparentColor = System::Drawing::Color::Gray;
 			   this->chart1->BackSecondaryColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(0)));
@@ -760,18 +759,12 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 			   this->chart1->Legends->Add(legend1);
 			   this->chart1->Location = System::Drawing::Point(1000, 0);
 			   this->chart1->Name = L"chart1";
-			   series1->BackImageTransparentColor = System::Drawing::Color::WhiteSmoke;
-			   series1->BorderColor = System::Drawing::Color::White;
-			   series1->BorderWidth = 3;
+			   series1->BorderColor = System::Drawing::Color::Transparent;
 			   series1->ChartArea = L"ChartArea1";
 			   series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
-			   series1->Color = System::Drawing::Color::Red;
+			   series1->Color = System::Drawing::Color::Blue;
 			   series1->Legend = L"Legend1";
-			   series1->MarkerBorderColor = System::Drawing::Color::White;
-			   series1->MarkerColor = System::Drawing::Color::White;
 			   series1->Name = L"Error";
-			   series1->ShadowColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(120)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			   this->chart1->Series->Add(series1);
 			   this->chart1->Size = System::Drawing::Size(590, 561);
 			   this->chart1->TabIndex = 1;
@@ -815,16 +808,16 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 			   // 
 			   // button1
 			   // 
-			   this->button1->BackColor = System::Drawing::Color::Turquoise;
+			   this->button1->BackColor = System::Drawing::Color::DarkRed;
 			   this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
 			   this->button1->Dock = System::Windows::Forms::DockStyle::Right;
 			   this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->button1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			   this->button1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(162)));
 			   this->button1->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
-			   this->button1->Location = System::Drawing::Point(59, 0);
+			   this->button1->Location = System::Drawing::Point(65, 0);
 			   this->button1->Name = L"button1";
-			   this->button1->Size = System::Drawing::Size(33, 30);
+			   this->button1->Size = System::Drawing::Size(27, 30);
 			   this->button1->TabIndex = 5;
 			   this->button1->Text = L"X";
 			   this->button1->TextImageRelation = System::Windows::Forms::TextImageRelation::ImageAboveText;
@@ -836,7 +829,7 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 			   this->panel8->BackColor = System::Drawing::Color::Turquoise;
 			   this->panel8->Controls->Add(this->button4);
 			   this->panel8->Controls->Add(this->button1);
-			   this->panel8->Location = System::Drawing::Point(1254, 0);
+			   this->panel8->Location = System::Drawing::Point(1701, 0);
 			   this->panel8->Name = L"panel8";
 			   this->panel8->Size = System::Drawing::Size(92, 30);
 			   this->panel8->TabIndex = 1;
@@ -849,9 +842,9 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 			   this->button4->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			   this->button4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(162)));
-			   this->button4->Location = System::Drawing::Point(2, 0);
+			   this->button4->Location = System::Drawing::Point(0, 0);
 			   this->button4->Name = L"button4";
-			   this->button4->Size = System::Drawing::Size(57, 30);
+			   this->button4->Size = System::Drawing::Size(65, 30);
 			   this->button4->TabIndex = 6;
 			   this->button4->Text = L"Clean";
 			   this->button4->UseVisualStyleBackColor = false;
@@ -1062,31 +1055,28 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 		DeltaL->setLayerCount(Convert::ToInt32(numericUpDown2->Value));
 		hiddenNeuronNumber = Convert::ToInt32(numericUpDown3->Value);
 		DeltaL->v = (double*)malloc(hiddenNeuronNumber * (2 + 1) * sizeof(double));
-		DeltaL->v_color = (int*)malloc(hiddenNeuronNumber * (2 + 1) * sizeof(int));
+		DeltaL->v_color = (int*)malloc(hiddenNeuronNumber * 3 * sizeof(int)); // * RGB
 		DeltaL->y = (double*)malloc((hiddenNeuronNumber + 1) * sizeof(double)); //+1 : BIAS
-		DeltaL->w = (double*)malloc((hiddenNeuronNumber + 1) * classNumber * sizeof(double)); //+1 : BIAS
+		DeltaL->w = (double*)malloc((hiddenNeuronNumber + 1) * classNumber * sizeof(double)); 
 		DeltaL->o = (double*)malloc(classNumber * sizeof(double));
+		DeltaL->d = (int*)malloc(classNumber * sizeof(int));
 		double* Do = (double*)malloc(classNumber * sizeof(double));
 		double* Dy = (double*)malloc(hiddenNeuronNumber * sizeof(double));
 
-		chart1->Series["Error"]->Points->Clear();
-
+//		chart1->Series["Error"]->Points->Clear();
 
 		richTextBox1->AppendText("<----------------------W weights initializing---------------------->\n");
-		for (int i = 0; i < hiddenNeuronNumber; i++)
+		for (int i = 0; i < hiddenNeuronNumber + 1; i++)
 			for (int j = 0; j < classNumber; j++)
 				DeltaL->w[i * classNumber + j] = ((double)rand() / RAND_MAX);
 
-		richTextBox1->AppendText("<------------------------------------------------------------------->\n");
-
 		richTextBox1->AppendText("<----------------------V weights initializing---------------------->\n");
-		for (int i = 0; i < hiddenNeuronNumber; i++)
+		for (int i = 0; i < hiddenNeuronNumber ; i++)
 			for (int j = 0; j < (2 + 1); j++) {
-				DeltaL->v[i * hiddenNeuronNumber + j] = ((double)rand() / RAND_MAX);
-				DeltaL->v_color[i * hiddenNeuronNumber + j] = (int)rand() % 255;
+				DeltaL->v[i * 3 + j] = ((double)rand() / RAND_MAX);
+				DeltaL->v_color[i * 3 + j] = (int)rand() % 255;
 			}
 
-		int cycleCount = 0;
 
 		if (sizeOfSamples == 0) {
 			MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
@@ -1094,39 +1084,69 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 		}
 
 		//TRAIN
-		//learningNetwork->Train(p, w, sizeOfSamples, pClass, classNumber, cycleCount);
-		double error = 1.0;
-		int d;
 		System::Drawing::Rectangle r;
 		PaintEventArgs^ f = gcnew PaintEventArgs(pictureBox1->CreateGraphics(), r);
 
-		while (error > 0.01)
-		{
-			cycleCount++;
+		long long int cycleCount = 0;
+		double error = 1.0;
+		while (error > 0.7){
 			error = 0.0;
-			for (int i = 0; i < sizeOfSamples; i++)
-			{
-				for (int k = 0; k < classNumber; k++)
-				{
-					p[i].classId == pClass[k].classId ? d = 1 : d = -1;
-					error += DeltaL->FeedForward(p[i].x,hiddenNeuronNumber, k, classNumber, d);
+			for (int i = 0; i < sizeOfSamples; i++){
+				
+				memset(DeltaL->d, -1, classNumber * sizeof(int));
+				DeltaL->d[p[i].classId] = 1;
+				
+				//calculate y
+				DeltaL->MatrixMultiplication(p[i].x, 3, 1, DeltaL->v, hiddenNeuronNumber, 3, DeltaL->y, "sigmoid", 0.25);
+				DeltaL->y[hiddenNeuronNumber] = BIAS;
 
-					//drawing error 
-					chart1->Series["Error"]->Points->AddXY(cycleCount, error);
+				//calculate o
+				DeltaL->MatrixMultiplication(DeltaL->y, (hiddenNeuronNumber + 1), 1, DeltaL->w, classNumber, (hiddenNeuronNumber + 1), DeltaL->o, "sigmoid", 0.5);
 
-
-					DeltaL->BackPropagation(p[i].x, hiddenNeuronNumber, classNumber, d, Do, Dy);
-
-					//draw new V values
-					drawTrainLine(hiddenNeuronNumber, 20);
-					this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
-					this->pictureBox1_Paint(this, f);
-
+				//error calue is computed
+				//error signals of the output layer 
+				for (int k = 0; k < classNumber; k++) {
+					error += 0.5 * (DeltaL->d[k] - DeltaL->o[k]) * (DeltaL->d[k] - DeltaL->o[k]);
+					Do[k] = 0.5 * (DeltaL->d[k] - DeltaL->o[k]) * (1 - DeltaL->o[k] * DeltaL->o[k]);
 				}
+
+				//error signals of the hidden layer 
+				double sum;
+				for (int j = 0; j < (hiddenNeuronNumber+1); j++) {
+					sum = 0.0;
+					for (int k = 0; k < classNumber; k++) {
+						sum += Do[k] * DeltaL->w[k * (hiddenNeuronNumber + 1) + j];
+					}
+					Dy[j] = 0.5 * (1 - DeltaL->y[j] * DeltaL->y[j]) * sum;
+				}
+
+				//Output layer weights are adjusted
+				for (int k = 0; k < classNumber; k++)
+					for (int j = 0; j < hiddenNeuronNumber + 1; j++)
+						DeltaL->w[k * (hiddenNeuronNumber+1) + j] += 2.5 * Do[k] * DeltaL->y[j];
+
+				//Hidden layer weights are adjusted
+				for (int j = 0; j < hiddenNeuronNumber; j++)
+					for (int i = 0; i < 3; i++)
+						DeltaL->v[j * 3 + i] += 3.5 * Dy[j] * p[i].x[i];
+
+				//error += DeltaL->FeedForward(p[i].x,hiddenNeuronNumber, classNumber, DeltaL->d);
+				//DeltaL->BackPropagation(p[i].x, hiddenNeuronNumber, classNumber, DeltaL->d, Do, Dy);
+
+				////draw new V values
+				//drawTrainLine(hiddenNeuronNumber, 20);
+				//this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
+				//this->pictureBox1_Paint(this, f);
+
 			}
+			cycleCount++;
+			//drawing error 
+			chart1->Series["Error"]->Points->AddXY(cycleCount, error);
+			this->richTextBox1->AppendText("Loss: " + Convert::ToString(error) + "\tcycle: " + Convert::ToString(cycleCount) + "\n");
+			this->richTextBox1->ScrollToCaret();
 		}
 
-		drawTrainLine(hiddenNeuronNumber, 20);
+		//drawTrainLine(hiddenNeuronNumber, 20);
 		this->textBox5->Text = Convert::ToString(cycleCount);	
 			
 
