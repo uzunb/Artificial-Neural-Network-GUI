@@ -21,8 +21,8 @@ public:
 
 	void Train(Samples* input, double* output, int inputCount, SampleClass* cls, int numberOfClass, int& jeneration);
 
-	double FeedForward(double* input, int hiddenNeuronNumber, int classCount, int numberOfClass, int d);
-	void BackPropagation(double* x, int hiddenNeuronNumber, int numberOfClass, int d, double* Do, double* Dy);
+	double FeedForward(double* x, int hiddenNeuronNumber, int numberOfClass, int* d);
+	void BackPropagation(double* x, int hiddenNeuronNumber, int numberOfClass, int* d, double* Do, double* Dy);
 
 };
 
