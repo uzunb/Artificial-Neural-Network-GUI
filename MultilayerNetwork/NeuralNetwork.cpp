@@ -94,17 +94,15 @@ int NeuralNetwork::sgn(int number)
 	return number >= 0 ? 1 : -1;
 }
 
-double NeuralNetwork::sigmoid(double net, double delta = 0.5	) 
+double NeuralNetwork::sigmoid(double net, double lambda = 1	) 
 {
-	double returnValue = (2 / (1 + exp(-delta * net)) - 1);
-	if (isfinite(returnValue)) {
-		return returnValue;
-	}
-	else
-		return	returnValue >= 0 ? 1 : -1;
+	double returnValue = (2 / (1 + exp(-lambda * net)) - 1);
+
+	if (isfinite(returnValue))	return  returnValue;
+	else                        return	returnValue >= 0 ? 1 : -1;
 }
 
-double NeuralNetwork::derivatedSigmoid(double output, int desiredValue = 1)
+double NeuralNetwork::derivatedSigmoid(double output)
 {
 	double returnValue = 0.5 * (1 - output * output);
 
@@ -146,10 +144,10 @@ double NeuralNetwork::softmax(double net)
 
 
 
-void NeuralNetwork::MatrixMultiplication(double* m1, int col1, int row1, double* m2, int col2, int row2, double* m3)
+void NeuralNetwork::MatrixMultiplication(double* m1, int row1, int col1, double* m2, int row2, int col2, double* m3)
 {
 	if (col1 != row2)
-		return;
+		exit(1);
 
 	double sum = 0;
 	for (int i = 0; i < row1; i++) {
@@ -165,7 +163,7 @@ void NeuralNetwork::MatrixMultiplication(double* m1, int col1, int row1, double*
 }
 
 
-void NeuralNetwork::MatrixMultiplication(double* m1, int col1, int row1, double* m2, int col2, int row2, double* m3, char* activationFunc, float lambda)
+void NeuralNetwork::MatrixMultiplication(double* m1, int row1, int col1, double* m2, int row2, int col2, double* m3, char* activationFunc, float lambda)
 {
 	if (col1 != row2)		exit(1);
 
@@ -197,4 +195,15 @@ void NeuralNetwork::MatrixMultiplication(double* matx, int col, int row, double 
 	for (int i = 0; i < row; i++)
 		for (int j = 0; j < col; j++)
 			matx2[i * col + j] = scalerNumber * matx[i * col + j];
+}
+
+void NeuralNetwork::transpose(double* matx, int row, int col)
+{
+	double* temp = new double[row * col];
+	for (int i = 0; i < row; i++)
+		for (int j = 0; j < col; j++)
+			temp[j * row + i] = matx[i * col + j];
+
+	matx = temp;
+	delete[] temp;
 }
