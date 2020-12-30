@@ -124,7 +124,7 @@ namespace MultilayerNetwork {
 	private: System::Windows::Forms::ToolStripMenuItem^ saveSamplesToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ loadSamplesToolStripMenuItem;
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
-private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
+	private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 
 	private: System::Windows::Forms::ToolStripMenuItem^ trainToolStripMenuItem;
 
@@ -1004,27 +1004,27 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 
 
 	//DrawTrainLine
-		void drawTrainLine(int hiddenNeuronNumber, int scale)
-		{
-			for (int i = 0; i < hiddenNeuronNumber; i++)
-			{
-				//x2 = (+c -ax1) / b
-				int offset = i * 3;
-				int minX = pictureBox1->Width / -2;
-				int minY = YPoint(minX, DeltaL->v, offset, scale);
-				int maxX = pictureBox1->Width / 2;
-				int maxY = YPoint(maxX, DeltaL->v, offset, scale);
+		   void drawTrainLine(int hiddenNeuronNumber, int scale)
+		   {
+			   for (int i = 0; i < hiddenNeuronNumber; i++)
+			   {
+				   //x2 = (+c -ax1) / b
+				   int offset = i * 3;
+				   int minX = pictureBox1->Width / -2;
+				   int minY = YPoint(minX, DeltaL->v, offset, scale);
+				   int maxX = pictureBox1->Width / 2;
+				   int maxY = YPoint(maxX, DeltaL->v, offset, scale);
 
-				Pen^ pen = gcnew Pen(Color::FromArgb(DeltaL->v_color[offset], DeltaL->v_color[offset+1], DeltaL->v_color[offset+2]), 2.0f);
-				pictureBox1->CreateGraphics()->DrawLine(pen, 0, pictureBox1->Height / 2 - minY, pictureBox1->Width, pictureBox1->Height / 2 - maxY);
-				richTextBox1->AppendText("w1: " + Convert::ToString(DeltaL->v[offset]) + "\tw2: " + Convert::ToString(DeltaL->v[offset+1]) + "\tw3: " + Convert::ToString(DeltaL->v[offset+2]) + "\tRGB:" + Convert::ToString(pClass[i].color.r) + ", " + Convert::ToString(pClass[i].color.g) + ", " + Convert::ToString(pClass[i].color.b) + "\n");
-			}
-		}//DrawTrainLine
-
-
+				   Pen^ pen = gcnew Pen(Color::FromArgb(DeltaL->v_color[offset], DeltaL->v_color[offset + 1], DeltaL->v_color[offset + 2]), 2.0f);
+				   pictureBox1->CreateGraphics()->DrawLine(pen, 0, pictureBox1->Height / 2 - minY, pictureBox1->Width, pictureBox1->Height / 2 - maxY);
+				   richTextBox1->AppendText("w1: " + Convert::ToString(DeltaL->v[offset]) + "\tw2: " + Convert::ToString(DeltaL->v[offset + 1]) + "\tw3: " + Convert::ToString(DeltaL->v[offset + 2]) + "\tRGB:" + Convert::ToString(pClass[i].color.r) + ", " + Convert::ToString(pClass[i].color.g) + ", " + Convert::ToString(pClass[i].color.b) + "\n");
+			   }
+		   }//DrawTrainLine
 
 
-		   //CLEAN
+
+
+			  //CLEAN
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 		sizeOfSamples = 0;
 		for (int i = 0; i < classNumber; i++)
@@ -1050,33 +1050,31 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 	private: System::Void deltaTrainToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->richTextBox1->BackColor = Color::Red;
 
-		//learningNetwork = new DeltaLearning();
 		DeltaL = new DeltaLearning();
 		DeltaL->setLayerCount(Convert::ToInt32(numericUpDown2->Value));
 		hiddenNeuronNumber = Convert::ToInt32(numericUpDown3->Value);
 		DeltaL->v = (double*)malloc(hiddenNeuronNumber * (2 + 1) * sizeof(double));
 		DeltaL->v_color = (int*)malloc(hiddenNeuronNumber * 3 * sizeof(int)); // * RGB
 		DeltaL->y = (double*)malloc((hiddenNeuronNumber + 1) * sizeof(double)); //+1 : BIAS
-		DeltaL->w = (double*)malloc((hiddenNeuronNumber + 1) * classNumber * sizeof(double)); 
+		DeltaL->w = (double*)malloc((hiddenNeuronNumber + 1) * classNumber * sizeof(double));
 		DeltaL->o = (double*)malloc(classNumber * sizeof(double));
 		DeltaL->d = (int*)malloc(classNumber * sizeof(int));
 		double* Do = (double*)malloc(classNumber * sizeof(double));
 		double* Dy = (double*)malloc(hiddenNeuronNumber * sizeof(double));
+		float mu1 = 0.7, mu2 = 0.7;
 
-//		chart1->Series["Error"]->Points->Clear();
 
-		richTextBox1->AppendText("<----------------------W weights initializing---------------------->\n");
+		richTextBox1->AppendText("W weights initializing\n");
 		for (int i = 0; i < hiddenNeuronNumber + 1; i++)
 			for (int j = 0; j < classNumber; j++)
 				DeltaL->w[i * classNumber + j] = ((double)rand() / RAND_MAX);
 
-		richTextBox1->AppendText("<----------------------V weights initializing---------------------->\n");
-		for (int i = 0; i < hiddenNeuronNumber ; i++)
+		richTextBox1->AppendText("V weights initializing\n");
+		for (int i = 0; i < hiddenNeuronNumber; i++)
 			for (int j = 0; j < (2 + 1); j++) {
 				DeltaL->v[i * 3 + j] = ((double)rand() / RAND_MAX);
 				DeltaL->v_color[i * 3 + j] = (int)rand() % 255;
 			}
-
 
 		if (sizeOfSamples == 0) {
 			MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
@@ -1084,71 +1082,66 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 		}
 
 		//TRAIN
-		System::Drawing::Rectangle r;
-		PaintEventArgs^ f = gcnew PaintEventArgs(pictureBox1->CreateGraphics(), r);
-
 		long long int cycleCount = 0;
-		double error = 1.0;
-		while (error > 0.7){
-			error = 0.0;
-			for (int i = 0; i < sizeOfSamples; i++){
+		double error = 1.0, totalError;
+		while (error > 0.001) {
+			
+			totalError = 0.0;
+			for (int i = 0; i < sizeOfSamples; i++) {
 				
+				/*	 FEED FORWARD	*/
+
+				//desire value
 				memset(DeltaL->d, -1, classNumber * sizeof(int));
 				DeltaL->d[p[i].classId] = 1;
-				
+
 				//calculate y
-				DeltaL->MatrixMultiplication(p[i].x, 3, 1, DeltaL->v, hiddenNeuronNumber, 3, DeltaL->y, "sigmoid", 0.25);
+				DeltaL->MatrixMultiplication(DeltaL->v, hiddenNeuronNumber, 3, p[i].x, 3, 1, DeltaL->y, "sigmoid",1);
 				DeltaL->y[hiddenNeuronNumber] = BIAS;
 
 				//calculate o
-				DeltaL->MatrixMultiplication(DeltaL->y, (hiddenNeuronNumber + 1), 1, DeltaL->w, classNumber, (hiddenNeuronNumber + 1), DeltaL->o, "sigmoid", 0.5);
+				DeltaL->MatrixMultiplication(DeltaL->w, classNumber, (hiddenNeuronNumber + 1), DeltaL->y, (hiddenNeuronNumber + 1), 1, DeltaL->o, "sigmoid", 1);				
 
-				//error calue is computed
-				//error signals of the output layer 
-				for (int k = 0; k < classNumber; k++) {
-					error += 0.5 * (DeltaL->d[k] - DeltaL->o[k]) * (DeltaL->d[k] - DeltaL->o[k]);
-					Do[k] = 0.5 * (DeltaL->d[k] - DeltaL->o[k]) * (1 - DeltaL->o[k] * DeltaL->o[k]);
-				}
+				/*	 BACK PROPAGATION	*/
 
-				//error signals of the hidden layer 
-				double sum;
-				for (int j = 0; j < (hiddenNeuronNumber+1); j++) {
-					sum = 0.0;
-					for (int k = 0; k < classNumber; k++) {
-						sum += Do[k] * DeltaL->w[k * (hiddenNeuronNumber + 1) + j];
-					}
-					Dy[j] = 0.5 * (1 - DeltaL->y[j] * DeltaL->y[j]) * sum;
-				}
-
-				//Output layer weights are adjusted
+				//w weights updating
 				for (int k = 0; k < classNumber; k++)
-					for (int j = 0; j < hiddenNeuronNumber + 1; j++)
-						DeltaL->w[k * (hiddenNeuronNumber+1) + j] += 2.5 * Do[k] * DeltaL->y[j];
-
-				//Hidden layer weights are adjusted
+				{
+					totalError += (DeltaL->d[k] - DeltaL->o[k]) * (DeltaL->d[k] - DeltaL->o[k]);
+					double temp = mu1 * (DeltaL->d[k] - DeltaL->o[k]) * DeltaL->derivatedSigmoid(DeltaL->o[k]);
+					for (int j = 0; j < (hiddenNeuronNumber + 1); j++)
+						DeltaL->w[k * (hiddenNeuronNumber + 1) + j] += temp * DeltaL->y[j];
+				}
+				
+				//v weights updating
 				for (int j = 0; j < hiddenNeuronNumber; j++)
-					for (int i = 0; i < 3; i++)
-						DeltaL->v[j * 3 + i] += 3.5 * Dy[j] * p[i].x[i];
-
-				//error += DeltaL->FeedForward(p[i].x,hiddenNeuronNumber, classNumber, DeltaL->d);
-				//DeltaL->BackPropagation(p[i].x, hiddenNeuronNumber, classNumber, DeltaL->d, Do, Dy);
-
-				////draw new V values
-				//drawTrainLine(hiddenNeuronNumber, 20);
-				//this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
-				//this->pictureBox1_Paint(this, f);
+				{
+					double total = 0.0;
+					for (int k = 0; k < classNumber; k++)
+						total += (DeltaL->d[k] - DeltaL->o[k]) * DeltaL->derivatedSigmoid(DeltaL->o[k]) * DeltaL->w[k * hiddenNeuronNumber + j];
+					
+					for (int ii = 0; ii < 3; ii++)
+						DeltaL->v[j * 3 + ii] += mu2 * DeltaL->derivatedSigmoid(DeltaL->y[j]) * p[i].x[ii] * total;
+				}
 
 			}
+			error = sqrt(totalError) / (sizeOfSamples * (classNumber + hiddenNeuronNumber));
 			cycleCount++;
+
 			//drawing error 
 			chart1->Series["Error"]->Points->AddXY(cycleCount, error);
-			this->richTextBox1->AppendText("Loss: " + Convert::ToString(error) + "\tcycle: " + Convert::ToString(cycleCount) + "\n");
+			//this->richTextBox1->AppendText("Loss: " + Convert::ToString(error) + "\tcycle: " + Convert::ToString(cycleCount) + "\n");
 			this->richTextBox1->ScrollToCaret();
+
+			////draw new V values
+			//drawTrainLine(hiddenNeuronNumber, 20);
+			//this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
+			//this->pictureBox1_Paint(this, f);
 		}
 
 		//drawTrainLine(hiddenNeuronNumber, 20);
-		this->textBox5->Text = Convert::ToString(cycleCount);	
-			
+		this->textBox5->Text = Convert::ToString(cycleCount);
+
 
 		//w[0] = w[1] = w[2] = 0;
 		this->richTextBox1->BackColor = Color::Turquoise;
@@ -1164,27 +1157,27 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 	}//Batch Normalizing
 
 	//Draw Normalized points
-	void drawNormalizedPoints(Samples* point, int pointCount, SampleClass* sc, int classNumber, int scale) {
-		Pen^ pen1 = gcnew Pen(Color::Aqua, 3.0f);
+		   void drawNormalizedPoints(Samples* point, int pointCount, SampleClass* sc, int classNumber, int scale) {
+			   Pen^ pen1 = gcnew Pen(Color::Aqua, 3.0f);
 
-		//picturebox clean
-		this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
-		System::Drawing::Rectangle r;
-		PaintEventArgs^ f = gcnew PaintEventArgs(pictureBox1->CreateGraphics(), r);
-		this->pictureBox1_Paint(this, f);
+			   //picturebox clean
+			   this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
+			   System::Drawing::Rectangle r;
+			   PaintEventArgs^ f = gcnew PaintEventArgs(pictureBox1->CreateGraphics(), r);
+			   this->pictureBox1_Paint(this, f);
 
-		//draw new points.
-		for (int i = 0; i < pointCount; i++)
-		{
-			int tempX = scale * point[i].x[0] + this->pictureBox1->Width / 2;
-			int tempY = this->pictureBox1->Height / 2 - point[i].x[1] * scale;
+			   //draw new points.
+			   for (int i = 0; i < pointCount; i++)
+			   {
+				   int tempX = scale * point[i].x[0] + this->pictureBox1->Width / 2;
+				   int tempY = this->pictureBox1->Height / 2 - point[i].x[1] * scale;
 
-			for (int j = 0; j < classNumber; j++)
-				if (point[i].classId == sc[j].classId)
-					pen1->Color = Color::FromArgb(sc[j].color.r, sc[j].color.g, sc[j].color.b);
-			this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 2, 2);
-		}
-	}//Draw Normalized points
+				   for (int j = 0; j < classNumber; j++)
+					   if (point[i].classId == sc[j].classId)
+						   pen1->Color = Color::FromArgb(sc[j].color.r, sc[j].color.g, sc[j].color.b);
+				   this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 2, 2);
+			   }
+		   }//Draw Normalized points
 
 
 	private: System::Void numericUpDown1_ValueChanged(System::Object^ sender, System::EventArgs^ e) {}
@@ -1197,7 +1190,7 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 		pClass = new SampleClass[classNumber];
 		sizeOfClass = new int[classNumber];
 
-		richTextBox1->AppendText("<----------------------Assigned random values.---------------------->\n");
+		richTextBox1->AppendText("Assigned random values.\n");
 		for (int i = 0; i < classNumber; i++)
 		{
 			pClass[i].classId = i;
@@ -1215,9 +1208,6 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 		this->fileToolStripMenuItem->Enabled = TRUE;
 		this->numericUpDown5->Maximum = classNumber - 1;
 
-
-		richTextBox1->AppendText("<------------------------------------------------------------------->\n");
-
 	}//OK BUTTON
 
 	//EXIT
@@ -1234,7 +1224,7 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 	private: System::Void textBox6_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 
-	//Save Samples
+		   //Save Samples
 	private: System::Void saveSamplesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 
 		std::ofstream samplesFile("samples.txt");
@@ -1284,12 +1274,12 @@ private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 
 	}//Load Samples
 
-	void MarshalString(String^ s, std::string& os) {
-		using namespace Runtime::InteropServices;
-		const char* chars =
-			(const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
-		os = chars;
-		Marshal::FreeHGlobal(IntPtr((void*)chars));
-	}
-};
+		   void MarshalString(String^ s, std::string& os) {
+			   using namespace Runtime::InteropServices;
+			   const char* chars =
+				   (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+			   os = chars;
+			   Marshal::FreeHGlobal(IntPtr((void*)chars));
+		   }
+	};
 }
