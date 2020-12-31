@@ -1286,11 +1286,13 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 		Bitmap^ surface = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
 		pictureBox1->Image = surface;
 
+		p = new Samples[1]; int pointClass;
 		for (int x = 0; x < pictureBox1->Height; x++)
 			for (int y = 0; y < pictureBox1->Width; y++)
 			{
-
-				surface->SetPixel(x, y, Color::FromArgb(pClass[0].color.r, pClass[0].color.g, pClass[0].color.b));
+				p->x[0] = x; p->x[1] = y; p->x[2] = BIAS;
+				pointClass = DeltaL->Test(p->x, hiddenNeuronNumber, classNumber);
+				surface->SetPixel(x, y, Color::FromArgb(pClass[pointClass].color.r, pClass[pointClass].color.g, pClass[pointClass].color.b));
 			}
 	}//TEST
 };

@@ -47,6 +47,5 @@ public:
 	void MatrixMultiplication(double* m1, int col1, int row1, double* m2, int col2, int row2, double* m3, char* activationFunc, float lambda);
 	void MatrixMultiplication(double* matx, int col, int row, double scalerNumber, double* matx2);
 	void transpose(double* matx, int row, int col);
-
 };
 

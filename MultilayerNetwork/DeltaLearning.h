@@ -23,6 +23,6 @@ public:
 
 	void FeedForward(Samples p, int hiddenNeuronNumber, int classNumber);
 	void BackPropagation(double* x, int hiddenNeuronNumber, int classNumber, double* Do, double* Dy, double& totalError);
-
+	int Test(double* x, int hiddenNeuronNumber, int classNumber);
 };
 
