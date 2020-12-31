@@ -125,6 +125,9 @@ namespace MultilayerNetwork {
 	private: System::Windows::Forms::ToolStripMenuItem^ loadSamplesToolStripMenuItem;
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
+private: System::Windows::Forms::ToolStripMenuItem^ testToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^ solutionAreaToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem;
 
 	private: System::Windows::Forms::ToolStripMenuItem^ trainToolStripMenuItem;
 
@@ -201,6 +204,9 @@ namespace MultilayerNetwork {
 			   this->button4 = (gcnew System::Windows::Forms::Button());
 			   this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			   this->openFileDialog2 = (gcnew System::Windows::Forms::OpenFileDialog());
+			   this->testToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->solutionAreaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->showSamplesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->menuStrip1->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			   this->panel1->SuspendLayout();
@@ -269,9 +275,9 @@ namespace MultilayerNetwork {
 			   // 
 			   // processToolStripMenuItem
 			   // 
-			   this->processToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+			   this->processToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
 				   this->initialToolStripMenuItem,
-					   this->trainToolStripMenuItem, this->deltaTrainToolStripMenuItem
+					   this->trainToolStripMenuItem, this->deltaTrainToolStripMenuItem, this->testToolStripMenuItem
 			   });
 			   this->processToolStripMenuItem->Name = L"processToolStripMenuItem";
 			   this->processToolStripMenuItem->Size = System::Drawing::Size(59, 26);
@@ -281,7 +287,7 @@ namespace MultilayerNetwork {
 			   // 
 			   this->initialToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->randomlyToolStripMenuItem });
 			   this->initialToolStripMenuItem->Name = L"initialToolStripMenuItem";
-			   this->initialToolStripMenuItem->Size = System::Drawing::Size(160, 22);
+			   this->initialToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			   this->initialToolStripMenuItem->Text = L"Initial";
 			   // 
 			   // randomlyToolStripMenuItem
@@ -293,14 +299,14 @@ namespace MultilayerNetwork {
 			   // trainToolStripMenuItem
 			   // 
 			   this->trainToolStripMenuItem->Name = L"trainToolStripMenuItem";
-			   this->trainToolStripMenuItem->Size = System::Drawing::Size(160, 22);
+			   this->trainToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			   this->trainToolStripMenuItem->Text = L"Perceptron Train";
 			   this->trainToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::trainToolStripMenuItem_Click);
 			   // 
 			   // deltaTrainToolStripMenuItem
 			   // 
 			   this->deltaTrainToolStripMenuItem->Name = L"deltaTrainToolStripMenuItem";
-			   this->deltaTrainToolStripMenuItem->Size = System::Drawing::Size(160, 22);
+			   this->deltaTrainToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			   this->deltaTrainToolStripMenuItem->Text = L"Delta Train";
 			   this->deltaTrainToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::deltaTrainToolStripMenuItem_Click);
 			   // 
@@ -858,6 +864,29 @@ namespace MultilayerNetwork {
 			   // 
 			   this->openFileDialog2->FileName = L"openFileDialog2";
 			   // 
+			   // testToolStripMenuItem
+			   // 
+			   this->testToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				   this->solutionAreaToolStripMenuItem,
+					   this->showSamplesToolStripMenuItem
+			   });
+			   this->testToolStripMenuItem->Name = L"testToolStripMenuItem";
+			   this->testToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->testToolStripMenuItem->Text = L"Test";
+			   // 
+			   // solutionAreaToolStripMenuItem
+			   // 
+			   this->solutionAreaToolStripMenuItem->Name = L"solutionAreaToolStripMenuItem";
+			   this->solutionAreaToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->solutionAreaToolStripMenuItem->Text = L"SolutionArea";
+			   this->solutionAreaToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::solutionAreaToolStripMenuItem_Click);
+			   // 
+			   // showSamplesToolStripMenuItem
+			   // 
+			   this->showSamplesToolStripMenuItem->Name = L"showSamplesToolStripMenuItem";
+			   this->showSamplesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->showSamplesToolStripMenuItem->Text = L"ShowSamples";
+			   // 
 			   // MainForm
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1090,40 +1119,10 @@ namespace MultilayerNetwork {
 			for (int i = 0; i < sizeOfSamples; i++) {
 				
 				/*	 FEED FORWARD	*/
-
-				//desire value
-				memset(DeltaL->d, -1, classNumber * sizeof(int));
-				DeltaL->d[p[i].classId] = 1;
-
-				//calculate y
-				DeltaL->MatrixMultiplication(DeltaL->v, hiddenNeuronNumber, 3, p[i].x, 3, 1, DeltaL->y, "sigmoid",1);
-				DeltaL->y[hiddenNeuronNumber] = BIAS;
-
-				//calculate o
-				DeltaL->MatrixMultiplication(DeltaL->w, classNumber, (hiddenNeuronNumber + 1), DeltaL->y, (hiddenNeuronNumber + 1), 1, DeltaL->o, "sigmoid", 1);				
+				DeltaL->FeedForward(p[i], hiddenNeuronNumber, classNumber);
 
 				/*	 BACK PROPAGATION	*/
-
-				//w weights updating
-				for (int k = 0; k < classNumber; k++)
-				{
-					totalError += (DeltaL->d[k] - DeltaL->o[k]) * (DeltaL->d[k] - DeltaL->o[k]);
-					double temp = mu1 * (DeltaL->d[k] - DeltaL->o[k]) * DeltaL->derivatedSigmoid(DeltaL->o[k]);
-					for (int j = 0; j < (hiddenNeuronNumber + 1); j++)
-						DeltaL->w[k * (hiddenNeuronNumber + 1) + j] += temp * DeltaL->y[j];
-				}
-				
-				//v weights updating
-				for (int j = 0; j < hiddenNeuronNumber; j++)
-				{
-					double total = 0.0;
-					for (int k = 0; k < classNumber; k++)
-						total += (DeltaL->d[k] - DeltaL->o[k]) * DeltaL->derivatedSigmoid(DeltaL->o[k]) * DeltaL->w[k * hiddenNeuronNumber + j];
-					
-					for (int ii = 0; ii < 3; ii++)
-						DeltaL->v[j * 3 + ii] += mu2 * DeltaL->derivatedSigmoid(DeltaL->y[j]) * p[i].x[ii] * total;
-				}
-
+				DeltaL->BackPropagation(p[i].x, hiddenNeuronNumber, classNumber, Do, Dy, totalError);
 			}
 			error = sqrt(totalError) / (sizeOfSamples * (classNumber + hiddenNeuronNumber));
 			cycleCount++;
@@ -1281,5 +1280,18 @@ namespace MultilayerNetwork {
 			   os = chars;
 			   Marshal::FreeHGlobal(IntPtr((void*)chars));
 		   }
-	};
+
+	//TEST
+	private: System::Void solutionAreaToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		Bitmap^ surface = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
+		pictureBox1->Image = surface;
+
+		for (int x = 0; x < pictureBox1->Height; x++)
+			for (int y = 0; y < pictureBox1->Width; y++)
+			{
+
+				surface->SetPixel(x, y, Color::FromArgb(pClass[0].color.r, pClass[0].color.g, pClass[0].color.b));
+			}
+	}//TEST
+};
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "DeltaLearning.h"
+#include <string>   //for memset
 
 
 DeltaLearning::DeltaLearning()
@@ -35,43 +36,42 @@ double DeltaLearning::getDelta()
 
 }
 
-double DeltaLearning::FeedForward(double* x, int hiddenNeuronNumber, int numberOfClass, int* d)
+void DeltaLearning::FeedForward(Samples p, int hiddenNeuronNumber, int classNumber)
 {
-    //MatrixMultiplication(x, 3, 1, this->v, hiddenNeuronNumber+1, 3, this->y, "sigmoid");
-    this->y[hiddenNeuronNumber] = BIAS;
-    
-    //MatrixMultiplication(this->y, (hiddenNeuronNumber + 1), 1, this->w, numberOfClass, (hiddenNeuronNumber + 1), this->o, "sigmoid");
+    //desire value
+    memset(d, -1, classNumber * sizeof(int));
+    d[p.classId] = 1;
 
-    double error = 0.0;
-    for (int k = 0; k < numberOfClass; k++)
-       error += 0.5 * (d[k] - o[k]) * (d[k] - o[k]);
-    return error;
+    //calculate y
+    MatrixMultiplication(v, hiddenNeuronNumber, 3, p.x, 3, 1, y, "sigmoid", 1);
+    y[hiddenNeuronNumber] = BIAS;
+
+    //calculate o
+    MatrixMultiplication(w, classNumber, (hiddenNeuronNumber + 1), y, (hiddenNeuronNumber + 1), 1, o, "sigmoid", 1);
 }
 
-void DeltaLearning::BackPropagation(double* x, int hiddenNeuronNumber, int numberOfClass, int* d, double* Do, double* Dy)
-{
-    //error signals of the output layer 
-    for (int k = 0; k < numberOfClass; k++)
-        Do[k] = (d[k] - o[k]) * (1 - o[k])* o[k];
+void DeltaLearning::BackPropagation(double* x, int hiddenNeuronNumber, int classNumber, double* Do, double* Dy, double& totalError)
+{	
+	 float mu1 = 0.5, mu2 = 0.7;
+	//w weights updating
+	for (int k = 0; k < classNumber; k++)
+	{
+		totalError += ( d[k] -  o[k]) * ( d[k] -  o[k]);
+		double temp = mu1 * ( d[k] -  o[k]) *  derivatedSigmoid( o[k]);
+		for (int j = 0; j < (hiddenNeuronNumber + 1); j++)
+			 w[k * (hiddenNeuronNumber + 1) + j] += temp *  y[j];
+	}
 
-    //error signals of the hidden layer 
-    double sum;
-    for (int j = 0; j < hiddenNeuronNumber; j++) {
-        sum = 0.0;
-        for (int k = 0; k < numberOfClass; k++)
-            sum += Do[k] * w[k * hiddenNeuronNumber + j];//w : hidden x class ?? will check
-        Dy[j] = y[j] * (1 - y[j]) * sum;
-    }
+	//v weights updating
+	for (int j = 0; j < hiddenNeuronNumber; j++)
+	{
+		double total = 0.0;
+		for (int k = 0; k < classNumber; k++)
+			total += ( d[k] -  o[k]) *  derivatedSigmoid( o[k]) *  w[k * hiddenNeuronNumber + j];
 
-    //Output layer weights are adjusted
-    for (int k = 0; k < numberOfClass; k++)
-        for (int j = 0; j < hiddenNeuronNumber; j++) 
-            w[k * hiddenNeuronNumber + j] += getC() * Do[k] * y[j];
-
-    //Hidden layer weights are adjusted
-    for (int j = 0; j < hiddenNeuronNumber; j++)
-        for (int i = 0; i < 3; i++)//dimension + 1
-            v[j * 3 + i] += getC() * Dy[j] * x[i];
+		for (int ii = 0; ii < 3; ii++)
+			 v[j * 3 + ii] += mu2 *  derivatedSigmoid( y[j]) * x[ii] * total;
+	}
 }
 
 
