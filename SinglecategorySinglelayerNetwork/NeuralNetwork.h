@@ -24,7 +24,7 @@ public:
 
 	virtual void Train(Samples* input, double* output, int inputCount, int& jeneration) = 0;
 
-	void batchNormalizing(Samples* input, int inputCount);
+	void BatchNormalizing(Samples* input, int inputCount);
 
 	//Activation functions
 	int sgn(int number);

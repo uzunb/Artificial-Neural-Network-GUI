@@ -36,12 +36,12 @@ double DeltaLearning::getDelta()
 
 void DeltaLearning::Train(Samples* input, double* w, int inputCount, int& jeneration)
 {
-    bool isUpdated;
+    bool isUpdated = true;
     int d;
     double net, temp, output, derivatedOutput, epoch, error;
 
     // until network give not error for all samples
-    do
+    while (isUpdated)
     {
         epoch = 0.0;
         isUpdated = false;
@@ -71,5 +71,5 @@ void DeltaLearning::Train(Samples* input, double* w, int inputCount, int& jenera
             }
         }
         ++jeneration;
-    } while (isUpdated);
+    } 
 }

@@ -135,6 +135,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 private: System::Windows::Forms::ToolStripMenuItem^ showWeightsToolStripMenuItem;
 private: System::Windows::Forms::TextBox^ textBox1;
 private: System::Windows::Forms::Label^ label3;
+private: System::Windows::Forms::ToolStripMenuItem^ withMomentToolStripMenuItem;
 
 	private: System::Windows::Forms::ToolStripMenuItem^ trainToolStripMenuItem;
 
@@ -162,12 +163,15 @@ private: System::Windows::Forms::Label^ label3;
 			   this->randomlyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->trainToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->deltaTrainToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->withMomentToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->testToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->solutionAreaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->showSamplesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->showWeightsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
 			   this->panel1 = (gcnew System::Windows::Forms::Panel());
+			   this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			   this->label3 = (gcnew System::Windows::Forms::Label());
 			   this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
 			   this->panel11 = (gcnew System::Windows::Forms::Panel());
 			   this->numericUpDown3 = (gcnew System::Windows::Forms::NumericUpDown());
@@ -210,8 +214,6 @@ private: System::Windows::Forms::Label^ label3;
 			   this->button4 = (gcnew System::Windows::Forms::Button());
 			   this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			   this->openFileDialog2 = (gcnew System::Windows::Forms::OpenFileDialog());
-			   this->label3 = (gcnew System::Windows::Forms::Label());
-			   this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			   this->menuStrip1->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			   this->panel1->SuspendLayout();
@@ -309,10 +311,18 @@ private: System::Windows::Forms::Label^ label3;
 			   // 
 			   // deltaTrainToolStripMenuItem
 			   // 
+			   this->deltaTrainToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->withMomentToolStripMenuItem });
 			   this->deltaTrainToolStripMenuItem->Name = L"deltaTrainToolStripMenuItem";
 			   this->deltaTrainToolStripMenuItem->Size = System::Drawing::Size(160, 22);
 			   this->deltaTrainToolStripMenuItem->Text = L"Delta Train";
 			   this->deltaTrainToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::deltaTrainToolStripMenuItem_Click);
+			   // 
+			   // withMomentToolStripMenuItem
+			   // 
+			   this->withMomentToolStripMenuItem->Name = L"withMomentToolStripMenuItem";
+			   this->withMomentToolStripMenuItem->Size = System::Drawing::Size(148, 22);
+			   this->withMomentToolStripMenuItem->Text = L"With Moment";
+			   this->withMomentToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::withMomentToolStripMenuItem_Click);
 			   // 
 			   // testToolStripMenuItem
 			   // 
@@ -362,6 +372,27 @@ private: System::Windows::Forms::Label^ label3;
 			   this->panel1->Name = L"panel1";
 			   this->panel1->Size = System::Drawing::Size(203, 711);
 			   this->panel1->TabIndex = 2;
+			   // 
+			   // textBox1
+			   // 
+			   this->textBox1->BackColor = System::Drawing::Color::Silver;
+			   this->textBox1->Location = System::Drawing::Point(0, 561);
+			   this->textBox1->Name = L"textBox1";
+			   this->textBox1->Size = System::Drawing::Size(203, 22);
+			   this->textBox1->TabIndex = 9;
+			   // 
+			   // label3
+			   // 
+			   this->label3->BackColor = System::Drawing::Color::DarkGreen;
+			   this->label3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
+			   this->label3->ForeColor = System::Drawing::Color::White;
+			   this->label3->Location = System::Drawing::Point(0, 525);
+			   this->label3->Name = L"label3";
+			   this->label3->Size = System::Drawing::Size(203, 33);
+			   this->label3->TabIndex = 8;
+			   this->label3->Text = L"Error";
+			   this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			   // 
 			   // groupBox3
 			   // 
@@ -844,27 +875,6 @@ private: System::Windows::Forms::Label^ label3;
 			   // 
 			   this->openFileDialog2->FileName = L"openFileDialog2";
 			   // 
-			   // label3
-			   // 
-			   this->label3->BackColor = System::Drawing::Color::DarkGreen;
-			   this->label3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
-			   this->label3->ForeColor = System::Drawing::Color::White;
-			   this->label3->Location = System::Drawing::Point(0, 525);
-			   this->label3->Name = L"label3";
-			   this->label3->Size = System::Drawing::Size(203, 33);
-			   this->label3->TabIndex = 8;
-			   this->label3->Text = L"Error";
-			   this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			   // 
-			   // textBox1
-			   // 
-			   this->textBox1->BackColor = System::Drawing::Color::Silver;
-			   this->textBox1->Location = System::Drawing::Point(0, 561);
-			   this->textBox1->Name = L"textBox1";
-			   this->textBox1->Size = System::Drawing::Size(203, 22);
-			   this->textBox1->TabIndex = 9;
-			   // 
 			   // MainForm
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1085,11 +1095,13 @@ private: System::Windows::Forms::Label^ label3;
 			MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 			return;
 		}
+		
+		//Son aðýrlýklarý w/r iþlemi yap
 
 		//TRAIN
 		long long int cycleCount = 0;
 		double error = 1.0, totalError;
-		while (error > 0.05) {
+		while (error > 0.001) {
 			
 			totalError = 0.0;
 			for (int i = 0; i < sizeOfSamples; i++) {
@@ -1280,8 +1292,8 @@ private: System::Windows::Forms::Label^ label3;
 
 		int pxlClass;
 		Samples* testInput = new Samples;
-		for (int x = 0; x < pictureBox1->Width; x+=1)
-			for (int y = 0; y < pictureBox1->Height; y+=1)
+		for (int x = 0; x < pictureBox1->Width; x+=3)
+			for (int y = 0; y < pictureBox1->Height; y+=3)
 			{
 				testInput->x[0] = ((double)(x - (pictureBox1->Width >> 1)) - meanX) / sqrt(varianceX);
 				testInput->x[1] = ((double)((pictureBox1->Height >> 1) - y) - meanY) / sqrt(varianceY);
@@ -1353,5 +1365,11 @@ private: System::Windows::Forms::Label^ label3;
 		}
 	}
 
+		//With Moment
+		private: System::Void withMomentToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+
+
+
+		}//With Moment
 };
 }

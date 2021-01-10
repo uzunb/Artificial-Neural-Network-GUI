@@ -55,7 +55,7 @@ double NeuralNetwork::getC()
 
 //Activation functions
 
-void NeuralNetwork::batchNormalizing(Samples* input, int inputCount)
+void NeuralNetwork::BatchNormalizing(Samples* input, int inputCount)
 {
 	double totalX, totalY, meanX, meanY, varianceX, varianceY;
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <time.h>
+#include <stdio.h>
 #include "Process.h"
 #include "PerceptronLearning.h"
 #include "DeltaLearning.h"
@@ -107,6 +108,9 @@ private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Panel^ panel9;
 	private: System::Windows::Forms::TextBox^ textBox9;
 	private: System::Windows::Forms::Label^ label9;
+	private: System::Windows::Forms::ToolStripMenuItem^ loadToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ loadToolStripMenuItem1;
+	private: System::Windows::Forms::ToolStripMenuItem^ saveSamplesToolStripMenuItem;
 
 
 
@@ -139,6 +143,9 @@ private: System::Windows::Forms::Label^ label6;
 		   {
 			   this->components = (gcnew System::ComponentModel::Container());
 			   this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			   this->loadToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->loadToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->saveSamplesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->processToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->initialToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->randomlyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -207,13 +214,39 @@ private: System::Windows::Forms::Label^ label6;
 			   this->menuStrip1->AutoSize = false;
 			   this->menuStrip1->BackColor = System::Drawing::Color::Turquoise;
 			   this->menuStrip1->GripStyle = System::Windows::Forms::ToolStripGripStyle::Visible;
-			   this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->processToolStripMenuItem });
+			   this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				   this->loadToolStripMenuItem,
+					   this->processToolStripMenuItem
+			   });
 			   this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			   this->menuStrip1->Name = L"menuStrip1";
 			   this->menuStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
 			   this->menuStrip1->Size = System::Drawing::Size(1346, 30);
 			   this->menuStrip1->TabIndex = 1;
 			   this->menuStrip1->Text = L"menuStrip1";
+			   // 
+			   // loadToolStripMenuItem
+			   // 
+			   this->loadToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				   this->loadToolStripMenuItem1,
+					   this->saveSamplesToolStripMenuItem
+			   });
+			   this->loadToolStripMenuItem->Name = L"loadToolStripMenuItem";
+			   this->loadToolStripMenuItem->Size = System::Drawing::Size(37, 26);
+			   this->loadToolStripMenuItem->Text = L"File";
+			   this->loadToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::loadToolStripMenuItem_Click);
+			   // 
+			   // loadToolStripMenuItem1
+			   // 
+			   this->loadToolStripMenuItem1->Name = L"loadToolStripMenuItem1";
+			   this->loadToolStripMenuItem1->Size = System::Drawing::Size(147, 22);
+			   this->loadToolStripMenuItem1->Text = L"Load Samples";
+			   // 
+			   // saveSamplesToolStripMenuItem
+			   // 
+			   this->saveSamplesToolStripMenuItem->Name = L"saveSamplesToolStripMenuItem";
+			   this->saveSamplesToolStripMenuItem->Size = System::Drawing::Size(147, 22);
+			   this->saveSamplesToolStripMenuItem->Text = L"Save Samples";
 			   // 
 			   // processToolStripMenuItem
 			   // 
@@ -895,7 +928,7 @@ private: System::Windows::Forms::Label^ label6;
 
 	//Batch Normalizing
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		learningNetwork->batchNormalizing(p, sizeOfSamples);
+		learningNetwork->BatchNormalizing(p, sizeOfSamples);
 		this->drawNormalizedPoints(p, sizeOfSamples, pClass, classNumber);
 	}//Batch Normalizing
 
@@ -972,5 +1005,7 @@ private: System::Windows::Forms::Label^ label6;
 		}
 	
 	
+	private: System::Void loadToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {}
+
 };
 }

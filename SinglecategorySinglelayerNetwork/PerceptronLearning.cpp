@@ -15,12 +15,12 @@ PerceptronLearning::~PerceptronLearning()
 
 void PerceptronLearning::Train(Samples* input, double* w, int inputCount, int &cycleCount)
 {
-    bool isUpdated;
+    bool isUpdated = true;
     int d, signedNet;
     double net, temp;
 
     // until network give not error for all samples
-    do
+    while (isUpdated)
     {
         isUpdated = false;
         for (int i = 0; i < inputCount; i++)
@@ -36,14 +36,14 @@ void PerceptronLearning::Train(Samples* input, double* w, int inputCount, int &c
 
                 //w^n+1 = w^n + c * ( d - sgn(net) ) * x
                 temp = this->getC() * (d - signedNet);
-                w[0] = w[0] + temp * input[i].x1;
-                w[1] = w[1] + temp * input[i].x2;
-                w[2] = w[2] + temp * BIAS;
+                w[0] += + temp * input[i].x1;
+                w[1] += + temp * input[i].x2;
+                w[2] += + temp * BIAS;
 
                 isUpdated = true;
             }
         }
-            ++cycleCount;
-    } while (isUpdated);
+        ++cycleCount;
+    } 
 }
 

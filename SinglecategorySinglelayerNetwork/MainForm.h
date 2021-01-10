@@ -701,7 +701,7 @@ namespace ArtificialNeuralNetwork {
 
 	//Batch Normalizing
 	private: System::Void checkBox1_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
-		learningNetwork->batchNormalizing(p, sizeOfSamples);
+		learningNetwork->BatchNormalizing(p, sizeOfSamples);
 		this->drawNormalizedPoints(p, sizeOfSamples);
 	}//Batch Normalizing
 
