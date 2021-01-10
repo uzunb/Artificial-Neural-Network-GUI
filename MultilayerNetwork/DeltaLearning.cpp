@@ -48,6 +48,7 @@ void DeltaLearning::FeedForward(Samples p, int hiddenNeuronNumber, int classNumb
 
 	//calculate o
 	MatrixMultiplication(w, classNumber, (hiddenNeuronNumber + 1), y, (hiddenNeuronNumber + 1), 1, o, "sigmoid", 1);
+	
 }
 
 void DeltaLearning::BackPropagation(double* x, int hiddenNeuronNumber, int classNumber, double* Do, double* Dy, double& totalError)
@@ -83,15 +84,17 @@ int DeltaLearning::Test(double* x, int hiddenNeuronNumber, int classNumber)
 	//calculate o
 	MatrixMultiplication(w, classNumber, (hiddenNeuronNumber + 1), y, (hiddenNeuronNumber + 1), 1, o, "sigmoid", 1);
 
-	double maxOutput = 0.0;
-	int maxi = 0;
-	for (int i = 0; i < classNumber; i++)
+	softmax(o, classNumber);
+
+	double maxOutput = o[0];
+	int iMax = 0;
+	for (int i = 1; i < classNumber; i++)
 		if (o[i] >= maxOutput) {
 			maxOutput = o[i];
-			maxi = i;
+			iMax = i;
 		}
 	
-	return maxi;
+	return iMax;
 }
 
 
