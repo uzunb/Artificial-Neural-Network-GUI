@@ -53,41 +53,7 @@ double NeuralNetwork::getC()
     return this->c;
 }
 
-//Activation functions
-
-void NeuralNetwork::batchNormalizing(Samples* input, int inputCount)
-{
-	double totalX, totalY, meanX, meanY, varianceX, varianceY;
-
-	//Calculate Means
-	totalX = totalY = 0;
-	for (int i = 0; i < inputCount; i++) {
-		totalX += input[i].x[0];
-		totalY += input[i].x[1];
-	}
-
-	meanX = totalX / inputCount;
-	meanY = totalY / inputCount;
-
-	//Calculate Variances
-	totalX = totalY = 0;
-	for (int i = 0; i < inputCount; i++)
-	{
-		totalX += pow(input[i].x[0] - meanX, 2);
-		totalY += pow(input[i].x[1] - meanY, 2);
-	}
-
-	varianceX = totalX / inputCount;
-	varianceY = totalY / inputCount;
-
-	//Assign new normalized locations.
-	for (int i = 0; i < inputCount; i++)
-	{
-		//scale * x + shift
-		input[i].x[0] = (input[i].x[0] - meanX) / sqrt(varianceX);
-		input[i].x[1] = (input[i].x[1] - meanY) / sqrt(varianceY);
-	}
-}
+/*Activation functions */
 
 int NeuralNetwork::sgn(int number)
 {
@@ -135,10 +101,14 @@ double NeuralNetwork::leakyReLU(double net)
 	return net < 0 ? 0.01 * net : net;
 }
 
-double NeuralNetwork::softmax(double net)
+void NeuralNetwork::softmax(double* output, int classNumber)
 {
-	//for multiply output .
-	return 0.0;
+	double sum = 0;
+	for (int i = 0; i < classNumber; i++)
+		sum += exp(output[i]);
+	
+	for (int i = 0; i < classNumber; i++)
+		output[i] = exp(output[i]) / sum;
 }
 
 

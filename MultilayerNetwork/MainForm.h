@@ -34,6 +34,8 @@ namespace MultilayerNetwork {
 			srand(time(NULL));
 			richTextBox1->AppendText("Ready for use.\n");
 			learningNetwork = new DeltaLearning();
+			DeltaL = new DeltaLearning();
+
 			//
 		}
 
@@ -58,12 +60,14 @@ namespace MultilayerNetwork {
 	private:
 		/// <summary>
 		/// Required designer variable.
-		Samples* p;
+		Samples* p, *originalSamples;
 		SampleClass* pClass;
 		int sizeOfSamples, * sizeOfClass, classNumber, selectedClass, hiddenNeuronNumber;
 		double* w;
 		NeuralNetwork* learningNetwork;
 		DeltaLearning* DeltaL;
+		double meanX, meanY, varianceX, varianceY;
+		
 
 
 	private: System::Windows::Forms::ToolStripMenuItem^ initialToolStripMenuItem;
@@ -84,8 +88,8 @@ namespace MultilayerNetwork {
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Panel^ panel5;
 	private: System::Windows::Forms::Panel^ panel6;
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::Label^ label3;
+
+
 	private: System::Windows::Forms::GroupBox^ groupBox2;
 	private: System::Windows::Forms::Label^ label4;
 
@@ -109,9 +113,9 @@ namespace MultilayerNetwork {
 	private: System::Windows::Forms::TextBox^ textBox8;
 	private: System::Windows::Forms::TextBox^ textBox7;
 	private: System::Windows::Forms::TextBox^ textBox6;
-	private: System::Windows::Forms::Panel^ panel9;
-	private: System::Windows::Forms::TextBox^ textBox9;
-	private: System::Windows::Forms::Label^ label9;
+
+
+
 	private: System::Windows::Forms::GroupBox^ groupBox3;
 	private: System::Windows::Forms::Panel^ panel11;
 	private: System::Windows::Forms::NumericUpDown^ numericUpDown3;
@@ -128,6 +132,9 @@ namespace MultilayerNetwork {
 private: System::Windows::Forms::ToolStripMenuItem^ testToolStripMenuItem;
 private: System::Windows::Forms::ToolStripMenuItem^ solutionAreaToolStripMenuItem;
 private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^ showWeightsToolStripMenuItem;
+private: System::Windows::Forms::TextBox^ textBox1;
+private: System::Windows::Forms::Label^ label3;
 
 	private: System::Windows::Forms::ToolStripMenuItem^ trainToolStripMenuItem;
 
@@ -155,6 +162,10 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   this->randomlyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->trainToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->deltaTrainToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->testToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->solutionAreaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->showSamplesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->showWeightsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
 			   this->panel1 = (gcnew System::Windows::Forms::Panel());
 			   this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
@@ -164,9 +175,6 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   this->panel10 = (gcnew System::Windows::Forms::Panel());
 			   this->numericUpDown2 = (gcnew System::Windows::Forms::NumericUpDown());
 			   this->label10 = (gcnew System::Windows::Forms::Label());
-			   this->panel9 = (gcnew System::Windows::Forms::Panel());
-			   this->textBox9 = (gcnew System::Windows::Forms::TextBox());
-			   this->label9 = (gcnew System::Windows::Forms::Label());
 			   this->panel7 = (gcnew System::Windows::Forms::Panel());
 			   this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			   this->label8 = (gcnew System::Windows::Forms::Label());
@@ -177,8 +185,6 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			   this->label7 = (gcnew System::Windows::Forms::Label());
 			   this->label6 = (gcnew System::Windows::Forms::Label());
-			   this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			   this->label3 = (gcnew System::Windows::Forms::Label());
 			   this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			   this->textBox8 = (gcnew System::Windows::Forms::TextBox());
 			   this->textBox7 = (gcnew System::Windows::Forms::TextBox());
@@ -204,9 +210,8 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   this->button4 = (gcnew System::Windows::Forms::Button());
 			   this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			   this->openFileDialog2 = (gcnew System::Windows::Forms::OpenFileDialog());
-			   this->testToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			   this->solutionAreaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			   this->showSamplesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->label3 = (gcnew System::Windows::Forms::Label());
+			   this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			   this->menuStrip1->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			   this->panel1->SuspendLayout();
@@ -215,7 +220,6 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown3))->BeginInit();
 			   this->panel10->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->BeginInit();
-			   this->panel9->SuspendLayout();
 			   this->panel7->SuspendLayout();
 			   this->panel6->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown5))->BeginInit();
@@ -287,7 +291,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   // 
 			   this->initialToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->randomlyToolStripMenuItem });
 			   this->initialToolStripMenuItem->Name = L"initialToolStripMenuItem";
-			   this->initialToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->initialToolStripMenuItem->Size = System::Drawing::Size(160, 22);
 			   this->initialToolStripMenuItem->Text = L"Initial";
 			   // 
 			   // randomlyToolStripMenuItem
@@ -299,23 +303,55 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   // trainToolStripMenuItem
 			   // 
 			   this->trainToolStripMenuItem->Name = L"trainToolStripMenuItem";
-			   this->trainToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->trainToolStripMenuItem->Size = System::Drawing::Size(160, 22);
 			   this->trainToolStripMenuItem->Text = L"Perceptron Train";
 			   this->trainToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::trainToolStripMenuItem_Click);
 			   // 
 			   // deltaTrainToolStripMenuItem
 			   // 
 			   this->deltaTrainToolStripMenuItem->Name = L"deltaTrainToolStripMenuItem";
-			   this->deltaTrainToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->deltaTrainToolStripMenuItem->Size = System::Drawing::Size(160, 22);
 			   this->deltaTrainToolStripMenuItem->Text = L"Delta Train";
 			   this->deltaTrainToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::deltaTrainToolStripMenuItem_Click);
+			   // 
+			   // testToolStripMenuItem
+			   // 
+			   this->testToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				   this->solutionAreaToolStripMenuItem,
+					   this->showSamplesToolStripMenuItem, this->showWeightsToolStripMenuItem
+			   });
+			   this->testToolStripMenuItem->Name = L"testToolStripMenuItem";
+			   this->testToolStripMenuItem->Size = System::Drawing::Size(160, 22);
+			   this->testToolStripMenuItem->Text = L"Test";
+			   // 
+			   // solutionAreaToolStripMenuItem
+			   // 
+			   this->solutionAreaToolStripMenuItem->Name = L"solutionAreaToolStripMenuItem";
+			   this->solutionAreaToolStripMenuItem->Size = System::Drawing::Size(147, 22);
+			   this->solutionAreaToolStripMenuItem->Text = L"SolutionArea";
+			   this->solutionAreaToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::solutionAreaToolStripMenuItem_Click);
+			   // 
+			   // showSamplesToolStripMenuItem
+			   // 
+			   this->showSamplesToolStripMenuItem->Name = L"showSamplesToolStripMenuItem";
+			   this->showSamplesToolStripMenuItem->Size = System::Drawing::Size(147, 22);
+			   this->showSamplesToolStripMenuItem->Text = L"ShowSamples";
+			   this->showSamplesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::showSamplesToolStripMenuItem_Click);
+			   // 
+			   // showWeightsToolStripMenuItem
+			   // 
+			   this->showWeightsToolStripMenuItem->Name = L"showWeightsToolStripMenuItem";
+			   this->showWeightsToolStripMenuItem->Size = System::Drawing::Size(147, 22);
+			   this->showWeightsToolStripMenuItem->Text = L"ShowWeights";
+			   this->showWeightsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::showWeightsToolStripMenuItem_Click);
 			   // 
 			   // panel1
 			   // 
 			   this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(35)), static_cast<System::Int32>(static_cast<System::Byte>(35)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(50)));
+			   this->panel1->Controls->Add(this->textBox1);
+			   this->panel1->Controls->Add(this->label3);
 			   this->panel1->Controls->Add(this->groupBox3);
-			   this->panel1->Controls->Add(this->panel9);
 			   this->panel1->Controls->Add(this->panel7);
 			   this->panel1->Controls->Add(this->panel6);
 			   this->panel1->Controls->Add(this->button2);
@@ -406,39 +442,6 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   this->label10->Text = L"Layer Count";
 			   this->label10->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			   // 
-			   // panel9
-			   // 
-			   this->panel9->Controls->Add(this->textBox9);
-			   this->panel9->Controls->Add(this->label9);
-			   this->panel9->Location = System::Drawing::Point(0, 523);
-			   this->panel9->Name = L"panel9";
-			   this->panel9->Size = System::Drawing::Size(203, 65);
-			   this->panel9->TabIndex = 1;
-			   this->panel9->Visible = false;
-			   // 
-			   // textBox9
-			   // 
-			   this->textBox9->BackColor = System::Drawing::Color::Silver;
-			   this->textBox9->Dock = System::Windows::Forms::DockStyle::Fill;
-			   this->textBox9->Location = System::Drawing::Point(0, 33);
-			   this->textBox9->Name = L"textBox9";
-			   this->textBox9->Size = System::Drawing::Size(203, 22);
-			   this->textBox9->TabIndex = 10;
-			   // 
-			   // label9
-			   // 
-			   this->label9->BackColor = System::Drawing::Color::DarkGreen;
-			   this->label9->Dock = System::Windows::Forms::DockStyle::Top;
-			   this->label9->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->label9->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
-			   this->label9->ForeColor = System::Drawing::Color::White;
-			   this->label9->Location = System::Drawing::Point(0, 0);
-			   this->label9->Name = L"label9";
-			   this->label9->Size = System::Drawing::Size(203, 33);
-			   this->label9->TabIndex = 9;
-			   this->label9->Text = L"Error";
-			   this->label9->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			   // 
 			   // panel7
 			   // 
 			   this->panel7->Controls->Add(this->textBox5);
@@ -478,13 +481,11 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   this->panel6->BackColor = System::Drawing::Color::DarkGreen;
 			   this->panel6->Controls->Add(this->numericUpDown5);
 			   this->panel6->Controls->Add(this->groupBox1);
-			   this->panel6->Controls->Add(this->textBox1);
-			   this->panel6->Controls->Add(this->label3);
 			   this->panel6->Controls->Add(this->groupBox2);
 			   this->panel6->Controls->Add(this->label2);
 			   this->panel6->Location = System::Drawing::Point(0, 167);
 			   this->panel6->Name = L"panel6";
-			   this->panel6->Size = System::Drawing::Size(200, 208);
+			   this->panel6->Size = System::Drawing::Size(200, 171);
 			   this->panel6->TabIndex = 4;
 			   this->panel6->Visible = false;
 			   // 
@@ -504,7 +505,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   this->groupBox1->Controls->Add(this->label7);
 			   this->groupBox1->Controls->Add(this->label6);
 			   this->groupBox1->Dock = System::Windows::Forms::DockStyle::Bottom;
-			   this->groupBox1->Location = System::Drawing::Point(0, 62);
+			   this->groupBox1->Location = System::Drawing::Point(0, 25);
 			   this->groupBox1->Name = L"groupBox1";
 			   this->groupBox1->Size = System::Drawing::Size(200, 73);
 			   this->groupBox1->TabIndex = 1;
@@ -553,27 +554,6 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   this->label6->Text = L"XY";
 			   this->label6->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			   // 
-			   // textBox1
-			   // 
-			   this->textBox1->BackColor = System::Drawing::Color::Silver;
-			   this->textBox1->Location = System::Drawing::Point(154, 34);
-			   this->textBox1->Name = L"textBox1";
-			   this->textBox1->Size = System::Drawing::Size(43, 22);
-			   this->textBox1->TabIndex = 6;
-			   // 
-			   // label3
-			   // 
-			   this->label3->BackColor = System::Drawing::Color::DarkGreen;
-			   this->label3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
-			   this->label3->ForeColor = System::Drawing::Color::White;
-			   this->label3->Location = System::Drawing::Point(-7, 30);
-			   this->label3->Name = L"label3";
-			   this->label3->Size = System::Drawing::Size(160, 25);
-			   this->label3->TabIndex = 5;
-			   this->label3->Text = L"Sample Count";
-			   this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			   // 
 			   // groupBox2
 			   // 
 			   this->groupBox2->Controls->Add(this->textBox8);
@@ -581,7 +561,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   this->groupBox2->Controls->Add(this->textBox6);
 			   this->groupBox2->Controls->Add(this->label4);
 			   this->groupBox2->Dock = System::Windows::Forms::DockStyle::Bottom;
-			   this->groupBox2->Location = System::Drawing::Point(0, 135);
+			   this->groupBox2->Location = System::Drawing::Point(0, 98);
 			   this->groupBox2->Name = L"groupBox2";
 			   this->groupBox2->Size = System::Drawing::Size(200, 73);
 			   this->groupBox2->TabIndex = 4;
@@ -646,7 +626,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   this->button2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(162)));
 			   this->button2->ForeColor = System::Drawing::Color::White;
-			   this->button2->Location = System::Drawing::Point(0, 400);
+			   this->button2->Location = System::Drawing::Point(1, 344);
 			   this->button2->Name = L"button2";
 			   this->button2->Size = System::Drawing::Size(200, 46);
 			   this->button2->TabIndex = 0;
@@ -864,28 +844,26 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   // 
 			   this->openFileDialog2->FileName = L"openFileDialog2";
 			   // 
-			   // testToolStripMenuItem
+			   // label3
 			   // 
-			   this->testToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				   this->solutionAreaToolStripMenuItem,
-					   this->showSamplesToolStripMenuItem
-			   });
-			   this->testToolStripMenuItem->Name = L"testToolStripMenuItem";
-			   this->testToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			   this->testToolStripMenuItem->Text = L"Test";
+			   this->label3->BackColor = System::Drawing::Color::DarkGreen;
+			   this->label3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
+			   this->label3->ForeColor = System::Drawing::Color::White;
+			   this->label3->Location = System::Drawing::Point(0, 525);
+			   this->label3->Name = L"label3";
+			   this->label3->Size = System::Drawing::Size(203, 33);
+			   this->label3->TabIndex = 8;
+			   this->label3->Text = L"Error";
+			   this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			   // 
-			   // solutionAreaToolStripMenuItem
+			   // textBox1
 			   // 
-			   this->solutionAreaToolStripMenuItem->Name = L"solutionAreaToolStripMenuItem";
-			   this->solutionAreaToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			   this->solutionAreaToolStripMenuItem->Text = L"SolutionArea";
-			   this->solutionAreaToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::solutionAreaToolStripMenuItem_Click);
-			   // 
-			   // showSamplesToolStripMenuItem
-			   // 
-			   this->showSamplesToolStripMenuItem->Name = L"showSamplesToolStripMenuItem";
-			   this->showSamplesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			   this->showSamplesToolStripMenuItem->Text = L"ShowSamples";
+			   this->textBox1->BackColor = System::Drawing::Color::Silver;
+			   this->textBox1->Location = System::Drawing::Point(0, 561);
+			   this->textBox1->Name = L"textBox1";
+			   this->textBox1->Size = System::Drawing::Size(203, 22);
+			   this->textBox1->TabIndex = 9;
 			   // 
 			   // MainForm
 			   // 
@@ -911,17 +889,15 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 			   this->menuStrip1->PerformLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->EndInit();
 			   this->panel1->ResumeLayout(false);
+			   this->panel1->PerformLayout();
 			   this->groupBox3->ResumeLayout(false);
 			   this->panel11->ResumeLayout(false);
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown3))->EndInit();
 			   this->panel10->ResumeLayout(false);
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->EndInit();
-			   this->panel9->ResumeLayout(false);
-			   this->panel9->PerformLayout();
 			   this->panel7->ResumeLayout(false);
 			   this->panel7->PerformLayout();
 			   this->panel6->ResumeLayout(false);
-			   this->panel6->PerformLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown5))->EndInit();
 			   this->groupBox1->ResumeLayout(false);
 			   this->groupBox1->PerformLayout();
@@ -980,7 +956,6 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 		else {
 			Samples* temp;
 			temp = p;
-			textBox1->Text = Convert::ToString(++sizeOfClass[selectedClass]);
 			sizeOfSamples++;
 			p = new Samples[sizeOfSamples];
 			for (int i = 0; i < sizeOfSamples - 1; i++)
@@ -999,6 +974,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 
 		textBox3->Text = Convert::ToString(p[sizeOfSamples - 1].x[0]) + "," + Convert::ToString(p[sizeOfSamples - 1].x[1]);
 		textBox4->Text = Convert::ToString(temp_x) + "," + Convert::ToString(temp_y);
+		textBox2->Text = Convert::ToString(sizeOfSamples);
 
 		//Adding point to table.
 		Pen^ pen = gcnew Pen(Color::FromArgb(pClass[selectedClass].color.r, pClass[selectedClass].color.g, pClass[selectedClass].color.b), 3.0f);
@@ -1033,22 +1009,22 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 
 
 	//DrawTrainLine
-		   void drawTrainLine(int hiddenNeuronNumber, int scale)
-		   {
-			   for (int i = 0; i < hiddenNeuronNumber; i++)
-			   {
-				   //x2 = (+c -ax1) / b
-				   int offset = i * 3;
-				   int minX = pictureBox1->Width / -2;
-				   int minY = YPoint(minX, DeltaL->v, offset, scale);
-				   int maxX = pictureBox1->Width / 2;
-				   int maxY = YPoint(maxX, DeltaL->v, offset, scale);
+	void drawTrainLine(int hiddenNeuronNumber, int scale)
+	{
+		for (int i = 0; i < hiddenNeuronNumber; i++)
+		{
+			//x2 = (+c -ax1) / b
+			int offset = i * 3;
+			int minX = pictureBox1->Width / -2;
+			int minY = YPoint(minX, DeltaL->v, offset, scale);
+			int maxX = pictureBox1->Width / 2;
+			int maxY = YPoint(maxX, DeltaL->v, offset, scale);
 
-				   Pen^ pen = gcnew Pen(Color::FromArgb(DeltaL->v_color[offset], DeltaL->v_color[offset + 1], DeltaL->v_color[offset + 2]), 2.0f);
-				   pictureBox1->CreateGraphics()->DrawLine(pen, 0, pictureBox1->Height / 2 - minY, pictureBox1->Width, pictureBox1->Height / 2 - maxY);
-				   richTextBox1->AppendText("w1: " + Convert::ToString(DeltaL->v[offset]) + "\tw2: " + Convert::ToString(DeltaL->v[offset + 1]) + "\tw3: " + Convert::ToString(DeltaL->v[offset + 2]) + "\tRGB:" + Convert::ToString(pClass[i].color.r) + ", " + Convert::ToString(pClass[i].color.g) + ", " + Convert::ToString(pClass[i].color.b) + "\n");
-			   }
-		   }//DrawTrainLine
+			Pen^ pen = gcnew Pen(Color::FromArgb(DeltaL->v_color[offset], DeltaL->v_color[offset + 1], DeltaL->v_color[offset + 2]), 2.0f);
+			pictureBox1->CreateGraphics()->DrawLine(pen, 0, pictureBox1->Height / 2 - minY, pictureBox1->Width, pictureBox1->Height / 2 - maxY);
+			richTextBox1->AppendText("w1: " + Convert::ToString(DeltaL->v[offset]) + "\tw2: " + Convert::ToString(DeltaL->v[offset + 1]) + "\tw3: " + Convert::ToString(DeltaL->v[offset + 2]) + "\tRGB:" + Convert::ToString(pClass[i].color.r) + ", " + Convert::ToString(pClass[i].color.g) + ", " + Convert::ToString(pClass[i].color.b) + "\n");
+		}
+	}//DrawTrainLine
 
 
 
@@ -1090,7 +1066,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 		DeltaL->d = (int*)malloc(classNumber * sizeof(int));
 		double* Do = (double*)malloc(classNumber * sizeof(double));
 		double* Dy = (double*)malloc(hiddenNeuronNumber * sizeof(double));
-		float mu1 = 0.7, mu2 = 0.7;
+		float mu1 = 0.9, mu2 = 0.9;
 
 
 		richTextBox1->AppendText("W weights initializing\n");
@@ -1113,7 +1089,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 		//TRAIN
 		long long int cycleCount = 0;
 		double error = 1.0, totalError;
-		while (error > 0.001) {
+		while (error > 0.05) {
 			
 			totalError = 0.0;
 			for (int i = 0; i < sizeOfSamples; i++) {
@@ -1124,13 +1100,16 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 				/*	 BACK PROPAGATION	*/
 				DeltaL->BackPropagation(p[i].x, hiddenNeuronNumber, classNumber, Do, Dy, totalError);
 			}
-			error = sqrt(totalError) / (sizeOfSamples * (classNumber + hiddenNeuronNumber));
+			error = sqrt(totalError) / (sizeOfSamples * classNumber);
 			cycleCount++;
 
 			//drawing error 
-			chart1->Series["Error"]->Points->AddXY(cycleCount, error);
+			//textBox1->Text = Convert::ToString(error); textBox1->Refresh();
+			//textBox5->Text = Convert::ToString(cycleCount); textBox5->Refresh();
+			//chart1->Series["Error"]->Points->AddXY(cycleCount, error); chart1->Refresh();
 			//this->richTextBox1->AppendText("Loss: " + Convert::ToString(error) + "\tcycle: " + Convert::ToString(cycleCount) + "\n");
-			this->richTextBox1->ScrollToCaret();
+			//this->richTextBox1->ScrollToCaret(); richTextBox1->Refresh();
+
 
 			////draw new V values
 			//drawTrainLine(hiddenNeuronNumber, 20);
@@ -1139,11 +1118,12 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 		}
 
 		//drawTrainLine(hiddenNeuronNumber, 20);
-		this->textBox5->Text = Convert::ToString(cycleCount);
 
 
 		//w[0] = w[1] = w[2] = 0;
 		this->richTextBox1->BackColor = Color::Turquoise;
+		textBox1->Text = Convert::ToString(error);
+		textBox5->Text = Convert::ToString(cycleCount);
 
 	}//Delta Train
 
@@ -1151,32 +1131,45 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 
 	//Batch Normalizing
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		learningNetwork->batchNormalizing(p, sizeOfSamples);
+		originalSamples = new Samples[sizeOfSamples];
+		for (int i = 0; i < sizeOfSamples; i++) {
+			originalSamples[i].x[0] = p[i].x[0];
+			originalSamples[i].x[1] = p[i].x[1];
+			originalSamples[i].x[2] = p[i].x[2];
+			originalSamples[i].classId = p[i].classId;
+		}
+
+
+		//DeltaL->BatchNormalizing(p, sizeOfSamples);
+		BatchNormalize();
+
 		this->drawNormalizedPoints(p, sizeOfSamples, pClass, classNumber, 20);
 	}//Batch Normalizing
 
+
+
 	//Draw Normalized points
-		   void drawNormalizedPoints(Samples* point, int pointCount, SampleClass* sc, int classNumber, int scale) {
-			   Pen^ pen1 = gcnew Pen(Color::Aqua, 3.0f);
+	void drawNormalizedPoints(Samples* point, int pointCount, SampleClass* sc, int classNumber, int scale) {
 
-			   //picturebox clean
-			   this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
-			   System::Drawing::Rectangle r;
-			   PaintEventArgs^ f = gcnew PaintEventArgs(pictureBox1->CreateGraphics(), r);
-			   this->pictureBox1_Paint(this, f);
+		//picturebox clean
+		this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
+		System::Drawing::Rectangle r;
+		PaintEventArgs^ f = gcnew PaintEventArgs(pictureBox1->CreateGraphics(), r);
+		this->pictureBox1_Paint(this, f);
 
-			   //draw new points.
-			   for (int i = 0; i < pointCount; i++)
-			   {
-				   int tempX = scale * point[i].x[0] + this->pictureBox1->Width / 2;
-				   int tempY = this->pictureBox1->Height / 2 - point[i].x[1] * scale;
+		Pen^ pen1 = gcnew Pen(Color::Aqua, 3.0f);
+		//draw new points.
+		for (int i = 0; i < pointCount; i++)
+		{
+			int tempX = scale * point[i].x[0] + this->pictureBox1->Width / 2;
+			int tempY = this->pictureBox1->Height / 2 - point[i].x[1] * scale;
 
-				   for (int j = 0; j < classNumber; j++)
-					   if (point[i].classId == sc[j].classId)
-						   pen1->Color = Color::FromArgb(sc[j].color.r, sc[j].color.g, sc[j].color.b);
-				   this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 2, 2);
-			   }
-		   }//Draw Normalized points
+			for (int j = 0; j < classNumber; j++)
+				if (point[i].classId == sc[j].classId)
+					pen1->Color = Color::FromArgb(sc[j].color.r, sc[j].color.g, sc[j].color.b);
+			this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 2, 2);
+		}
+	}//Draw Normalized points
 
 
 	private: System::Void numericUpDown1_ValueChanged(System::Object^ sender, System::EventArgs^ e) {}
@@ -1202,7 +1195,6 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 		this->panel5->Visible = TRUE;
 		this->panel6->Visible = TRUE;
 		this->panel7->Visible = TRUE;
-		this->panel9->Visible = TRUE;
 		this->button2->Visible = TRUE;
 		this->fileToolStripMenuItem->Enabled = TRUE;
 		this->numericUpDown5->Maximum = classNumber - 1;
@@ -1286,14 +1278,80 @@ private: System::Windows::Forms::ToolStripMenuItem^ showSamplesToolStripMenuItem
 		Bitmap^ surface = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
 		pictureBox1->Image = surface;
 
-		p = new Samples[1]; int pointClass;
-		for (int x = 0; x < pictureBox1->Height; x++)
-			for (int y = 0; y < pictureBox1->Width; y++)
+		int pxlClass;
+		Samples* testInput = new Samples;
+		for (int x = 0; x < pictureBox1->Width; x+=1)
+			for (int y = 0; y < pictureBox1->Height; y+=1)
 			{
-				p->x[0] = x; p->x[1] = y; p->x[2] = BIAS;
-				pointClass = DeltaL->Test(p->x, hiddenNeuronNumber, classNumber);
-				surface->SetPixel(x, y, Color::FromArgb(pClass[pointClass].color.r, pClass[pointClass].color.g, pClass[pointClass].color.b));
+				testInput->x[0] = ((double)(x - (pictureBox1->Width >> 1)) - meanX) / sqrt(varianceX);
+				testInput->x[1] = ((double)((pictureBox1->Height >> 1) - y) - meanY) / sqrt(varianceY);
+				testInput->x[2] = (double)BIAS;
+
+				pxlClass = DeltaL->Test(testInput->x, hiddenNeuronNumber, classNumber);
+				surface->SetPixel(x, y, Color::FromArgb(pClass[pxlClass].color.r, pClass[pxlClass].color.g, pClass[pxlClass].color.b));
 			}
 	}//TEST
+
+	//SHOW TRAIN SAMPLES
+	private: System::Void showSamplesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		Pen^ pen1 = gcnew Pen(Color::Aqua, 3.0f);
+		//draw new points.
+		for (int i = 0; i < sizeOfSamples; i++)
+		{
+			int tempX = originalSamples[i].x[0] + this->pictureBox1->Width / 2;
+			int tempY = this->pictureBox1->Height / 2 - originalSamples[i].x[1];
+
+			for (int j = 0; j < classNumber; j++)
+				if (originalSamples[i].classId == pClass[j].classId)
+					pen1->Color = Color::FromArgb(pClass[j].color.r, pClass[j].color.g, pClass[j].color.b);
+			this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 2, 2);
+		}
+
+	}
+
+	//SHOW V WEIGHTS
+	private: System::Void showWeightsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		//draw new V values
+			drawTrainLine(hiddenNeuronNumber, 20);
+			this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
+			//this->pictureBox1_Paint(this, f);
+	}//SHOW V WEIGHTS
+
+
+	void BatchNormalize()
+	{
+		double totalX, totalY; //, meanX, meanY, varianceX, varianceY;
+
+		//Calculate Means
+		totalX = totalY = 0; 
+		for (int i = 0; i < sizeOfSamples; i++) {
+			totalX += p[i].x[0];
+			totalY += p[i].x[1];
+		}
+
+		this->meanX = totalX / sizeOfSamples;
+		meanY = totalY / sizeOfSamples;
+
+		//Calculate Variances
+		totalX = totalY = 0;
+		for (int i = 0; i < sizeOfSamples; i++)
+		{
+			totalX += pow(p[i].x[0] - this->meanX, 2);
+			totalY += pow(p[i].x[1] - meanY, 2);
+		}
+
+		varianceX = totalX / sizeOfSamples;
+		varianceY = totalY / sizeOfSamples;
+
+		//Assign new normalized locations.
+		for (int i = 0; i < sizeOfSamples; i++)
+		{
+			//scale * x + shift
+			p[i].x[0] = (p[i].x[0] - this->meanX) / sqrt(varianceX);
+			p[i].x[1] = (p[i].x[1] - meanY) / sqrt(varianceY);
+		}
+	}
+
 };
 }

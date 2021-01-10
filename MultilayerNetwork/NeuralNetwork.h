@@ -18,6 +18,8 @@ public:
 	double* o;		//classNumber * 1
 	int* d;			//classNumber * 1
 		
+	
+
 	void setLayerCount(int count);
 	void setNeuronCount(int count);
 	void setInput(int* input);
@@ -31,7 +33,7 @@ public:
 
 	virtual void Train(Samples* input, double* output, int inputCount, SampleClass* cls, int numberOfClass, int& jeneration) = 0;
 
-	void batchNormalizing(Samples* input, int inputCount);
+
 
 	//Activation functions
 	int sgn(int number);
@@ -41,7 +43,7 @@ public:
 	double tanH(double net);		// Hyperbolic Tangent
 	double reLU(double net);		// Rectified Linear Unit
 	double leakyReLU(double net);
-	double softmax(double net);
+	void softmax(double* output, int classNumber);
 
 	void MatrixMultiplication(double* m1, int col1, int row1, double* m2, int col2, int row2, double* m3);
 	void MatrixMultiplication(double* m1, int col1, int row1, double* m2, int col2, int row2, double* m3, char* activationFunc, float lambda);
