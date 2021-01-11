@@ -125,8 +125,8 @@ namespace MultilayerNetwork {
 	private: System::Windows::Forms::Label^ label10;
 	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
 	private: System::Windows::Forms::ToolStripMenuItem^ fileToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ saveSamplesToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ loadSamplesToolStripMenuItem;
+
+
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 private: System::Windows::Forms::ToolStripMenuItem^ testToolStripMenuItem;
@@ -136,6 +136,15 @@ private: System::Windows::Forms::ToolStripMenuItem^ showWeightsToolStripMenuItem
 private: System::Windows::Forms::TextBox^ textBox1;
 private: System::Windows::Forms::Label^ label3;
 private: System::Windows::Forms::ToolStripMenuItem^ withMomentToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^ samplesToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^ loadSamplesToolStripMenuItem1;
+private: System::Windows::Forms::ToolStripMenuItem^ saveSamplesToolStripMenuItem1;
+private: System::Windows::Forms::ToolStripMenuItem^ weightsToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^ saveWeightsToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^ loadWeightsToolStripMenuItem;
+private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
+
+
 
 	private: System::Windows::Forms::ToolStripMenuItem^ trainToolStripMenuItem;
 
@@ -156,8 +165,12 @@ private: System::Windows::Forms::ToolStripMenuItem^ withMomentToolStripMenuItem;
 			   System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			   this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			   this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			   this->saveSamplesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			   this->loadSamplesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->samplesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->loadSamplesToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->saveSamplesToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->weightsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->saveWeightsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->loadWeightsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->processToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->initialToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->randomlyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -214,6 +227,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ withMomentToolStripMenuItem;
 			   this->button4 = (gcnew System::Windows::Forms::Button());
 			   this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			   this->openFileDialog2 = (gcnew System::Windows::Forms::OpenFileDialog());
+			   this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
 			   this->menuStrip1->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			   this->panel1->SuspendLayout();
@@ -257,27 +271,61 @@ private: System::Windows::Forms::ToolStripMenuItem^ withMomentToolStripMenuItem;
 			   // fileToolStripMenuItem
 			   // 
 			   this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				   this->saveSamplesToolStripMenuItem,
-					   this->loadSamplesToolStripMenuItem
+				   this->samplesToolStripMenuItem,
+					   this->weightsToolStripMenuItem
 			   });
 			   this->fileToolStripMenuItem->Enabled = false;
 			   this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
 			   this->fileToolStripMenuItem->Size = System::Drawing::Size(37, 26);
 			   this->fileToolStripMenuItem->Text = L"File";
 			   // 
-			   // saveSamplesToolStripMenuItem
+			   // samplesToolStripMenuItem
 			   // 
-			   this->saveSamplesToolStripMenuItem->Name = L"saveSamplesToolStripMenuItem";
-			   this->saveSamplesToolStripMenuItem->Size = System::Drawing::Size(147, 22);
-			   this->saveSamplesToolStripMenuItem->Text = L"Save Samples";
-			   this->saveSamplesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::saveSamplesToolStripMenuItem_Click);
+			   this->samplesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				   this->loadSamplesToolStripMenuItem1,
+					   this->saveSamplesToolStripMenuItem1
+			   });
+			   this->samplesToolStripMenuItem->Name = L"samplesToolStripMenuItem";
+			   this->samplesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->samplesToolStripMenuItem->Text = L"Samples";
 			   // 
-			   // loadSamplesToolStripMenuItem
+			   // loadSamplesToolStripMenuItem1
 			   // 
-			   this->loadSamplesToolStripMenuItem->Name = L"loadSamplesToolStripMenuItem";
-			   this->loadSamplesToolStripMenuItem->Size = System::Drawing::Size(147, 22);
-			   this->loadSamplesToolStripMenuItem->Text = L"Load Samples";
-			   this->loadSamplesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::loadSamplesToolStripMenuItem_Click);
+			   this->loadSamplesToolStripMenuItem1->Name = L"loadSamplesToolStripMenuItem1";
+			   this->loadSamplesToolStripMenuItem1->Size = System::Drawing::Size(147, 22);
+			   this->loadSamplesToolStripMenuItem1->Text = L"Load Samples";
+			   this->loadSamplesToolStripMenuItem1->Click += gcnew System::EventHandler(this, &MainForm::loadSamplesToolStripMenuItem1_Click);
+			   // 
+			   // saveSamplesToolStripMenuItem1
+			   // 
+			   this->saveSamplesToolStripMenuItem1->Name = L"saveSamplesToolStripMenuItem1";
+			   this->saveSamplesToolStripMenuItem1->Size = System::Drawing::Size(147, 22);
+			   this->saveSamplesToolStripMenuItem1->Text = L"Save Samples";
+			   this->saveSamplesToolStripMenuItem1->Click += gcnew System::EventHandler(this, &MainForm::saveSamplesToolStripMenuItem1_Click);
+			   // 
+			   // weightsToolStripMenuItem
+			   // 
+			   this->weightsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				   this->saveWeightsToolStripMenuItem,
+					   this->loadWeightsToolStripMenuItem
+			   });
+			   this->weightsToolStripMenuItem->Name = L"weightsToolStripMenuItem";
+			   this->weightsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->weightsToolStripMenuItem->Text = L"Weights";
+			   // 
+			   // saveWeightsToolStripMenuItem
+			   // 
+			   this->saveWeightsToolStripMenuItem->Name = L"saveWeightsToolStripMenuItem";
+			   this->saveWeightsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->saveWeightsToolStripMenuItem->Text = L"Save Weights";
+			   this->saveWeightsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::saveWeightsToolStripMenuItem_Click);
+			   // 
+			   // loadWeightsToolStripMenuItem
+			   // 
+			   this->loadWeightsToolStripMenuItem->Name = L"loadWeightsToolStripMenuItem";
+			   this->loadWeightsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->loadWeightsToolStripMenuItem->Text = L"Load Weights";
+			   this->loadWeightsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::loadWeightsToolStripMenuItem_Click);
 			   // 
 			   // processToolStripMenuItem
 			   // 
@@ -1227,63 +1275,15 @@ private: System::Windows::Forms::ToolStripMenuItem^ withMomentToolStripMenuItem;
 	private: System::Void textBox6_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 
-		   //Save Samples
-	private: System::Void saveSamplesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		std::ofstream samplesFile("samples.txt");
-		if (!samplesFile.is_open())
-			richTextBox1->AppendText("Error! \n File could not open.");
 
-		for (int i = 0; i < sizeOfSamples; i++)
-			samplesFile << p[i].x[0] << ',' << p[i].x[1] << ',' << p[i].x[2] << ',' << p[i].classId << "\n";
-
-		richTextBox1->AppendText("Samples Saved.\n");
-		samplesFile.close();
-
-	}//Save Samples
-
-	//Load Samples
-	private: System::Void loadSamplesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-			String^ Spath = openFileDialog1->FileName;
-			std::string path;
-			MarshalString(Spath, path);
-			std::ifstream samplesFile(path);
-			if (!samplesFile.is_open())
-				richTextBox1->AppendText("Error! \n File could not open.");
-
-			std::string myText;
-			char* token;
-			sizeOfSamples = 0;
-			while (getline(samplesFile, myText, '\n'))
-				sizeOfSamples++;
-			p = new Samples[sizeOfSamples];
-
-			samplesFile.clear();
-			samplesFile.seekg(0, std::ios::beg);
-			// Use a while loop together with the getline() function to read the file line by line
-			for (int i = 0; getline(samplesFile, myText, '\n'); i++) {
-				token = strtok((char*)myText.c_str(), ",");
-				for (int j = 0; token; j++)
-				{
-					j != 3 ? p[i].x[j] = atoi(token) : p[i].classId = atoi(token);
-					token = strtok(NULL, ",");
-				}
-			}
-
-			samplesFile.close();
-			this->drawNormalizedPoints(p, sizeOfSamples, pClass, classNumber, 1);
-		}
-
-	}//Load Samples
-
-		   void MarshalString(String^ s, std::string& os) {
-			   using namespace Runtime::InteropServices;
-			   const char* chars =
-				   (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
-			   os = chars;
-			   Marshal::FreeHGlobal(IntPtr((void*)chars));
-		   }
+		void MarshalString(String^ s, std::string& os) {
+			using namespace Runtime::InteropServices;
+			const char* chars =
+				(const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+			os = chars;
+			Marshal::FreeHGlobal(IntPtr((void*)chars));
+	}
 
 	//TEST
 	private: System::Void solutionAreaToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1371,5 +1371,161 @@ private: System::Windows::Forms::ToolStripMenuItem^ withMomentToolStripMenuItem;
 
 
 		}//With Moment
+
+		//Load Samples
+		private: System::Void loadSamplesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				String^ Spath = openFileDialog1->FileName;
+				std::string path;
+				MarshalString(Spath, path);
+				std::ifstream samplesFile(path);
+				if (!samplesFile.is_open())
+					richTextBox1->AppendText("Error! \n File could not open.");
+
+				std::string myText;
+				char* token;
+				sizeOfSamples = 0;
+				while (getline(samplesFile, myText, '\n'))
+					sizeOfSamples++;
+				p = new Samples[sizeOfSamples];
+
+				samplesFile.clear();
+				samplesFile.seekg(0, std::ios::beg);
+				// Use a while loop together with the getline() function to read the file line by line
+				for (int i = 0; getline(samplesFile, myText, '\n'); i++) {
+					token = strtok((char*)myText.c_str(), ",");
+					for (int j = 0; token; j++)
+					{
+						j != 3 ? p[i].x[j] = atoi(token) : p[i].classId = atoi(token);
+						token = strtok(NULL, ",");
+					}
+				}
+
+				samplesFile.close();
+				this->drawNormalizedPoints(p, sizeOfSamples, pClass, classNumber, 1);
+			}
+
+		}//Load Samples
+	
+		//Save Samples
+		private: System::Void saveSamplesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) {
+			std::ofstream samplesFile("data/samples.txt");
+			if (!samplesFile.is_open())
+				richTextBox1->AppendText("Error! \n File could not open.");
+
+			for (int i = 0; i < sizeOfSamples; i++)
+				samplesFile << p[i].x[0] << ',' << p[i].x[1] << ',' << p[i].x[2] << ',' << p[i].classId << "\n";
+
+			richTextBox1->AppendText("Samples Saved.\n");
+			samplesFile.close();
+		
+		}//Save Samples
+
+		//Save Weights
+		private: System::Void saveWeightsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (saveFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				SaveFileDialog().FileName = "W_Weight";
+				String^ Spath = SaveFileDialog().FileName;
+				std::string path;
+				MarshalString(Spath, path);
+
+				path = path + std::to_string(classNumber) + 'x' + std::to_string(hiddenNeuronNumber) + ".txt";
+
+				std::ofstream WeightsFile(path);
+				if (!WeightsFile.is_open())
+					richTextBox1->AppendText("Error! \n File could not open.");
+
+				//first letter to be V or W
+				if (path[0] == 'V')
+				{
+					for (int i = 0; i < hiddenNeuronNumber; i++)
+						for (int j = 0; j < 3; j++)
+							WeightsFile << DeltaL->v[i * 3 + j] << ',';
+				}
+				else if (path[0] == 'W')
+				{
+					for (int i = 0; i < classNumber; i++)
+						for (int j = 0; j < (hiddenNeuronNumber + 1); j++)
+							WeightsFile << DeltaL->w[i * (hiddenNeuronNumber + 1) + j] << ',';
+				}
+
+
+				WeightsFile.close();
+				//this->drawTrainLine(hiddenNeuronNumber, 1);
+				richTextBox1->AppendText("V Weights Saved.\n");
+			}
+			
+		}//Save Weights
+
+		//Load Weights
+		private: System::Void loadWeightsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+			if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				String^ Spath = openFileDialog1->FileName;
+				std::string path;
+				MarshalString(Spath, path);
+
+				std::ifstream WeightsFile(path);
+				if (!WeightsFile.is_open())
+					richTextBox1->AppendText("Error! \n File could not open.");
+			
+				std::string myText;
+				char* token;
+
+				//determine size used to filename
+				//first letter to be V or W
+				if (path[0] == 'V')
+				{
+					hiddenNeuronNumber = 0;
+					while (getline(WeightsFile, myText, ','))
+						hiddenNeuronNumber++;
+					DeltaL->v = new double[hiddenNeuronNumber];
+					hiddenNeuronNumber /= 3;
+
+					WeightsFile.clear();
+					WeightsFile.seekg(0, std::ios::beg);
+
+					for (int i = 0; getline(WeightsFile, myText, ','); i++)
+						DeltaL->v[i] = stod(myText);
+				}
+				else if (path[0] == 'W')
+				{
+					hiddenNeuronNumber = 0;
+					while (getline(WeightsFile, myText, ','))
+						hiddenNeuronNumber++;
+					DeltaL->v = new double[hiddenNeuronNumber * 3];
+					DeltaL->w = new double[(hiddenNeuronNumber+1) * classNumber];
+
+
+					WeightsFile.clear();
+					WeightsFile.seekg(0, std::ios::beg);
+
+					for (int i = 0; getline(WeightsFile, myText, ','); i++)
+						DeltaL->v[i] = stod(myText);
+				}
+
+
+				sizeOfSamples = 0;
+				while (getline(WeightsFile, myText, '\n'))
+					sizeOfSamples++;
+				p = new Samples[sizeOfSamples];
+
+				WeightsFile.clear();
+				WeightsFile.seekg(0, std::ios::beg);
+				// Use a while loop together with the getline() function to read the file line by line
+				for (int i = 0; getline(WeightsFile, myText, '\n'); i++) {
+					token = strtok((char*)myText.c_str(), ",");
+					for (int j = 0; token; j++)
+					{
+						j != 3 ? p[i].x[j] = atoi(token) : p[i].classId = atoi(token);
+						token = strtok(NULL, ",");
+					}
+				}
+
+
+				WeightsFile.close();
+				//this->drawTrainLine(hiddenNeuronNumber, 1);
+				richTextBox1->AppendText("V Weights Saved.\n");
+			}
+		}//Load Weights
 };
 }
