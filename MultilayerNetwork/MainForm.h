@@ -10,6 +10,7 @@
 #include "DeltaLearning.h"
 
 
+
 namespace MultilayerNetwork {
 
 	using namespace System;
@@ -142,11 +143,12 @@ private: System::Windows::Forms::ToolStripMenuItem^ saveSamplesToolStripMenuItem
 private: System::Windows::Forms::ToolStripMenuItem^ weightsToolStripMenuItem;
 private: System::Windows::Forms::ToolStripMenuItem^ saveWeightsToolStripMenuItem;
 private: System::Windows::Forms::ToolStripMenuItem^ loadWeightsToolStripMenuItem;
+private: System::Windows::Forms::ToolStripMenuItem^ trainToolStripMenuItem;
 private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 
 
 
-	private: System::Windows::Forms::ToolStripMenuItem^ trainToolStripMenuItem;
+
 
 
 		   /// </summary>
@@ -174,9 +176,9 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->processToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->initialToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->randomlyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			   this->trainToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->deltaTrainToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->withMomentToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			   this->trainToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->testToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->solutionAreaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->showSamplesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -286,7 +288,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 					   this->saveSamplesToolStripMenuItem1
 			   });
 			   this->samplesToolStripMenuItem->Name = L"samplesToolStripMenuItem";
-			   this->samplesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->samplesToolStripMenuItem->Size = System::Drawing::Size(118, 22);
 			   this->samplesToolStripMenuItem->Text = L"Samples";
 			   // 
 			   // loadSamplesToolStripMenuItem1
@@ -310,28 +312,28 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 					   this->loadWeightsToolStripMenuItem
 			   });
 			   this->weightsToolStripMenuItem->Name = L"weightsToolStripMenuItem";
-			   this->weightsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->weightsToolStripMenuItem->Size = System::Drawing::Size(118, 22);
 			   this->weightsToolStripMenuItem->Text = L"Weights";
 			   // 
 			   // saveWeightsToolStripMenuItem
 			   // 
 			   this->saveWeightsToolStripMenuItem->Name = L"saveWeightsToolStripMenuItem";
-			   this->saveWeightsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->saveWeightsToolStripMenuItem->Size = System::Drawing::Size(146, 22);
 			   this->saveWeightsToolStripMenuItem->Text = L"Save Weights";
 			   this->saveWeightsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::saveWeightsToolStripMenuItem_Click);
 			   // 
 			   // loadWeightsToolStripMenuItem
 			   // 
 			   this->loadWeightsToolStripMenuItem->Name = L"loadWeightsToolStripMenuItem";
-			   this->loadWeightsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->loadWeightsToolStripMenuItem->Size = System::Drawing::Size(146, 22);
 			   this->loadWeightsToolStripMenuItem->Text = L"Load Weights";
 			   this->loadWeightsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::loadWeightsToolStripMenuItem_Click);
 			   // 
 			   // processToolStripMenuItem
 			   // 
-			   this->processToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+			   this->processToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				   this->initialToolStripMenuItem,
-					   this->trainToolStripMenuItem, this->deltaTrainToolStripMenuItem, this->testToolStripMenuItem
+					   this->deltaTrainToolStripMenuItem, this->testToolStripMenuItem
 			   });
 			   this->processToolStripMenuItem->Name = L"processToolStripMenuItem";
 			   this->processToolStripMenuItem->Size = System::Drawing::Size(59, 26);
@@ -341,7 +343,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   // 
 			   this->initialToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->randomlyToolStripMenuItem });
 			   this->initialToolStripMenuItem->Name = L"initialToolStripMenuItem";
-			   this->initialToolStripMenuItem->Size = System::Drawing::Size(160, 22);
+			   this->initialToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			   this->initialToolStripMenuItem->Text = L"Initial";
 			   // 
 			   // randomlyToolStripMenuItem
@@ -349,28 +351,31 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->randomlyToolStripMenuItem->Name = L"randomlyToolStripMenuItem";
 			   this->randomlyToolStripMenuItem->Size = System::Drawing::Size(128, 22);
 			   this->randomlyToolStripMenuItem->Text = L"Randomly";
-			   // 
-			   // trainToolStripMenuItem
-			   // 
-			   this->trainToolStripMenuItem->Name = L"trainToolStripMenuItem";
-			   this->trainToolStripMenuItem->Size = System::Drawing::Size(160, 22);
-			   this->trainToolStripMenuItem->Text = L"Perceptron Train";
-			   this->trainToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::trainToolStripMenuItem_Click);
+			   this->randomlyToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::randomlyToolStripMenuItem_Click);
 			   // 
 			   // deltaTrainToolStripMenuItem
 			   // 
-			   this->deltaTrainToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->withMomentToolStripMenuItem });
+			   this->deltaTrainToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				   this->withMomentToolStripMenuItem,
+					   this->trainToolStripMenuItem
+			   });
 			   this->deltaTrainToolStripMenuItem->Name = L"deltaTrainToolStripMenuItem";
-			   this->deltaTrainToolStripMenuItem->Size = System::Drawing::Size(160, 22);
-			   this->deltaTrainToolStripMenuItem->Text = L"Delta Train";
-			   this->deltaTrainToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::deltaTrainToolStripMenuItem_Click);
+			   this->deltaTrainToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->deltaTrainToolStripMenuItem->Text = L"Train";
 			   // 
 			   // withMomentToolStripMenuItem
 			   // 
 			   this->withMomentToolStripMenuItem->Name = L"withMomentToolStripMenuItem";
-			   this->withMomentToolStripMenuItem->Size = System::Drawing::Size(148, 22);
-			   this->withMomentToolStripMenuItem->Text = L"With Moment";
+			   this->withMomentToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->withMomentToolStripMenuItem->Text = L"Train With Moment";
 			   this->withMomentToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::withMomentToolStripMenuItem_Click);
+			   // 
+			   // trainToolStripMenuItem
+			   // 
+			   this->trainToolStripMenuItem->Name = L"trainToolStripMenuItem";
+			   this->trainToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->trainToolStripMenuItem->Text = L"Train";
+			   this->trainToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::trainToolStripMenuItem_Click_1);
 			   // 
 			   // testToolStripMenuItem
 			   // 
@@ -379,7 +384,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 					   this->showSamplesToolStripMenuItem, this->showWeightsToolStripMenuItem
 			   });
 			   this->testToolStripMenuItem->Name = L"testToolStripMenuItem";
-			   this->testToolStripMenuItem->Size = System::Drawing::Size(160, 22);
+			   this->testToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			   this->testToolStripMenuItem->Text = L"Test";
 			   // 
 			   // solutionAreaToolStripMenuItem
@@ -1036,7 +1041,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 
 		//Adding point to table.
 		Pen^ pen = gcnew Pen(Color::FromArgb(pClass[selectedClass].color.r, pClass[selectedClass].color.g, pClass[selectedClass].color.b), 3.0f);
-		pictureBox1->CreateGraphics()->DrawEllipse(pen, temp_x, temp_y, 2, 2);
+		pictureBox1->CreateGraphics()->DrawEllipse(pen, temp_x, temp_y, 3, 3);
 
 
 	}//DrawPoint
@@ -1044,23 +1049,6 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 
 	//Perceptron Train
 	private: System::Void trainToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-
-		this->richTextBox1->BackColor = Color::Red;
-
-		//PerceptronLearning* learningNetwork = new PerceptronLearning();
-		//int cycleCount = 0;
-
-		//if (sizeOfSamples != 0) {
-		//	learningNetwork->Train(p, w, sizeOfSamples, pClass, classNumber, cycleCount);
-		//	drawTrainLine(pClass, classNumber, 1);
-		//	this->textBox5->Text = Convert::ToString(cycleCount);
-		//}
-		//else
-		//	MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-
-		////w[0] = w[1] = w[2] = 0;
-
-		//this->richTextBox1->BackColor = Color::Turquoise;
 
 	}//Perceptron Train
 
@@ -1087,7 +1075,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 
 
 
-			  //CLEAN
+	//CLEAN
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 		sizeOfSamples = 0;
 		for (int i = 0; i < classNumber; i++)
@@ -1109,35 +1097,9 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 
 
 
-	//Delta Train
-	private: System::Void deltaTrainToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	//TRAIN
+	private: System::Void trainToolStripMenuItem_Click_1(System::Object^ sender, System::EventArgs^ e) {
 		this->richTextBox1->BackColor = Color::Red;
-
-		DeltaL = new DeltaLearning();
-		DeltaL->setLayerCount(Convert::ToInt32(numericUpDown2->Value));
-		hiddenNeuronNumber = Convert::ToInt32(numericUpDown3->Value);
-		DeltaL->v = (double*)malloc(hiddenNeuronNumber * (2 + 1) * sizeof(double));
-		DeltaL->v_color = (int*)malloc(hiddenNeuronNumber * 3 * sizeof(int)); // * RGB
-		DeltaL->y = (double*)malloc((hiddenNeuronNumber + 1) * sizeof(double)); //+1 : BIAS
-		DeltaL->w = (double*)malloc((hiddenNeuronNumber + 1) * classNumber * sizeof(double));
-		DeltaL->o = (double*)malloc(classNumber * sizeof(double));
-		DeltaL->d = (int*)malloc(classNumber * sizeof(int));
-		double* Do = (double*)malloc(classNumber * sizeof(double));
-		double* Dy = (double*)malloc(hiddenNeuronNumber * sizeof(double));
-		float mu1 = 0.9, mu2 = 0.9;
-
-
-		richTextBox1->AppendText("W weights initializing\n");
-		for (int i = 0; i < hiddenNeuronNumber + 1; i++)
-			for (int j = 0; j < classNumber; j++)
-				DeltaL->w[i * classNumber + j] = ((double)rand() / RAND_MAX);
-
-		richTextBox1->AppendText("V weights initializing\n");
-		for (int i = 0; i < hiddenNeuronNumber; i++)
-			for (int j = 0; j < (2 + 1); j++) {
-				DeltaL->v[i * 3 + j] = ((double)rand() / RAND_MAX);
-				DeltaL->v_color[i * 3 + j] = (int)rand() % 255;
-			}
 
 		if (sizeOfSamples == 0) {
 			MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
@@ -1145,8 +1107,6 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 		}
 		
 		//Son aðýrlýklarý w/r iþlemi yap
-
-		//TRAIN
 		long long int cycleCount = 0;
 		double error = 1.0, totalError;
 		while (error > 0.001) {
@@ -1158,7 +1118,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 				DeltaL->FeedForward(p[i], hiddenNeuronNumber, classNumber);
 
 				/*	 BACK PROPAGATION	*/
-				DeltaL->BackPropagation(p[i].x, hiddenNeuronNumber, classNumber, Do, Dy, totalError);
+				DeltaL->BackPropagation(p[i].x, hiddenNeuronNumber, classNumber, totalError);
 			}
 			error = sqrt(totalError) / (sizeOfSamples * classNumber);
 			cycleCount++;
@@ -1178,14 +1138,11 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 		}
 
 		//drawTrainLine(hiddenNeuronNumber, 20);
-
-
-		//w[0] = w[1] = w[2] = 0;
 		this->richTextBox1->BackColor = Color::Turquoise;
 		textBox1->Text = Convert::ToString(error);
 		textBox5->Text = Convert::ToString(cycleCount);
 
-	}//Delta Train
+	}//TRAIN
 
 
 
@@ -1227,7 +1184,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			for (int j = 0; j < classNumber; j++)
 				if (point[i].classId == sc[j].classId)
 					pen1->Color = Color::FromArgb(sc[j].color.r, sc[j].color.g, sc[j].color.b);
-			this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 2, 2);
+			this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 3, 3);
 		}
 	}//Draw Normalized points
 
@@ -1235,14 +1192,13 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 	private: System::Void numericUpDown1_ValueChanged(System::Object^ sender, System::EventArgs^ e) {}
 
 
-		   //OK BUTTON
+	//OK BUTTON
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 		int dimension = 2;
 		classNumber = Convert::ToInt32(numericUpDown1->Value);
 		pClass = new SampleClass[classNumber];
 		sizeOfClass = new int[classNumber];
 
-		richTextBox1->AppendText("Assigned random values.\n");
 		for (int i = 0; i < classNumber; i++)
 		{
 			pClass[i].classId = i;
@@ -1252,6 +1208,18 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			for (int j = 0; j < hiddenNeuronNumber; j++)
 				learningNetwork->w[i * hiddenNeuronNumber + j] = ((double)rand() / RAND_MAX);
 		}
+
+		DeltaL->setLayerCount(Convert::ToInt32(numericUpDown2->Value));
+		hiddenNeuronNumber = Convert::ToInt32(numericUpDown3->Value);
+		DeltaL->v = (double*)malloc(hiddenNeuronNumber * (2 + 1) * sizeof(double));
+		DeltaL->vRecent = (double*)calloc(hiddenNeuronNumber * (2 + 1) , sizeof(double));
+		DeltaL->v_color = (int*)malloc(hiddenNeuronNumber * 3 * sizeof(int)); // * RGB
+		DeltaL->y = (double*)malloc((hiddenNeuronNumber + 1) * sizeof(double)); //+1 : BIAS
+		DeltaL->w = (double*)malloc((hiddenNeuronNumber + 1) * classNumber * sizeof(double));
+		DeltaL->wRecent = (double*)calloc((hiddenNeuronNumber + 1) * classNumber, sizeof(double));
+		DeltaL->o = (double*)malloc(classNumber * sizeof(double));
+		DeltaL->d = (int*)malloc(classNumber * sizeof(int));
+
 		this->panel5->Visible = TRUE;
 		this->panel6->Visible = TRUE;
 		this->panel7->Visible = TRUE;
@@ -1302,6 +1270,8 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 				pxlClass = DeltaL->Test(testInput->x, hiddenNeuronNumber, classNumber);
 				surface->SetPixel(x, y, Color::FromArgb(pClass[pxlClass].color.r, pClass[pxlClass].color.g, pClass[pxlClass].color.b));
 			}
+
+
 	}//TEST
 
 	//SHOW TRAIN SAMPLES
@@ -1316,7 +1286,13 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			for (int j = 0; j < classNumber; j++)
 				if (originalSamples[i].classId == pClass[j].classId)
 					pen1->Color = Color::FromArgb(pClass[j].color.r, pClass[j].color.g, pClass[j].color.b);
-			this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 2, 2);
+			this->pictureBox1->CreateGraphics()->DrawEllipse(pen1, tempX, tempY, 3, 3);
+		}
+		for (int i = 0; i < sizeOfSamples; i++) {
+			p[i].x[0] = originalSamples[i].x[0];
+			p[i].x[1] = originalSamples[i].x[1];
+			p[i].x[2] = originalSamples[i].x[2];
+			p[i].classId = originalSamples[i].classId;
 		}
 
 	}
@@ -1365,12 +1341,57 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 		}
 	}
 
-		//With Moment
-		private: System::Void withMomentToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	//Train With Moment
+	private: System::Void withMomentToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		this->richTextBox1->BackColor = Color::Red;
+
+		if (sizeOfSamples == 0) {
+			MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+			return;
+		}
+
+		//Son aðýrlýklarý w/r iþlemi yap
+		long long int cycleCount = 0;
+		double error = 1.0, totalError;
+		while (error > 0.001) {
+
+			totalError = 0.0;
+			for (int i = 0; i < sizeOfSamples; i++) {
+
+				/*	 FEED FORWARD	*/
+				DeltaL->FeedForward(p[i], hiddenNeuronNumber, classNumber);
+
+				/*	 BACK PROPAGATION	*/
+				DeltaL->BackPropagationWithMoment(p[i].x, hiddenNeuronNumber, classNumber, totalError);
+			}
+			error = sqrt(totalError) / (sizeOfSamples * classNumber);
+			cycleCount++;
+
+			//drawing error 
+			//textBox1->Text = Convert::ToString(error); textBox1->Refresh();
+			//textBox5->Text = Convert::ToString(cycleCount); textBox5->Refresh();
+			//chart1->Series["Error"]->Points->AddXY(cycleCount, error); chart1->Refresh();
+			//this->richTextBox1->AppendText("Loss: " + Convert::ToString(error) + "\tcycle: " + Convert::ToString(cycleCount) + "\n");
+			//this->richTextBox1->ScrollToCaret(); richTextBox1->Refresh();
+
+
+			////draw new V values
+			//drawTrainLine(hiddenNeuronNumber, 20);
+			//this->pictureBox1->CreateGraphics()->Clear(Color::FromArgb(30, 30, 30));
+			//this->pictureBox1_Paint(this, f);
+		}
+
+		//drawTrainLine(hiddenNeuronNumber, 20);
+		this->richTextBox1->BackColor = Color::Turquoise;
+		textBox1->Text = Convert::ToString(error);
+		textBox5->Text = Convert::ToString(cycleCount);
+
+		
 
 
 
-		}//With Moment
+	}//With Moment
 
 		//Load Samples
 		private: System::Void loadSamplesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1423,17 +1444,19 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 
 		//Save Weights
 		private: System::Void saveWeightsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+			
+				saveFileDialog1->FileName = "W_Weight";
 			if (saveFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-				SaveFileDialog().FileName = "W_Weight";
-				String^ Spath = SaveFileDialog().FileName;
 				std::string path;
-				MarshalString(Spath, path);
+				MarshalString(saveFileDialog1->FileName, path);
 
 				path = path + std::to_string(classNumber) + 'x' + std::to_string(hiddenNeuronNumber) + ".txt";
 
 				std::ofstream WeightsFile(path);
 				if (!WeightsFile.is_open())
 					richTextBox1->AppendText("Error! \n File could not open.");
+				
+				int len = path.length();
 
 				//first letter to be V or W
 				if (path[0] == 'V')
@@ -1441,18 +1464,17 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 					for (int i = 0; i < hiddenNeuronNumber; i++)
 						for (int j = 0; j < 3; j++)
 							WeightsFile << DeltaL->v[i * 3 + j] << ',';
+					richTextBox1->AppendText("V Weights Saved.\n");
 				}
 				else if (path[0] == 'W')
 				{
 					for (int i = 0; i < classNumber; i++)
 						for (int j = 0; j < (hiddenNeuronNumber + 1); j++)
 							WeightsFile << DeltaL->w[i * (hiddenNeuronNumber + 1) + j] << ',';
+					richTextBox1->AppendText("W Weights Saved.\n");
 				}
 
-
 				WeightsFile.close();
-				//this->drawTrainLine(hiddenNeuronNumber, 1);
-				richTextBox1->AppendText("V Weights Saved.\n");
 			}
 			
 		}//Save Weights
@@ -1460,16 +1482,16 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 		//Load Weights
 		private: System::Void loadWeightsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-				String^ Spath = openFileDialog1->FileName;
+				
 				std::string path;
-				MarshalString(Spath, path);
+				MarshalString(openFileDialog1->FileName, path);
 
 				std::ifstream WeightsFile(path);
 				if (!WeightsFile.is_open())
 					richTextBox1->AppendText("Error! \n File could not open.");
-			
+				
+				MarshalString(openFileDialog1->SafeFileName, path);
 				std::string myText;
-				char* token;
 
 				//determine size used to filename
 				//first letter to be V or W
@@ -1486,13 +1508,16 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 
 					for (int i = 0; getline(WeightsFile, myText, ','); i++)
 						DeltaL->v[i] = stod(myText);
+
+					this->drawTrainLine(hiddenNeuronNumber, 1);
+					richTextBox1->AppendText("V Weights loaded.\n");
 				}
 				else if (path[0] == 'W')
 				{
-					hiddenNeuronNumber = 0;
+					classNumber = 0;
 					while (getline(WeightsFile, myText, ','))
-						hiddenNeuronNumber++;
-					DeltaL->v = new double[hiddenNeuronNumber * 3];
+						classNumber++;
+					classNumber /= (hiddenNeuronNumber + 1);
 					DeltaL->w = new double[(hiddenNeuronNumber+1) * classNumber];
 
 
@@ -1501,31 +1526,34 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 
 					for (int i = 0; getline(WeightsFile, myText, ','); i++)
 						DeltaL->v[i] = stod(myText);
+
+					richTextBox1->AppendText("W Weights loaded.\n");
 				}
-
-
-				sizeOfSamples = 0;
-				while (getline(WeightsFile, myText, '\n'))
-					sizeOfSamples++;
-				p = new Samples[sizeOfSamples];
-
-				WeightsFile.clear();
-				WeightsFile.seekg(0, std::ios::beg);
-				// Use a while loop together with the getline() function to read the file line by line
-				for (int i = 0; getline(WeightsFile, myText, '\n'); i++) {
-					token = strtok((char*)myText.c_str(), ",");
-					for (int j = 0; token; j++)
-					{
-						j != 3 ? p[i].x[j] = atoi(token) : p[i].classId = atoi(token);
-						token = strtok(NULL, ",");
-					}
-				}
-
 
 				WeightsFile.close();
-				//this->drawTrainLine(hiddenNeuronNumber, 1);
-				richTextBox1->AppendText("V Weights Saved.\n");
+
+				
 			}
 		}//Load Weights
+
+	//RANDOMLY
+	private: System::Void randomlyToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		richTextBox1->AppendText("W weights initializing\n");
+		for (int i = 0; i < hiddenNeuronNumber + 1; i++)
+			for (int j = 0; j < classNumber; j++)
+				DeltaL->w[i * classNumber + j] = ((double)rand() / RAND_MAX);
+
+		richTextBox1->AppendText("V weights initializing\n");
+		for (int i = 0; i < hiddenNeuronNumber; i++)
+			for (int j = 0; j < (2 + 1); j++) {
+				DeltaL->v[i * 3 + j] = ((double)rand() / RAND_MAX);
+				DeltaL->v_color[i * 3 + j] = (int)rand() % 255;
+			}
+
+	}//RANDOMLY
+
+
+
 };
 }
