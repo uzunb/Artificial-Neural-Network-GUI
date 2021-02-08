@@ -16,7 +16,7 @@ Classification is made in 2-dimensional space with artificial neural networks le
 ***
 
 
-### - Single Category Single Layer Neural Network
+### - SingleCategory SingleLayer Neural Network
     - discrete (Perceptron Learning Rule)
     - continuos (Delta Learning Rule)
     
@@ -26,7 +26,7 @@ DISCRETE                   |  CONTINOUS
     
 ------
 
-### -Multi Category Single Layer Neural Network 
+### - MultiCategory SingleLayer Neural Network 
     - Discrete (Perceptron Learning Rule) 
     - Continous (Delta Learning Rule)
     
@@ -36,7 +36,7 @@ DISCRETE                   |  CONTINOUS
 
 ------
 
-### Multi Layer Neural Network
+### MultiLayer Neural Network
     - Error Back Propagation
     
 MULTILAYER                
