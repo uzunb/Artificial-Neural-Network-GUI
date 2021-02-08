@@ -13,18 +13,17 @@ PerceptronLearning::~PerceptronLearning()
     
 }
 
-void PerceptronLearning::Train(Samples* input, double* w, int numberOfInputs, SampleClass* cls, int numberOfClasses, int &cycleCount)
+void PerceptronLearning::Train(Samples* input, double* w, int numberOfInputs, SampleClass* cls, int numberOfClasses, int &epoch, double &loss)
 {
-    bool isUpdated;
     int d, output;
-    double net, temp, error;
+    double net, temp;
 
     //For each class weights
     for (int clsNumber = 0; clsNumber < numberOfClasses; clsNumber++)
     {
         do
         {
-            error = 0;
+            loss = 0;
             // until network give not error for all samples
             for (int i = 0; i < numberOfInputs; i++)
             {
@@ -43,11 +42,11 @@ void PerceptronLearning::Train(Samples* input, double* w, int numberOfInputs, Sa
                     cls[clsNumber].w[1] = cls[clsNumber].w[1] + temp * input[i].x2;
                     cls[clsNumber].w[2] = cls[clsNumber].w[2] + temp * BIAS;
 
-                    error += 0.5 * (d - output) * (d - output);
+                    loss += 0.5 * (d - output) * (d - output);
                 }
             }
-            ++cycleCount;
-        } while (error > 0.05);
+            ++epoch;
+        } while (loss > 0.05);
     }
 }
 

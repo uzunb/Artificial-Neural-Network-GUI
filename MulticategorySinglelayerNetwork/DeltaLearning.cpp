@@ -35,11 +35,10 @@ double DeltaLearning::getDelta()
 
 }
 
-void DeltaLearning::Train(Samples* input, double* w, int inputCount, SampleClass* cls, int numberOfClass, int& jeneration)
+void DeltaLearning::Train(Samples* input, double* w, int inputCount, SampleClass* cls, int numberOfClass, int& epoch, double &loss)
 {
-    bool isUpdated;
     int d;
-    double net, temp, output, derivatedOutput, epoch, error, errorMax = 0.9;
+    double net, temp, output, derivatedOutput;
 
     //For each class weights
     for (int clsNumber = 0; clsNumber < numberOfClass; clsNumber++)
@@ -47,7 +46,7 @@ void DeltaLearning::Train(Samples* input, double* w, int inputCount, SampleClass
         // until network give not error for all samples
         do
         {
-            isUpdated = false;
+            loss = 0.0;
             for (int i = 0; i < inputCount; i++)
             {
                 //expected value
@@ -60,20 +59,15 @@ void DeltaLearning::Train(Samples* input, double* w, int inputCount, SampleClass
                 output = this->sigmoid(net, this->getDelta());
                 derivatedOutput = this->derivatedSigmoid(output, d);
 
-                error = 0.5 * pow(d - output, 2);
-                if (error > 0.1) {
-                    //w^n+1 = w^n + c * ( d - sgn(net) ) * x
-                    temp = 0.5 * this->getC() * (d - output) * derivatedOutput;
-                    cls[clsNumber].w[0] += temp * input[i].x1;
-                    cls[clsNumber].w[1] += temp * input[i].x2;
-                    cls[clsNumber].w[2] += temp * BIAS;
+                //w^n+1 = w^n + c * ( d - sgn(net) ) * x
+                temp = 0.5 * this->getC() * (d - output) * derivatedOutput;
+                cls[clsNumber].w[0] += temp * input[i].x1;
+                cls[clsNumber].w[1] += temp * input[i].x2;
+                cls[clsNumber].w[2] += temp * BIAS;
 
-                    isUpdated = true;
-                }
+                loss += 0.5 * pow(d - output, 2);
             }
-            ++jeneration;
-
-
-        } while (isUpdated);
+            ++epoch;
+        } while (loss > 0.01);
     }
 }

@@ -22,7 +22,7 @@ public:
 	int* getOutput();
 	double getC();
 
-	virtual void Train(Samples* input, double* output, int inputCount, SampleClass* cls, int numberOfClass, int& jeneration) = 0;
+	virtual void Train(Samples* input, double* output, int inputCount, SampleClass* cls, int numberOfClass, int& epoch, double &loss) = 0;
 
 	void BatchNormalizing(Samples* input, int inputCount);
 

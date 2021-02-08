@@ -19,6 +19,7 @@ namespace MultilayerNetwork {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Summary for MainForm
@@ -85,7 +86,7 @@ namespace MultilayerNetwork {
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Panel^ panel3;
 	private: System::Windows::Forms::BindingSource^ bindingSource2;
-	private: System::Windows::Forms::Button^ button1;
+
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Panel^ panel5;
 	private: System::Windows::Forms::Panel^ panel6;
@@ -162,9 +163,9 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 		   void InitializeComponent(void)
 		   {
 			   this->components = (gcnew System::ComponentModel::Container());
-			   System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			   System::Windows::Forms::DataVisualization::Charting::Legend^ legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			   System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			   System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea2 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			   System::Windows::Forms::DataVisualization::Charting::Legend^ legend2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			   System::Windows::Forms::DataVisualization::Charting::Series^ series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			   this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			   this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			   this->samplesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -224,7 +225,6 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->panel3 = (gcnew System::Windows::Forms::Panel());
 			   this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			   this->bindingSource2 = (gcnew System::Windows::Forms::BindingSource(this->components));
-			   this->button1 = (gcnew System::Windows::Forms::Button());
 			   this->panel8 = (gcnew System::Windows::Forms::Panel());
 			   this->button4 = (gcnew System::Windows::Forms::Button());
 			   this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
@@ -266,7 +266,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			   this->menuStrip1->Name = L"menuStrip1";
 			   this->menuStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
-			   this->menuStrip1->Size = System::Drawing::Size(1793, 30);
+			   this->menuStrip1->Size = System::Drawing::Size(1784, 30);
 			   this->menuStrip1->TabIndex = 1;
 			   this->menuStrip1->Text = L"menuStrip1";
 			   // 
@@ -343,7 +343,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   // 
 			   this->initialToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->randomlyToolStripMenuItem });
 			   this->initialToolStripMenuItem->Name = L"initialToolStripMenuItem";
-			   this->initialToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->initialToolStripMenuItem->Size = System::Drawing::Size(103, 22);
 			   this->initialToolStripMenuItem->Text = L"Initial";
 			   // 
 			   // randomlyToolStripMenuItem
@@ -360,20 +360,20 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 					   this->trainToolStripMenuItem
 			   });
 			   this->deltaTrainToolStripMenuItem->Name = L"deltaTrainToolStripMenuItem";
-			   this->deltaTrainToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->deltaTrainToolStripMenuItem->Size = System::Drawing::Size(103, 22);
 			   this->deltaTrainToolStripMenuItem->Text = L"Train";
 			   // 
 			   // withMomentToolStripMenuItem
 			   // 
 			   this->withMomentToolStripMenuItem->Name = L"withMomentToolStripMenuItem";
-			   this->withMomentToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->withMomentToolStripMenuItem->Size = System::Drawing::Size(176, 22);
 			   this->withMomentToolStripMenuItem->Text = L"Train With Moment";
 			   this->withMomentToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::withMomentToolStripMenuItem_Click);
 			   // 
 			   // trainToolStripMenuItem
 			   // 
 			   this->trainToolStripMenuItem->Name = L"trainToolStripMenuItem";
-			   this->trainToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->trainToolStripMenuItem->Size = System::Drawing::Size(176, 22);
 			   this->trainToolStripMenuItem->Text = L"Train";
 			   this->trainToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::trainToolStripMenuItem_Click_1);
 			   // 
@@ -384,7 +384,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 					   this->showSamplesToolStripMenuItem, this->showWeightsToolStripMenuItem
 			   });
 			   this->testToolStripMenuItem->Name = L"testToolStripMenuItem";
-			   this->testToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			   this->testToolStripMenuItem->Size = System::Drawing::Size(103, 22);
 			   this->testToolStripMenuItem->Text = L"Test";
 			   // 
 			   // solutionAreaToolStripMenuItem
@@ -433,6 +433,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->textBox1->Name = L"textBox1";
 			   this->textBox1->Size = System::Drawing::Size(203, 22);
 			   this->textBox1->TabIndex = 9;
+			   this->textBox1->Visible = false;
 			   // 
 			   // label3
 			   // 
@@ -444,8 +445,9 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->label3->Name = L"label3";
 			   this->label3->Size = System::Drawing::Size(203, 33);
 			   this->label3->TabIndex = 8;
-			   this->label3->Text = L"Error";
+			   this->label3->Text = L"Loss";
 			   this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			   this->label3->Visible = false;
 			   // 
 			   // groupBox3
 			   // 
@@ -557,7 +559,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->label8->Name = L"label8";
 			   this->label8->Size = System::Drawing::Size(203, 33);
 			   this->label8->TabIndex = 7;
-			   this->label8->Text = L"Total Cycle";
+			   this->label8->Text = L"Epoch";
 			   this->label8->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			   // 
 			   // panel6
@@ -812,7 +814,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->panel2->Dock = System::Windows::Forms::DockStyle::Top;
 			   this->panel2->Location = System::Drawing::Point(203, 30);
 			   this->panel2->Name = L"panel2";
-			   this->panel2->Size = System::Drawing::Size(1590, 561);
+			   this->panel2->Size = System::Drawing::Size(1581, 561);
 			   this->panel2->TabIndex = 3;
 			   // 
 			   // chart1
@@ -822,21 +824,21 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->chart1->BackSecondaryColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			   this->chart1->BorderlineColor = System::Drawing::Color::Maroon;
-			   chartArea1->Name = L"ChartArea1";
-			   this->chart1->ChartAreas->Add(chartArea1);
+			   chartArea2->Name = L"ChartArea1";
+			   this->chart1->ChartAreas->Add(chartArea2);
 			   this->chart1->Dock = System::Windows::Forms::DockStyle::Fill;
-			   legend1->Name = L"Legend1";
-			   this->chart1->Legends->Add(legend1);
+			   legend2->Name = L"Legend1";
+			   this->chart1->Legends->Add(legend2);
 			   this->chart1->Location = System::Drawing::Point(1000, 0);
 			   this->chart1->Name = L"chart1";
-			   series1->BorderColor = System::Drawing::Color::Transparent;
-			   series1->ChartArea = L"ChartArea1";
-			   series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
-			   series1->Color = System::Drawing::Color::Blue;
-			   series1->Legend = L"Legend1";
-			   series1->Name = L"Error";
-			   this->chart1->Series->Add(series1);
-			   this->chart1->Size = System::Drawing::Size(590, 561);
+			   series2->BorderColor = System::Drawing::Color::Transparent;
+			   series2->ChartArea = L"ChartArea1";
+			   series2->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
+			   series2->Color = System::Drawing::Color::Blue;
+			   series2->Legend = L"Legend1";
+			   series2->Name = L"Loss";
+			   this->chart1->Series->Add(series2);
+			   this->chart1->Size = System::Drawing::Size(581, 561);
 			   this->chart1->TabIndex = 1;
 			   this->chart1->Text = L"chart1";
 			   // 
@@ -859,7 +861,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->panel3->Dock = System::Windows::Forms::DockStyle::Bottom;
 			   this->panel3->Location = System::Drawing::Point(203, 591);
 			   this->panel3->Name = L"panel3";
-			   this->panel3->Size = System::Drawing::Size(1590, 150);
+			   this->panel3->Size = System::Drawing::Size(1581, 150);
 			   this->panel3->TabIndex = 4;
 			   // 
 			   // richTextBox1
@@ -872,34 +874,15 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->richTextBox1->ForeColor = System::Drawing::Color::White;
 			   this->richTextBox1->Location = System::Drawing::Point(0, 0);
 			   this->richTextBox1->Name = L"richTextBox1";
-			   this->richTextBox1->Size = System::Drawing::Size(1590, 150);
+			   this->richTextBox1->Size = System::Drawing::Size(1581, 150);
 			   this->richTextBox1->TabIndex = 0;
 			   this->richTextBox1->Text = L"";
-			   // 
-			   // button1
-			   // 
-			   this->button1->BackColor = System::Drawing::Color::DarkRed;
-			   this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			   this->button1->Dock = System::Windows::Forms::DockStyle::Right;
-			   this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->button1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(162)));
-			   this->button1->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
-			   this->button1->Location = System::Drawing::Point(65, 0);
-			   this->button1->Name = L"button1";
-			   this->button1->Size = System::Drawing::Size(27, 30);
-			   this->button1->TabIndex = 5;
-			   this->button1->Text = L"X";
-			   this->button1->TextImageRelation = System::Windows::Forms::TextImageRelation::ImageAboveText;
-			   this->button1->UseVisualStyleBackColor = false;
-			   this->button1->Click += gcnew System::EventHandler(this, &MainForm::button1_Click);
 			   // 
 			   // panel8
 			   // 
 			   this->panel8->BackColor = System::Drawing::Color::Turquoise;
 			   this->panel8->Controls->Add(this->button4);
-			   this->panel8->Controls->Add(this->button1);
-			   this->panel8->Location = System::Drawing::Point(1701, 0);
+			   this->panel8->Location = System::Drawing::Point(1692, 0);
 			   this->panel8->Name = L"panel8";
 			   this->panel8->Size = System::Drawing::Size(92, 30);
 			   this->panel8->TabIndex = 1;
@@ -912,9 +895,9 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->button4->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			   this->button4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(162)));
-			   this->button4->Location = System::Drawing::Point(0, 0);
+			   this->button4->Location = System::Drawing::Point(3, 0);
 			   this->button4->Name = L"button4";
-			   this->button4->Size = System::Drawing::Size(65, 30);
+			   this->button4->Size = System::Drawing::Size(89, 30);
 			   this->button4->TabIndex = 6;
 			   this->button4->Text = L"Clean";
 			   this->button4->UseVisualStyleBackColor = false;
@@ -934,7 +917,8 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			   this->ClientSize = System::Drawing::Size(1793, 741);
+			   this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			   this->ClientSize = System::Drawing::Size(1784, 741);
 			   this->Controls->Add(this->panel8);
 			   this->Controls->Add(this->panel3);
 			   this->Controls->Add(this->panel2);
@@ -942,7 +926,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			   this->Controls->Add(this->menuStrip1);
 			   this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(162)));
-			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			   this->ImeMode = System::Windows::Forms::ImeMode::Katakana;
 			   this->MaximumSize = System::Drawing::Size(1800, 800);
 			   this->MinimumSize = System::Drawing::Size(800, 600);
 			   this->Name = L"MainForm";
@@ -1107,9 +1091,9 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 		}
 		
 		//Son aðýrlýklarý w/r iþlemi yap
-		long long int cycleCount = 0;
+		long long int epoch = 0;
 		double error = 1.0, totalError;
-		while (error > 0.001) {
+		while (error > 0.01) {
 			
 			totalError = 0.0;
 			for (int i = 0; i < sizeOfSamples; i++) {
@@ -1121,12 +1105,12 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 				DeltaL->BackPropagation(p[i].x, hiddenNeuronNumber, classNumber, totalError);
 			}
 			error = sqrt(totalError) / (sizeOfSamples * classNumber);
-			cycleCount++;
+			epoch++;
 
 			//drawing error 
 			//textBox1->Text = Convert::ToString(error); textBox1->Refresh();
-			//textBox5->Text = Convert::ToString(cycleCount); textBox5->Refresh();
-			//chart1->Series["Error"]->Points->AddXY(cycleCount, error); chart1->Refresh();
+			//textBox5->Text = Convert::ToString(epoch); textBox5->Refresh();
+			chart1->Series["Loss"]->Points->AddXY(epoch, error); chart1->Refresh();
 			//this->richTextBox1->AppendText("Loss: " + Convert::ToString(error) + "\tcycle: " + Convert::ToString(cycleCount) + "\n");
 			//this->richTextBox1->ScrollToCaret(); richTextBox1->Refresh();
 
@@ -1140,7 +1124,7 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 		//drawTrainLine(hiddenNeuronNumber, 20);
 		this->richTextBox1->BackColor = Color::Turquoise;
 		textBox1->Text = Convert::ToString(error);
-		textBox5->Text = Convert::ToString(cycleCount);
+		textBox5->Text = Convert::ToString(epoch);
 
 	}//TRAIN
 
@@ -1220,6 +1204,9 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 		DeltaL->o = (double*)malloc(classNumber * sizeof(double));
 		DeltaL->d = (int*)malloc(classNumber * sizeof(int));
 
+
+		this->label3->Visible = TRUE;
+		this->textBox1->Visible = TRUE;
 		this->panel5->Visible = TRUE;
 		this->panel6->Visible = TRUE;
 		this->panel7->Visible = TRUE;
@@ -1345,16 +1332,18 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 	private: System::Void withMomentToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 
 		this->richTextBox1->BackColor = Color::Red;
+		chart1->Series["Loss"]->Points->Clear();
 
 		if (sizeOfSamples == 0) {
 			MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
 			return;
 		}
 
+
 		//Son aðýrlýklarý w/r iþlemi yap
-		long long int cycleCount = 0;
-		double error = 1.0, totalError;
-		while (error > 0.001) {
+		long long int epoch = 0;
+		double loss = 1.0, totalError;
+		while (loss > 0.01) {
 
 			totalError = 0.0;
 			for (int i = 0; i < sizeOfSamples; i++) {
@@ -1365,13 +1354,13 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 				/*	 BACK PROPAGATION	*/
 				DeltaL->BackPropagationWithMoment(p[i].x, hiddenNeuronNumber, classNumber, totalError);
 			}
-			error = sqrt(totalError) / (sizeOfSamples * classNumber);
-			cycleCount++;
+			loss = sqrt(totalError) / (sizeOfSamples * classNumber);
+			epoch++;
 
 			//drawing error 
 			//textBox1->Text = Convert::ToString(error); textBox1->Refresh();
 			//textBox5->Text = Convert::ToString(cycleCount); textBox5->Refresh();
-			//chart1->Series["Error"]->Points->AddXY(cycleCount, error); chart1->Refresh();
+			chart1->Series["Loss"]->Points->AddXY(epoch, loss); chart1->Refresh();
 			//this->richTextBox1->AppendText("Loss: " + Convert::ToString(error) + "\tcycle: " + Convert::ToString(cycleCount) + "\n");
 			//this->richTextBox1->ScrollToCaret(); richTextBox1->Refresh();
 
@@ -1384,8 +1373,8 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 
 		//drawTrainLine(hiddenNeuronNumber, 20);
 		this->richTextBox1->BackColor = Color::Turquoise;
-		textBox1->Text = Convert::ToString(error);
-		textBox5->Text = Convert::ToString(cycleCount);
+		textBox1->Text = Convert::ToString(loss);
+		textBox5->Text = Convert::ToString(epoch);
 
 		
 
@@ -1449,28 +1438,26 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 			if (saveFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 				std::string path;
 				MarshalString(saveFileDialog1->FileName, path);
+				
 
 				path = path + std::to_string(classNumber) + 'x' + std::to_string(hiddenNeuronNumber) + ".txt";
-
 				std::ofstream WeightsFile(path);
 				if (!WeightsFile.is_open())
 					richTextBox1->AppendText("Error! \n File could not open.");
 				
-				int len = path.length();
+				MarshalString(Path::GetFileName(saveFileDialog1->FileName), path);
 
 				//first letter to be V or W
 				if (path[0] == 'V')
 				{
-					for (int i = 0; i < hiddenNeuronNumber; i++)
-						for (int j = 0; j < 3; j++)
-							WeightsFile << DeltaL->v[i * 3 + j] << ',';
+					for (int i = 0; i < hiddenNeuronNumber * 3; i++)
+						WeightsFile << DeltaL->v[i] << ' ';
 					richTextBox1->AppendText("V Weights Saved.\n");
 				}
 				else if (path[0] == 'W')
 				{
-					for (int i = 0; i < classNumber; i++)
-						for (int j = 0; j < (hiddenNeuronNumber + 1); j++)
-							WeightsFile << DeltaL->w[i * (hiddenNeuronNumber + 1) + j] << ',';
+					for (int j = 0; j < (hiddenNeuronNumber + 1) * classNumber; j++)
+						WeightsFile << DeltaL->w[j] << ' ';
 					richTextBox1->AppendText("W Weights Saved.\n");
 				}
 
@@ -1492,47 +1479,27 @@ private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 				
 				MarshalString(openFileDialog1->SafeFileName, path);
 				std::string myText;
+				
 
 				//determine size used to filename
 				//first letter to be V or W
 				if (path[0] == 'V')
 				{
-					hiddenNeuronNumber = 0;
-					while (getline(WeightsFile, myText, ','))
-						hiddenNeuronNumber++;
-					DeltaL->v = new double[hiddenNeuronNumber];
-					hiddenNeuronNumber /= 3;
+					for (int i = 0; i < hiddenNeuronNumber * 3; i++)
+						WeightsFile >> DeltaL->v[i];
 
-					WeightsFile.clear();
-					WeightsFile.seekg(0, std::ios::beg);
-
-					for (int i = 0; getline(WeightsFile, myText, ','); i++)
-						DeltaL->v[i] = stod(myText);
-
-					this->drawTrainLine(hiddenNeuronNumber, 1);
+					//this->drawTrainLine(hiddenNeuronNumber, 1);
 					richTextBox1->AppendText("V Weights loaded.\n");
 				}
 				else if (path[0] == 'W')
 				{
-					classNumber = 0;
-					while (getline(WeightsFile, myText, ','))
-						classNumber++;
-					classNumber /= (hiddenNeuronNumber + 1);
-					DeltaL->w = new double[(hiddenNeuronNumber+1) * classNumber];
-
-
-					WeightsFile.clear();
-					WeightsFile.seekg(0, std::ios::beg);
-
-					for (int i = 0; getline(WeightsFile, myText, ','); i++)
-						DeltaL->v[i] = stod(myText);
+					for (int i = 0; i < (hiddenNeuronNumber+1) * classNumber; i++)
+						WeightsFile >> DeltaL->w[i];
 
 					richTextBox1->AppendText("W Weights loaded.\n");
 				}
 
 				WeightsFile.close();
-
-				
 			}
 		}//Load Weights
 

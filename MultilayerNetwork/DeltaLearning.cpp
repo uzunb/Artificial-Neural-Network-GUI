@@ -77,14 +77,27 @@ void DeltaLearning::BackPropagation(double* x, int hiddenNeuronNumber, int class
 
 void DeltaLearning::BackPropagationWithMoment(double* x, int hiddenNeuronNumber, int classNumber, double& totalError)
 {
-	float mu1 = 0.5, mu2 = 0.7;
+	float mu1 = 0.5, mu2 = 0.7, numTotal= 0, denomTotal = 0;
 	//w weights updating
 	for (int k = 0; k < classNumber; k++)
 	{
+		//error
 		totalError += (d[k] - o[k]) * (d[k] - o[k]);
+
+		////adaptive Lr
+		//numTotal = 0, denomTotal = 0;
+		//for (int j = (hiddenNeuronNumber + 1)-1, i = 0; j >= 0; j--, i++)
+		//{
+		//	numTotal += w[k * (hiddenNeuronNumber + 1) + j] * y[i];
+		//	denomTotal += y[j] * y[i];
+		//}
+		//mu1 = abs(numTotal) / denomTotal;
+
+		//w weights adjustment
 		double temp = mu1 * (d[k] - o[k]) * derivatedSigmoid(o[k]);
 		for (int j = 0; j < (hiddenNeuronNumber + 1); j++) {
 			int wIndex = k * (hiddenNeuronNumber + 1) + j;
+
 			w[wIndex] += temp * y[j] + wRecent[wIndex];
 			wRecent[wIndex] = mu1 * temp * y[j];
 		}
@@ -96,13 +109,14 @@ void DeltaLearning::BackPropagationWithMoment(double* x, int hiddenNeuronNumber,
 		for (int k = 0; k < classNumber; k++)
 			total += (d[k] - o[k]) * derivatedSigmoid(o[k]) * w[k * hiddenNeuronNumber + j];
 
-		mu2 = abs(v[j * 3 + 2] * x[0] + v[j * 3 + 1] * x[1] + v[j * 3] * x[2]) / (x[2] * x[0] + x[1] * x[1] + x[0] * x[2]);
+		////adaptive Lr
+		//mu2 = abs(v[j * 3 + 2] * x[0] + v[j * 3 + 1] * x[1] + v[j * 3] * x[2]) / (x[2] * x[0] + x[1] * x[1] + x[0] * x[2]);
 
 		for (int ii = 0; ii < 3; ii++){ 
 			int vIndex = j * 3 + ii;
+
 			v[vIndex] += mu2 * derivatedSigmoid(y[j]) * x[ii] * total + vRecent[vIndex];
 			vRecent[vIndex] = mu2 * derivatedSigmoid(y[j]) * x[ii] * total;
-
 		}
 	}
 }

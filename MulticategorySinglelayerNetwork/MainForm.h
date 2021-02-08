@@ -76,12 +76,12 @@ namespace ArtificialNeuralNetwork {
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Panel^ panel3;
 	private: System::Windows::Forms::BindingSource^ bindingSource2;
-	private: System::Windows::Forms::Button^ button1;
+
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Panel^ panel5;
 	private: System::Windows::Forms::Panel^ panel6;
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::Label^ label3;
+
+
 	private: System::Windows::Forms::GroupBox^ groupBox2;
 	private: System::Windows::Forms::Label^ label4;
 
@@ -166,8 +166,6 @@ private: System::Windows::Forms::Label^ label6;
 			   this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			   this->label7 = (gcnew System::Windows::Forms::Label());
 			   this->label6 = (gcnew System::Windows::Forms::Label());
-			   this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			   this->label3 = (gcnew System::Windows::Forms::Label());
 			   this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			   this->textBox8 = (gcnew System::Windows::Forms::TextBox());
 			   this->textBox7 = (gcnew System::Windows::Forms::TextBox());
@@ -187,7 +185,6 @@ private: System::Windows::Forms::Label^ label6;
 			   this->panel3 = (gcnew System::Windows::Forms::Panel());
 			   this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			   this->bindingSource2 = (gcnew System::Windows::Forms::BindingSource(this->components));
-			   this->button1 = (gcnew System::Windows::Forms::Button());
 			   this->panel8 = (gcnew System::Windows::Forms::Panel());
 			   this->button4 = (gcnew System::Windows::Forms::Button());
 			   this->menuStrip1->SuspendLayout();
@@ -318,6 +315,7 @@ private: System::Windows::Forms::Label^ label6;
 			   this->textBox9->Name = L"textBox9";
 			   this->textBox9->Size = System::Drawing::Size(203, 22);
 			   this->textBox9->TabIndex = 10;
+			   this->textBox9->Visible = false;
 			   // 
 			   // label9
 			   // 
@@ -330,8 +328,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->label9->Name = L"label9";
 			   this->label9->Size = System::Drawing::Size(203, 33);
 			   this->label9->TabIndex = 9;
-			   this->label9->Text = L"Error";
+			   this->label9->Text = L"Loss";
 			   this->label9->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			   this->label9->Visible = false;
 			   // 
 			   // panel7
 			   // 
@@ -364,7 +363,7 @@ private: System::Windows::Forms::Label^ label6;
 			   this->label8->Name = L"label8";
 			   this->label8->Size = System::Drawing::Size(203, 33);
 			   this->label8->TabIndex = 7;
-			   this->label8->Text = L"Total Cycle";
+			   this->label8->Text = L"Epoch";
 			   this->label8->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			   // 
 			   // panel6
@@ -372,13 +371,11 @@ private: System::Windows::Forms::Label^ label6;
 			   this->panel6->BackColor = System::Drawing::Color::DarkGreen;
 			   this->panel6->Controls->Add(this->numericUpDown5);
 			   this->panel6->Controls->Add(this->groupBox1);
-			   this->panel6->Controls->Add(this->textBox1);
-			   this->panel6->Controls->Add(this->label3);
 			   this->panel6->Controls->Add(this->groupBox2);
 			   this->panel6->Controls->Add(this->label2);
 			   this->panel6->Location = System::Drawing::Point(3, 50);
 			   this->panel6->Name = L"panel6";
-			   this->panel6->Size = System::Drawing::Size(200, 208);
+			   this->panel6->Size = System::Drawing::Size(200, 172);
 			   this->panel6->TabIndex = 4;
 			   this->panel6->Visible = false;
 			   // 
@@ -398,7 +395,7 @@ private: System::Windows::Forms::Label^ label6;
 			   this->groupBox1->Controls->Add(this->label7);
 			   this->groupBox1->Controls->Add(this->label6);
 			   this->groupBox1->Dock = System::Windows::Forms::DockStyle::Bottom;
-			   this->groupBox1->Location = System::Drawing::Point(0, 62);
+			   this->groupBox1->Location = System::Drawing::Point(0, 26);
 			   this->groupBox1->Name = L"groupBox1";
 			   this->groupBox1->Size = System::Drawing::Size(200, 73);
 			   this->groupBox1->TabIndex = 1;
@@ -447,27 +444,6 @@ private: System::Windows::Forms::Label^ label6;
 			   this->label6->Text = L"XY";
 			   this->label6->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			   // 
-			   // textBox1
-			   // 
-			   this->textBox1->BackColor = System::Drawing::Color::Silver;
-			   this->textBox1->Location = System::Drawing::Point(154, 34);
-			   this->textBox1->Name = L"textBox1";
-			   this->textBox1->Size = System::Drawing::Size(43, 22);
-			   this->textBox1->TabIndex = 6;
-			   // 
-			   // label3
-			   // 
-			   this->label3->BackColor = System::Drawing::Color::DarkGreen;
-			   this->label3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold));
-			   this->label3->ForeColor = System::Drawing::Color::White;
-			   this->label3->Location = System::Drawing::Point(-7, 30);
-			   this->label3->Name = L"label3";
-			   this->label3->Size = System::Drawing::Size(160, 25);
-			   this->label3->TabIndex = 5;
-			   this->label3->Text = L"Sample Count";
-			   this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			   // 
 			   // groupBox2
 			   // 
 			   this->groupBox2->Controls->Add(this->textBox8);
@@ -475,7 +451,7 @@ private: System::Windows::Forms::Label^ label6;
 			   this->groupBox2->Controls->Add(this->textBox6);
 			   this->groupBox2->Controls->Add(this->label4);
 			   this->groupBox2->Dock = System::Windows::Forms::DockStyle::Bottom;
-			   this->groupBox2->Location = System::Drawing::Point(0, 135);
+			   this->groupBox2->Location = System::Drawing::Point(0, 99);
 			   this->groupBox2->Name = L"groupBox2";
 			   this->groupBox2->Size = System::Drawing::Size(200, 73);
 			   this->groupBox2->TabIndex = 4;
@@ -540,7 +516,7 @@ private: System::Windows::Forms::Label^ label6;
 			   this->button2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(162)));
 			   this->button2->ForeColor = System::Drawing::Color::White;
-			   this->button2->Location = System::Drawing::Point(0, 313);
+			   this->button2->Location = System::Drawing::Point(0, 270);
 			   this->button2->Name = L"button2";
 			   this->button2->Size = System::Drawing::Size(200, 46);
 			   this->button2->TabIndex = 0;
@@ -679,29 +655,10 @@ private: System::Windows::Forms::Label^ label6;
 			   this->richTextBox1->TabIndex = 0;
 			   this->richTextBox1->Text = L"";
 			   // 
-			   // button1
-			   // 
-			   this->button1->BackColor = System::Drawing::Color::Turquoise;
-			   this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			   this->button1->Dock = System::Windows::Forms::DockStyle::Right;
-			   this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->button1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(162)));
-			   this->button1->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
-			   this->button1->Location = System::Drawing::Point(59, 0);
-			   this->button1->Name = L"button1";
-			   this->button1->Size = System::Drawing::Size(33, 30);
-			   this->button1->TabIndex = 5;
-			   this->button1->Text = L"X";
-			   this->button1->TextImageRelation = System::Windows::Forms::TextImageRelation::ImageAboveText;
-			   this->button1->UseVisualStyleBackColor = false;
-			   this->button1->Click += gcnew System::EventHandler(this, &MainForm::button1_Click);
-			   // 
 			   // panel8
 			   // 
 			   this->panel8->BackColor = System::Drawing::Color::Turquoise;
 			   this->panel8->Controls->Add(this->button4);
-			   this->panel8->Controls->Add(this->button1);
 			   this->panel8->Location = System::Drawing::Point(1254, 0);
 			   this->panel8->Name = L"panel8";
 			   this->panel8->Size = System::Drawing::Size(92, 30);
@@ -715,9 +672,9 @@ private: System::Windows::Forms::Label^ label6;
 			   this->button4->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			   this->button4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(162)));
-			   this->button4->Location = System::Drawing::Point(2, 0);
+			   this->button4->Location = System::Drawing::Point(0, 0);
 			   this->button4->Name = L"button4";
-			   this->button4->Size = System::Drawing::Size(57, 30);
+			   this->button4->Size = System::Drawing::Size(92, 30);
 			   this->button4->TabIndex = 6;
 			   this->button4->Text = L"Clean";
 			   this->button4->UseVisualStyleBackColor = false;
@@ -737,7 +694,7 @@ private: System::Windows::Forms::Label^ label6;
 			   this->Controls->Add(this->menuStrip1);
 			   this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(162)));
-			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			   this->MaximumSize = System::Drawing::Size(1366, 800);
 			   this->MinimumSize = System::Drawing::Size(800, 600);
 			   this->Name = L"MainForm";
@@ -752,7 +709,6 @@ private: System::Windows::Forms::Label^ label6;
 			   this->panel7->ResumeLayout(false);
 			   this->panel7->PerformLayout();
 			   this->panel6->ResumeLayout(false);
-			   this->panel6->PerformLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown5))->EndInit();
 			   this->groupBox1->ResumeLayout(false);
 			   this->groupBox1->PerformLayout();
@@ -810,7 +766,6 @@ private: System::Windows::Forms::Label^ label6;
 		else {
 			Samples* temp;
 			temp = p;
-			textBox1->Text = Convert::ToString(++sizeOfClass[selectedClass]);
 			sizeOfSamples++;
 			p = new Samples[sizeOfSamples];
 			for (int i = 0; i < sizeOfSamples - 1; i++)
@@ -825,6 +780,7 @@ private: System::Windows::Forms::Label^ label6;
 			delete temp;
 		}
 
+		textBox2->Text = Convert::ToString(sizeOfSamples);
 		textBox3->Text = Convert::ToString(p[sizeOfSamples - 1].x1) + "," + Convert::ToString(p[sizeOfSamples - 1].x2);
 		textBox4->Text = Convert::ToString(temp_x) + "," + Convert::ToString(temp_y);
 
@@ -842,12 +798,15 @@ private: System::Windows::Forms::Label^ label6;
 		this->richTextBox1->BackColor = Color::Red;
 
 		PerceptronLearning *learningNetwork = new PerceptronLearning();
-		int cycleCount = 0;
+		int epoch = 0;
+		double loss = 0.0;
 
 		if (sizeOfSamples != 0) {
-			learningNetwork->Train(p, w, sizeOfSamples, pClass, classNumber, cycleCount);
+			learningNetwork->Train(p, w, sizeOfSamples, pClass, classNumber, epoch, loss);
 			drawTrainLine(pClass, classNumber, 1);
-			this->textBox5->Text = Convert::ToString(cycleCount);
+			this->textBox5->Text = Convert::ToString(epoch);
+			this->textBox9->Text = Convert::ToString(loss);
+
 		}
 		else
 			MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
@@ -908,12 +867,15 @@ private: System::Windows::Forms::Label^ label6;
 		this->richTextBox1->BackColor = Color::Red;
 
 		learningNetwork = new DeltaLearning();
-		int cycleCount = 0;
+		int epoch = 0;
+		double loss = 0.0;
 
 		if (sizeOfSamples != 0) {
-			learningNetwork->Train(p, w, sizeOfSamples, pClass, classNumber, cycleCount);
+			learningNetwork->Train(p, w, sizeOfSamples, pClass, classNumber, epoch, loss);
 			drawTrainLine(pClass, classNumber, 20);
-			this->textBox5->Text = Convert::ToString(cycleCount);
+			this->textBox5->Text = Convert::ToString(epoch);
+			this->textBox9->Text = Convert::ToString(loss);
+
 		}
 		else
 			MessageBox::Show("Please enter samples.", "Warning!", MessageBoxButtons::OK, MessageBoxIcon::Warning);
@@ -979,6 +941,9 @@ private: System::Windows::Forms::Label^ label6;
 			richTextBox1->AppendText("w1: " + Convert::ToString(pClass[i].w[0]) + "\tw2: " + Convert::ToString(pClass[i].w[1]) + "\tw3: " + Convert::ToString(pClass[i].w[2]) + "\tRGB:" + Convert::ToString(pClass[i].color.r) + ", " + Convert::ToString(pClass[i].color.g) + ", " + Convert::ToString(pClass[i].color.b) + "\n");
 
 		}
+
+		this->textBox9->Visible = TRUE;
+		this->label9->Visible = TRUE;
 		this->panel5->Visible = TRUE;
 		this->panel6->Visible = TRUE;
 		this->panel7->Visible = TRUE;

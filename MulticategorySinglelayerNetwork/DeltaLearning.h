@@ -19,6 +19,6 @@ public:
 	double getEta();
 	double getDelta();
 
-	void Train(Samples* input, double* output, int inputCount, SampleClass* cls, int numberOfClass, int& jeneration);
+	void Train(Samples* input, double* output, int inputCount, SampleClass* cls, int numberOfClass, int& epoch, double& loss);
 };
 

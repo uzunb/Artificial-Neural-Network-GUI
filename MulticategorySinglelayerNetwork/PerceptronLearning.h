@@ -10,7 +10,7 @@ public:
 	PerceptronLearning();
 	~PerceptronLearning();
 
-	void Train(Samples* input, double* output, int numberOfInputs, SampleClass* cls, int numberOfClass, int &jeneration);
+	void Train(Samples* input, double* output, int numberOfInputs, SampleClass* cls, int numberOfClass, int &jeneration, double& loss);
 
 };
 

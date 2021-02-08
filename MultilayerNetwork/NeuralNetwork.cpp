@@ -177,3 +177,11 @@ void NeuralNetwork::transpose(double* matx, int row, int col)
 	matx = temp;
 	delete[] temp;
 }
+
+//float NeuralNetwork::dynamicLearningRate(double* w, int row, int col, Samples* p)
+//{
+//	float c;
+//	//transpose(w, row, col);
+//	//MatrixMultiplication(w, col, row, p->x, 3, 1, )
+//	return c;
+//}
